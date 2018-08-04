@@ -13,6 +13,9 @@ package org.merchandise.initialdata.setup;
 import de.hybris.platform.commerceservices.dataimport.impl.CoreDataImportService;
 import de.hybris.platform.commerceservices.dataimport.impl.SampleDataImportService;
 import de.hybris.platform.commerceservices.setup.AbstractSystemSetup;
+import de.hybris.platform.commerceservices.setup.data.ImportData;
+import de.hybris.platform.commerceservices.setup.events.CoreDataImportedEvent;
+import de.hybris.platform.commerceservices.setup.events.SampleDataImportedEvent;
 import de.hybris.platform.core.initialization.SystemSetup;
 import de.hybris.platform.core.initialization.SystemSetup.Process;
 import de.hybris.platform.core.initialization.SystemSetup.Type;
@@ -22,6 +25,7 @@ import de.hybris.platform.core.initialization.SystemSetupParameterMethod;
 import org.merchandise.initialdata.constants.MerchandiseInitialDataConstants;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -32,14 +36,15 @@ import org.springframework.beans.factory.annotation.Required;
  * This class provides hooks into the system's initialization and update processes.
  */
 @SystemSetup(extension = MerchandiseInitialDataConstants.EXTENSIONNAME)
-public class InitialDataSystemSetup extends AbstractSystemSetup
-{
+public class InitialDataSystemSetup extends AbstractSystemSetup {
 	@SuppressWarnings("unused")
 	private static final Logger LOG = Logger.getLogger(InitialDataSystemSetup.class);
 
 	private static final String IMPORT_CORE_DATA = "importCoreData";
 	private static final String IMPORT_SAMPLE_DATA = "importSampleData";
 	private static final String ACTIVATE_SOLR_CRON_JOBS = "activateSolrCronJobs";
+
+	private static final String ELECTRONICS = "electronics";
 
 	private CoreDataImportService coreDataImportService;
 	private SampleDataImportService sampleDataImportService;
@@ -49,8 +54,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	 */
 	@Override
 	@SystemSetupParameterMethod
-	public List<SystemSetupParameter> getInitializationOptions()
-	{
+	public List<SystemSetupParameter> getInitializationOptions() {
 		final List<SystemSetupParameter> params = new ArrayList<SystemSetupParameter>();
 
 		params.add(createBooleanSystemSetupParameter(IMPORT_CORE_DATA, "Import Core Data", true));
@@ -64,13 +68,11 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	/**
 	 * Implement this method to create initial objects. This method will be called by system creator during
 	 * initialization and system update. Be sure that this method can be called repeatedly.
-	 * 
-	 * @param context
-	 *           the context provides the selected parameters and values
+	 *
+	 * @param context the context provides the selected parameters and values
 	 */
 	@SystemSetup(type = Type.ESSENTIAL, process = Process.ALL)
-	public void createEssentialData(final SystemSetupContext context)
-	{
+	public void createEssentialData(final SystemSetupContext context) {
 		// Add Essential Data here as you require
 	}
 
@@ -95,36 +97,38 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	 * getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
 	 * </pre>
 	 *
-	 * @param context
-	 *           the context provides the selected parameters and values
+	 * @param context the context provides the selected parameters and values
 	 */
 	@SystemSetup(type = Type.PROJECT, process = Process.ALL)
-	public void createProjectData(final SystemSetupContext context)
-	{
-		/*
-		 * Add import data for each site you have configured
-		 */
+	public void createProjectData(final SystemSetupContext context) {
+		final ImportData merchandiseImportData = new ImportData();
+		merchandiseImportData.setStoreNames(Collections.singletonList(ELECTRONICS));
+		merchandiseImportData.setContentCatalogNames(Collections.singletonList(ELECTRONICS));
+		merchandiseImportData.setProductCatalogName(ELECTRONICS);
+		final List<ImportData> importData = Collections.singletonList(merchandiseImportData);
+
+		getCoreDataImportService().execute(this, context, importData);
+		getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
+
+		getSampleDataImportService().execute(this, context, importData);
+		getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
 	}
 
-	public CoreDataImportService getCoreDataImportService()
-	{
+	public CoreDataImportService getCoreDataImportService() {
 		return coreDataImportService;
 	}
 
 	@Required
-	public void setCoreDataImportService(final CoreDataImportService coreDataImportService)
-	{
+	public void setCoreDataImportService(final CoreDataImportService coreDataImportService) {
 		this.coreDataImportService = coreDataImportService;
 	}
 
-	public SampleDataImportService getSampleDataImportService()
-	{
+	public SampleDataImportService getSampleDataImportService() {
 		return sampleDataImportService;
 	}
 
 	@Required
-	public void setSampleDataImportService(final SampleDataImportService sampleDataImportService)
-	{
+	public void setSampleDataImportService(final SampleDataImportService sampleDataImportService) {
 		this.sampleDataImportService = sampleDataImportService;
 	}
 }

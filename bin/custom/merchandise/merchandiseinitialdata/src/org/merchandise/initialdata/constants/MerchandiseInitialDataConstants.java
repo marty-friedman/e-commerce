@@ -13,12 +13,10 @@ package org.merchandise.initialdata.constants;
 /**
  * Global class for all MerchandiseInitialData constants.
  */
-public final class MerchandiseInitialDataConstants extends GeneratedMerchandiseInitialDataConstants
-{
+public final class MerchandiseInitialDataConstants extends GeneratedMerchandiseInitialDataConstants {
 	public static final String EXTENSIONNAME = "merchandiseinitialdata";
 
-	private MerchandiseInitialDataConstants()
-	{
+	private MerchandiseInitialDataConstants() {
 		//empty
 	}
 }

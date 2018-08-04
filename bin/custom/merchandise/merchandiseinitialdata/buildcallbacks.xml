@@ -88,4 +88,20 @@
 		<exclude name="**/*.impex"/>
 	</patternset>
 
+	<target name="runantbind">
+		<bindImpexTemplate
+			addonname="merchandiseinitialdata"
+			contentCatalog="electronicsContentCatalog"
+			contentCatalogName="Electronics Content Catalog"
+			productCatalog="electronicsProductCatalog"
+			productCatalogName="Electronics Product Catalog"
+			storeUid="electronics"
+			storeName="electronics"
+			classificationCatalog="ElectronicsClassification"
+			defaultPromoGrp="electronicsPromoGrp"
+			vendor="electro"
+			indexedType="electronicsProductType"
+			facetSearchConfigName="electronicsIndex"/>
+	</target>
+
 </project>
