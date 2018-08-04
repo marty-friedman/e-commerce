@@ -37,7 +37,24 @@
     <itemtypes>
 
         <!-- Add your item definitions here -->
-
+        <typegroup name="Merchandise">
+            <itemtype code="Product" generate="false" autocreate="false">
+                <attributes>
+                    <attribute qualifier="internalOnly" type="java.lang.Boolean">
+                        <persistence type="property"/>
+                        <defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+            <itemtype code="Customer" generate="false" autocreate="false">
+                <attributes>
+                    <attribute qualifier="internal" type="java.lang.Boolean">
+                        <persistence type="property"/>
+                        <defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
 
         <!-- TypeGroups are for structure of this file only -->
 
