@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<alias name="defaultDynamicProcessDefinitionDao" alias="dynamicProcessDefinitionDao" />
+	<bean id="defaultDynamicProcessDefinitionDao"
+		class="de.hybris.platform.processengine.transformer.dao.impl.DefaultDynamicProcessDefinitionDao" />
+
+	<alias name="defaultBpmnService" alias="bpmnService" />
+	<bean id="defaultBpmnService"
+		class="de.hybris.platform.processengine.transformer.bpmnhybris.service.impl.DefaultBpmnService">
+		<property name="modelService" ref="modelService" />
+		<property name="dynamicProcessDefinitionDao" ref="dynamicProcessDefinitionDao" />
+		<property name="bpmn2Hybris" ref="bPMN2HybrisTransformer"/>
+		<property name="hybris2Bpmn" ref="hybris2BPMNTransformer"/>
+	</bean>
+	
+	<alias name="defaultHybris2BPMNProcessTransformer" alias="hybris2BPMNTransformer"/>
+	<bean id="defaultHybris2BPMNProcessTransformer" class="de.hybris.platform.processengine.transformer.bpmnhybris.Hybris2BPMNProcessTransformer">
+		<property name="hybrisElementsFactory" ref="bpmnHybrisElementFactory"/>
+		<property name="bpmnDiagramGenerator" ref="bpmnDiagramGenerator"/>
+		<property name="hybrisElementHandlerRegistry" ref="hybrisElementHandlerRegistry"/>
+		<property name="validator" ref="bpmnHybrisTransformationValidator"/>
+	</bean>
+	
+	<alias name="defaultBPMN2HybrisProcessTransformer" alias="bPMN2HybrisTransformer"/>
+	<bean id="defaultBPMN2HybrisProcessTransformer" class="de.hybris.platform.processengine.transformer.bpmnhybris.BPMN2HybrisProcessTransformer">
+		<property name="hybrisElementsFactory" ref="bpmnHybrisElementFactory"/>
+		<property name="bpmnElementHandlerRegistery" ref="bpmnHandlersRegistry"/>
+		<property name="validator" ref="bpmnHybrisTransformationValidator"/>
+	</bean>
+
+	<alias name="defaultBPMNDiagramGenerator" alias="bpmnDiagramGenerator"/>
+	<bean id="defaultBPMNDiagramGenerator" class="de.hybris.platform.processengine.transformer.bpmnhybris.DefaultBPMNDiagramGenerator"/>
+		
+	<alias name="defaultBPMNHybrisElementFactory" alias="bpmnHybrisElementFactory"/>
+	<bean id="defaultBPMNHybrisElementFactory" class="de.hybris.platform.processengine.transformer.bpmnhybris.HybrisBPMNElementsFactory"/>
+	
+	<alias name="defaultBPMNHybrisTransformationValidator" alias="bpmnHybrisTransformationValidator"/>
+	<bean id="defaultBPMNHybrisTransformationValidator" class="de.hybris.platform.processengine.transformer.bpmnhybris.DefaultValidatorImpl"/>
+	
+	<alias name="defaultHybrisElementHandlerRegistry" alias="hybrisElementHandlerRegistry"/>
+	<bean id="defaultHybrisElementHandlerRegistry" class="de.hybris.platform.processengine.transformer.bpmnhybris.DefaultHybrisElementHandlerRegistryImpl">
+		<property name="hybrisStartNodeHandler" ref="hybrisStartNodeHandler"/>
+		<property name="hybrisWaitHandler" ref="hybrisWaitNodeHandler"/>
+		<property name="hybrisWaitTimerHandler" ref="hybrisWaitTimerNodeHandler"/>
+		<property name="hybrisActionHandler" ref="hybrisActionNodeHandler"/>
+		<property name="hybrisScriptActionHandler" ref="hybrisScriptActionNodeHandler"/>
+		<property name="hybrisEndHandler" ref="hybrisEndNodeHandler"/>
+		<property name="hybrisExclusiveChoiceHandler" ref="hybrisExclusiveChoiceNodeHandler"/>
+		<property name="hybrisExclusiveJoinHandler" ref="hybrisExclusiveJoinNodeHandler"/>
+		<property name="hybrisEventBasedHandler" ref="hybrisEventBasedGatewayNodeHandler"/>
+		<property name="hybrisNotifyHandler" ref="hybrisNotifyNodeHandler"/>
+		<property name="hybrisSplitHandler" ref="hybrisSplitNodeHandler"/>
+		<property name="hybrisJoinHandler" ref="hybrisJoinNodeHandler"/>
+		<property name="hybrisUnkownTypeHandler" ref="hybrisUnknownTypeNodeHandler"/>
+	</bean>
+	
+	<alias name="defaultHybrisStartNodeHandler" alias="hybrisStartNodeHandler"/>
+	<bean id="defaultHybrisStartNodeHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.hybris.handler.HybrisStartNodeHandler"/>
+	
+	<alias name="defaultHybrisActionNodeHandler" alias="hybrisActionNodeHandler"/>
+	<bean id="defaultHybrisActionNodeHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.hybris.handler.HybrisActionNodeHandler"/>
+	
+	<alias name="defaultHybrisEndNodeHandler" alias="hybrisEndNodeHandler"/>
+	<bean id="defaultHybrisEndNodeHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.hybris.handler.HybrisEndNodeHandler"/>
+	
+	<alias name="defaultHybrisEventBasedGatewayNodeHandler" alias="hybrisEventBasedGatewayNodeHandler"/>
+	<bean id="defaultHybrisEventBasedGatewayNodeHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.hybris.handler.HybrisEventBasedGatewayNodeHandler"/>
+	
+	<alias name="defaultHybrisExclusiveChoiceNodeHandler" alias="hybrisExclusiveChoiceNodeHandler"/>
+	<bean id="defaultHybrisExclusiveChoiceNodeHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.hybris.handler.HybrisExclusiveChoiceNodeHandler"/>
+	
+	<alias name="defaultHybrisExclusiveJoinNodeHandler" alias="hybrisExclusiveJoinNodeHandler"/>
+	<bean id="defaultHybrisExclusiveJoinNodeHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.hybris.handler.HybrisExclusiveJoinNodeHandler"/>
+	
+	<alias name="defaultHybrisJoinNodeHandler" alias="hybrisJoinNodeHandler"/>
+	<bean id="defaultHybrisJoinNodeHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.hybris.handler.HybrisJoinNodeHandler"/>
+	
+	<alias name="defaultHybrisNotifyNodeHandler" alias="hybrisNotifyNodeHandler"/>
+	<bean id="defaultHybrisNotifyNodeHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.hybris.handler.HybrisNotifyNodeHandler"/>
+	
+	<alias name="defaultHybrisScriptActionNodeHandler" alias="hybrisScriptActionNodeHandler"/>
+	<bean id="defaultHybrisScriptActionNodeHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.hybris.handler.HybrisScriptActionNodeHandler"/>
+	
+	<alias name="defaultHybrisSplitNodeHandler" alias="hybrisSplitNodeHandler"/>
+	<bean id="defaultHybrisSplitNodeHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.hybris.handler.HybrisSplitNodeHandler"/>
+	
+	<alias name="defaultHybrisUnknownTypeNodeHandler" alias="hybrisUnknownTypeNodeHandler"/>
+	<bean id="defaultHybrisUnknownTypeNodeHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.hybris.handler.HybrisUnknownTypeNodeHandler"/>
+	
+	<alias name="defaultHybrisWaitNodeHandler" alias="hybrisWaitNodeHandler"/>
+	<bean id="defaultHybrisWaitNodeHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.hybris.handler.HybrisWaitNodeHandler"/>
+	
+	<alias name="defaultHybrisWaitTimerNodeHandler" alias="hybrisWaitTimerNodeHandler"/>
+	<bean id="defaultHybrisWaitTimerNodeHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.hybris.handler.HybrisWaitTimerHandler"/>
+	
+	<alias name="defaultBpmnHandlersRegistry" alias="bpmnHandlersRegistry"/>
+	<bean id="defaultBpmnHandlersRegistry" class="de.hybris.platform.processengine.transformer.bpmnhybris.DefaultBPMNHandlerRegistryImpl">
+		<property name="startEventHandler" ref="bpmnStartEventHandler"/>
+		<property name="dataObjectHandler" ref="bpmnDataObjectHandler"/>
+		<property name="endEventHandler" ref="bpmnEndEventHandler"/>
+		<property name="eventBasedGatewayHandler" ref="bpmnEventBasedGatewayHandler"/>
+		<property name="exclusiveChoiceHandler" ref="bpmnExclusiveChoiceHandler"/>
+		<property name="exclusiveJoinHandler" ref="bpmnExclusiveJoinHandler"/>
+		<property name="genericTaskHandler" ref="bpmnGenericTaskHandler"/>
+		<property name="scriptTaskHandler" ref="bpmnScriptTaskHandler"/>
+		<property name="intermediateCatchEventHandler" ref="bpmnIntermediateCatchEventHandler"/>
+		<property name="sequenceFlowHandler" ref="bpmnSequenceFlowHandler"/>
+	</bean>
+
+        <bean id="bpmnHacTabsConfig" class="de.hybris.platform.hac.custom.JsonHacConfiguration">
+                <property name="resource" value="classpath:bpmn-tab-config.json"/>
+        </bean>
+	
+	<alias name="defaultBpmnDataObjectHandler" alias="bpmnDataObjectHandler"/>
+	<bean id="defaultBpmnDataObjectHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.bpmn.handler.BPMNDataObjectHandler"/>
+
+	<alias name="defaultBpmnStartEventHandler" alias="bpmnStartEventHandler"/>
+	<bean id="defaultBpmnStartEventHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.bpmn.handler.BPMNStartEventHandler"/>
+
+	<alias name="defaultBpmnEndEventHandler" alias="bpmnEndEventHandler"/>
+	<bean id="defaultBpmnEndEventHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.bpmn.handler.BPMNEndEventHandler"/>
+	
+	<alias name="defaultBpmnEventBasedGatewayHandler" alias="bpmnEventBasedGatewayHandler"/>
+	<bean id="defaultBpmnEventBasedGatewayHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.bpmn.handler.BPMNEventBasedGatewayHandler"/>
+
+	<alias name="defaultBpmnExclusiveChoiceHandler" alias="bpmnExclusiveChoiceHandler"/>
+	<bean id="defaultBpmnExclusiveChoiceHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.bpmn.handler.BPMNExclusiveChoiceHandler"/>
+
+	<alias name="defaultBpmnExclusiveJoinHandler" alias="bpmnExclusiveJoinHandler"/>
+	<bean id="defaultBpmnExclusiveJoinHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.bpmn.handler.BPMNExclusiveJoinHandler"/>
+	
+	<alias name="defaultBpmnGenericTaskHandler" alias="bpmnGenericTaskHandler"/>
+	<bean id="defaultBpmnGenericTaskHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.bpmn.handler.BPMNGenericTaskHandler"/>
+	
+	<alias name="defaultBpmnScriptTaskHandler" alias="bpmnScriptTaskHandler"/>
+	<bean id="defaultBpmnScriptTaskHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.bpmn.handler.BPMNScriptTaskHandler"/>
+
+	<alias name="defaultBpmnIntermediateCatchEventHandler" alias="bpmnIntermediateCatchEventHandler"/>
+	<bean id="defaultBpmnIntermediateCatchEventHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.bpmn.handler.BPMNIntermediateCatchEventHandler"/>
+
+	<alias name="defaultBpmnSequenceFlowHandler" alias="bpmnSequenceFlowHandler"/>
+	<bean id="defaultBpmnSequenceFlowHandler" class="de.hybris.platform.processengine.transformer.bpmnhybris.bpmn.handler.BPMNSequenceFlowHandler"/>
+			
+</beans>

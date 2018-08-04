@@ -1,0 +1,120 @@
+/****************************************************
+				nested-component
+****************************************************/
+.cms-nested-component-template {
+	padding: 20px;
+	border: 1px solid @smartedit-grey17;
+}
+
+.cms-nested-component__item {
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid @smartedit-grey17;
+	padding: 10px;
+}
+
+.cms-nested-component__image {
+	max-width: 100px;
+}
+
+.cms-nested-component__data {
+	width: calc(~"100% - 100px");
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.cms-sub-type-selector__heading {
+	padding-top: 15px;
+	text-transform: uppercase;
+}
+
+.cms-nested-component__name {
+	font-weight: @font-weight--bold;
+	color: @smartedit-blue;
+}
+
+.cms-nested-component__type {
+	text-transform: uppercase;
+}
+
+.se-ge-breadcrumb__item {
+	margin-bottom: 35px;
+}
+
+.se-ge-breadcrumb__item,
+.se-ge-breadcrumb__divider,
+.se-ge-breadcrumb__data {
+	display: inline-block;
+}
+
+.se-ge-breadcrumb__divider {
+	margin-left: 15px;
+	margin-right: 15px;
+	vertical-align: top;
+	margin-top: 5px;
+}
+
+.se-ge-breadcrumb__title {
+	font-family: @font-open-sans;
+	font-size: 12px;
+	font-weight: @font-weight--semibold;
+	color: @default-greyblue;
+	text-transform: uppercase;
+}
+
+.se-ge-breadcrumb__info {
+	font-family: @font-open-sans;
+	font-size: 14px;
+	font-weight: @font-weight--normal;
+	color: @default-greyblue;
+}
+
+.se-ge-breadcrumb__title,
+.se-ge-breadcrumb__info {
+	display: block;
+}
+
+.cms-nested-component__result-name:extend(.se-nowrap-ellipsis),
+.cms-nested-component__result-code:extend(.se-nowrap-ellipsis) {
+	display: inline-block;
+	width: 48%;
+}
+
+//overlap the border of the search field with the ui-select border
+.cms-nested-component-select .select2-choices .select2-search-field:not(:first-child) {
+	border: 1px solid @smartedit-grey17;
+	padding-right: 11px;
+	margin: -1px;
+}
+
+nested-component,
+nested-component .cms-nested-component__item {
+	width: 100%;
+}
+
+.cms-nested-component-template .ui-select-multiple .cms-nested-component,
+.cms-nested-component-template .ui-select-multiple .se-item-printer,
+.se-generic-editor-dropdown.ui-select-multiple .ui-select-match-item.select2-search-choice {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.se-generic-editor-dropdown.ui-select-multiple .cms-nested-component__item {
+	border: none;
+}
+
+.cms-nested-component-select .se-generic-editor-dropdown__match2 {
+	height: 100%;
+}
+
+.cms-nested-component-select .ui-select-match-item.select2-search-choice {
+	width: 95%;
+}
+
+//position the remove icon
+.cms-nested-component-select .se-generic-editor-multiple-dropdown__match .ui-select-match-close.select2-search-choice-close {
+	left: initial;
+	right: 5px;
+	top: 36%;
+}

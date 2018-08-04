@@ -1,0 +1,6 @@
+<div data-ng-if="ctrl.getFilteredErrors().length > 0">
+    <span data-ng-repeat="error in ctrl.getFilteredErrors()"
+        class="se-help-block--has-error help-block">
+        {{error | translate}}
+    </span>
+</div>

@@ -1,0 +1,7 @@
+<div class="col-sm-1 pull-right dropdown tree-node ySENodeTemplate"
+    data-ng-show="!ctrl.isReadOnly()">
+    <y-drop-down-menu dropdown-items="ctrl.getDropdownItems()"
+        selected-item="this"
+        class="y-dropdown pull-right nav-node-editor-entry-item__more-menu" />
+</div>
+<div class="col-sm-5 pull-right tree-node ySENodeTemplateTree"> {{node.itemType || 'se.cms.navigationmanagement.navnode.objecttype.node' | translate}} </div>

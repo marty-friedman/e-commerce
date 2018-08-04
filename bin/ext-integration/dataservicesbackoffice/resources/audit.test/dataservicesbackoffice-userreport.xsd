@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="User" type="User"/>
+<xs:complexType name="simpleHybrisField">
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute type="xs:string" name="header"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="localizedHybrisField">
+<xs:sequence>
+<xs:element name="value" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute type="xs:string" name="locale"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+<xs:attribute type="xs:string" name="header"/>
+</xs:complexType>
+<xs:complexType name="User">
+<xs:sequence>
+<xs:element type="simpleHybrisField" name="name"/>
+<xs:element type="simpleHybrisField" name="uid">
+<xs:unique name="unique_user_uid">
+<xs:selector xpath="user"/>
+<xs:field xpath="uid"/>
+</xs:unique>
+</xs:element>
+<xs:element type="Address" name="defaultPaymentAddress"/>
+<xs:element type="Media" name="profilePicture"/>
+<xs:element type="Currency" name="sessionCurrency"/>
+<xs:element type="Address" name="addresses" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element type="UserGroup" name="groups" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Address">
+<xs:sequence>
+<xs:element type="simpleHybrisField" name="streetname"/>
+<xs:element type="simpleHybrisField" name="town"/>
+<xs:element type="Title" name="title"/>
+<xs:element type="Item" name="owner"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Item">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="Title">
+<xs:sequence>
+<xs:element type="simpleHybrisField" name="code">
+<xs:unique name="unique_title_code">
+<xs:selector xpath="title"/>
+<xs:field xpath="code"/>
+</xs:unique>
+</xs:element>
+<xs:element type="localizedHybrisField" name="name"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Media">
+<xs:sequence>
+<xs:element type="simpleHybrisField" name="code">
+<xs:unique name="unique_media_code">
+<xs:selector xpath="media"/>
+<xs:field xpath="code"/>
+</xs:unique>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Currency">
+<xs:sequence>
+<xs:element type="simpleHybrisField" name="isocode">
+<xs:unique name="unique_currency_isocode">
+<xs:selector xpath="currency"/>
+<xs:field xpath="isocode"/>
+</xs:unique>
+</xs:element>
+<xs:element name="symbol" type="simpleHybrisField"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="UserGroup">
+<xs:sequence>
+<xs:element type="simpleHybrisField" name="uid">
+<xs:unique name="unique_usergroup_uid">
+<xs:selector xpath="usergroup"/>
+<xs:field xpath="uid"/>
+</xs:unique>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

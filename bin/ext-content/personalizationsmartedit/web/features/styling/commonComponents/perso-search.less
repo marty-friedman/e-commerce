@@ -1,0 +1,55 @@
+/* *
+/* This file includes the styles used in search component (e.g. from the panel)
+*/
+
+@perso-search--margin-right: 3px;
+@perso-search__input--padding-left: 0.25*@perso-gutter;  //5px
+@perso-search__input--padding-bottom: 0.5*@perso-gutter;  //10px     
+@perso-search__search-icon--padding: 0 0 4px 6px;  //consistent with page list
+@perso-search__reset-icon--padding: 0.25*@perso-gutter 0.75*@perso-gutter 0.25*@perso-gutter 0; //5px 15px 5px 0
+
+.perso-search {
+    color: @text-color-dark-blue;
+    width: 60%;
+    border: 1px solid @border-color-light-grey;
+    margin-right: @perso-search--margin-right;  //make edge happy with the borders
+    .form-control {
+        padding-left: @perso-search__input--padding-left;
+        padding-bottom: @perso-search__input--padding-bottom;
+        border: none;
+        box-shadow: none;
+        // ie/edge fix for the extra reset x when the user starts typing
+        &::-ms-clear {
+            display: none;
+        }
+    }
+}
+
+.perso-search__search-icon {
+    border: none;
+    border-radius: 0;
+    top: 0;
+    background-color: @background-color-white;
+    font-size: @perso-search__search-icon--font-size;
+    padding: @perso-search__search-icon--padding;
+}
+
+.perso-search__reset-icon {
+    background-color: @background-color-white;
+    padding: @perso-search__reset-icon--padding;
+    border: none;
+    top: 0;
+    font-size: large;
+    color: @text-color-grey;
+    &.input-group-addon {
+        border-radius: 0
+    }
+}
+
+.perso-search__results {
+    width: 40%;
+    align-self: center;
+    text-align: right;
+    color: @text-color-grey;
+    font-style: italic;
+}

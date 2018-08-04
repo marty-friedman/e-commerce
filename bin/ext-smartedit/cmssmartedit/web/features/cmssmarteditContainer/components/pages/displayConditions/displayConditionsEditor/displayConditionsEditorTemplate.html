@@ -1,0 +1,14 @@
+<div>
+    <display-conditions-page-info data-page-name="$ctrl.getPageName()"
+        data-page-type="$ctrl.getPageType()"
+        data-is-primary="$ctrl.isPagePrimary()"></display-conditions-page-info>
+    <div data-ng-if="$ctrl.isPagePrimary()">
+        <display-conditions-page-variations data-variations="$ctrl.getVariations()"></display-conditions-page-variations>
+    </div>
+    <div data-ng-if="!$ctrl.isPagePrimary()">
+        <display-conditions-primary-page data-read-only="$ctrl.getIsAssociatedPrimaryReadOnly()"
+            data-associated-primary-page="$ctrl.getAssociatedPrimaryPage()"
+            data-all-primary-pages="$ctrl.getPrimaryPages()"
+            data-on-primary-page-select="$ctrl.onPrimaryPageSelect(primaryPage)"></display-conditions-primary-page>
+    </div>
+</div>

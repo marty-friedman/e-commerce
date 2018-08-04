@@ -1,0 +1,52 @@
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<libraries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/libraries.xsd">
+
+	<!--library >
+		 <name>BPMNWidget</name>
+	</library>
+	<library protocol="RESOURCE" url="backoffice/widgets/BPMNWidget/lib" />
+
+	<library protocol="CLASSPATH" url="alerts.js" /-->
+
+	<library protocol="RESOURCE" url="../1.10.0/thirdparty/log4javascript.js"/>
+	<library protocol="RESOURCE" url="../1.10.0/thirdparty/common.js"/>
+	<library protocol="RESOURCE" url="../1.10.0/thirdparty/d3.min.js"/>
+	<library protocol="RESOURCE" url="../1.10.0/thirdparty/dagre.min.js"/>
+	<library protocol="RESOURCE" url="../1.10.0/thirdparty/gravityCoreClient.js"/>
+	<library protocol="RESOURCE" url="../1.10.0/thirdparty/hammer.min.js"/>
+	<library protocol="RESOURCE" url="../1.10.0/thirdparty/jspdf.min.js"/>
+	<library protocol="RESOURCE" url="../1.10.0/thirdparty/klay.js"/>
+	<library protocol="RESOURCE" url="../1.10.0/thirdparty/uuid.js"/>
+
+	<library protocol="RESOURCE" url="../1.10.0/core-min.js"/>
+	<library protocol="RESOURCE" url="../1.10.0/model-min.js"/>
+	<library protocol="RESOURCE" url="../1.10.0/common.ui-min.js"/>
+	<library protocol="RESOURCE" url="../1.10.0/ui.symbol-min.js"/>
+	<library protocol="RESOURCE" url="../1.10.0/ui.editor-min.js"/>
+	<library protocol="RESOURCE" url="../1.10.0/galilei.bpmn-min.js"/>
+
+	<!-- <library protocol="RESOURCE" url="../model.js"/> -->
+	<library protocol="RESOURCE" url="../hybrisModel.js"/>
+	<library protocol="RESOURCE" url="../hybriseditor.js"/>
+	<library protocol="RESOURCE" url="../hybrisdiagram.js"/>
+	<library protocol="RESOURCE" url="../library.js"/>
+	<!-- <library protocol="RESOURCE" url="../editor.js"/> -->
+	
+	<library protocol="RESOURCE" url="../properties.js"/>
+	<!-- <library protocol="RESOURCE" url="../AJS.js"/> -->
+	
+	
+	
+	
+	
+</libraries>

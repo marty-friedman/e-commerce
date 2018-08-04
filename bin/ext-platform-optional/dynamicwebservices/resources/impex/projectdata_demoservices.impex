@@ -1,0 +1,34 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+
+INSERT_UPDATE Script; code[unique=true]; active[unique=true] ; scriptType(code); content; checksum
+"#% beforeEach:
+import de.hybris.platform.core.Registry;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
+String path = line.get(Integer.valueOf(4));
+if( StringUtils.isNotBlank(path) )
+{
+  line.put(
+    Integer.valueOf(4),
+    IOUtils.toString(Registry.class.getResourceAsStream(path),""utf-8"")
+  );
+}"
+
+;usersDemoScript; true; GROOVY; /dynamicwebservices/usersDemo.groovy; dummy
+;ordersDemoScript; true; GROOVY; /dynamicwebservices/ordersDemo.groovy; dummy
+
+#% beforeEach:end
+
+INSERT_UPDATE DynamicWebService; service[unique=true]; domain[unique=true]; enabled; scriptURI; pathParameterPattern
+; usersDemoService ; dws ; true ; model://usersDemoScript ; :uid
+; ordersDemoService ; dws ; true ; model://ordersDemoScript ; :code
+

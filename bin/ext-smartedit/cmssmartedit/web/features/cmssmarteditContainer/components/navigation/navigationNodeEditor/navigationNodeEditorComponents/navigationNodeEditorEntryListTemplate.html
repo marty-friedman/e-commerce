@@ -1,0 +1,26 @@
+<div class="ySENavigationNodeEditorEntryList">
+    <div>
+        <label data-translate="se.cms.navigationmanagement.navnode.node.entries"></label>
+    </div>
+
+    <div data-ng-repeat="entry in ctrl.entries track by $index"
+        class="nav-node-editor-entry-item">
+        <div class="row-fluid">
+            <div class="col-xs-10 nav-node-editor-entry-item__text"
+                data-ng-click="ctrl.onSelect(entry)">
+                <div class="nav-node-editor-entry-item__name">
+                    <span class="ng-class:{'error-input':ctrl.isInError(entry)}">{{entry.title | l10n }}</span>
+                </div>
+                <div class="nav-node-editor-entry-item__type">
+                    <span class="ng-class:{'error-input':ctrl.isInError(entry)}">{{entry.itemType }}</span>
+                </div>
+            </div>
+            <div class="col-xs-2 nav-node-editor-entry-item__menu">
+                <y-drop-down-menu dropdown-items="ctrl.dropdownItems"
+                    selected-item="entry"
+                    class="y-dropdown pull-right nav-node-editor-entry-item__more-menu" />
+            </div>
+        </div>
+    </div>
+    <div data-ng-if="ctrl.entries.length === 0">{{'se.cms.navigationmanagement.node.noentry.message'| translate}}</div>
+</div>

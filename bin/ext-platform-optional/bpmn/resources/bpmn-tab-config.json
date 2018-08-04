@@ -1,0 +1,17 @@
+[ {
+  "basePath" : "/bpmn",
+  "mainTabLabel" : "BPMN Process",
+  "subTabs" : [ {
+    "path" : "/import",
+    "label" : "BPMN Import",
+    "skipPrefix" : false
+  }, {
+    "path" : "/export",
+    "label" : "BPMN Export",
+    "skipPrefix" : false
+  } , {
+    "path" : "/editor",
+    "label" : "BPMN Editor",
+    "skipPrefix" : false
+  } ]
+} ]

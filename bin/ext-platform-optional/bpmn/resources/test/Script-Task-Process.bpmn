@@ -1,0 +1,55 @@
+<bpmn2:definitions id='2889da7a-44e0-48e5-94b2-24e0eef9b80c' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:bpmn2='http://www.omg.org/spec/BPMN/20100524/MODEL' xmlns:bpmndi='http://www.omg.org/spec/BPMN/20100524/DI' xmlns:di='http://www.omg.org/spec/DD/20100524/DI' xmlns:dc='http://www.omg.org/spec/DD/20100524/DC' xmlns:y='http://www.sap.com/bpmn2/hybris' name='Script-Task-Process' targetNamespace='http://www.sap.com/bpmn2/hybris'>
+	<bpmn2:process id='process-2889da7a-44e0-48e5-94b2-24e0eef9b80c' name='Script-Task-Process'>
+		<bpmn2:property id='3e8fc0f5-3c3d-456a-80a1-4769ee890e42' name='boundaryNotVisibleProperty'/>
+		<bpmn2:dataObject id='69a40496-830f-4315-a5f0-8289f78c055e' name='de.hybris.platform.orderprocessing.model.OrderProcessModel as processClass' isCollection='false'>
+			<y:extensionElements>
+				<processContext/>
+				<dataType/>
+				<mandatory>false</mandatory>
+			</y:extensionElements>
+		</bpmn2:dataObject>
+		<bpmn2:startEvent id='9132934c-0b2a-49b4-8a8b-0d0a218048cc' name='StartEvent' parallelMultiple='false' isInterrupting='true'>
+			<bpmn2:outgoing>ba975777-90af-4772-a294-8018b6eaf004</bpmn2:outgoing>
+		</bpmn2:startEvent>
+		<bpmn2:scriptTask id='2f45b6df-7347-4251-9dd1-c1fb3ff71c2f' name='Task2' startQuantity='0' completionQuantity='0' isForCompensation='false'>
+			<bpmn2:script>&lt;![CDATA[&lt;script type=&apos;javascript&apos;&gt;(function() { return &apos;OK&apos; })()&lt;/script&gt;]]</bpmn2:script>
+			<bpmn2:incoming>ba975777-90af-4772-a294-8018b6eaf004</bpmn2:incoming>
+			<bpmn2:outgoing>b5f0a92f-2073-4237-bc17-f58b07370481</bpmn2:outgoing>
+		</bpmn2:scriptTask>
+		<bpmn2:endEvent id='12bb0060-85bd-4cee-8850-b281acae1690' name='SUCCEEDED'>
+			<bpmn2:incoming>b5f0a92f-2073-4237-bc17-f58b07370481</bpmn2:incoming>
+		</bpmn2:endEvent>
+		<bpmn2:sequenceFlow id='ba975777-90af-4772-a294-8018b6eaf004' name='OK' sourceRef='9132934c-0b2a-49b4-8a8b-0d0a218048cc' targetRef='2f45b6df-7347-4251-9dd1-c1fb3ff71c2f' isImmediate='false'/>
+		<bpmn2:sequenceFlow id='b5f0a92f-2073-4237-bc17-f58b07370481' name='OK' sourceRef='2f45b6df-7347-4251-9dd1-c1fb3ff71c2f' targetRef='12bb0060-85bd-4cee-8850-b281acae1690' isImmediate='false'/>
+	</bpmn2:process>
+	<bpmndi:BPMNDiagram id='diagram-2889da7a-44e0-48e5-94b2-24e0eef9b80c' name='Script-Task-Process' resolution='96.0'>
+		<bpmndi:BPMNPlane bpmnElement='process-2889da7a-44e0-48e5-94b2-24e0eef9b80c'>
+			<bpmndi:BPMNShape id='symbol-69a40496-830f-4315-a5f0-8289f78c055e' bpmnElement='69a40496-830f-4315-a5f0-8289f78c055e'>
+				<dc:Bounds x='295' y='46' width='34' height='40'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape id='symbol-9132934c-0b2a-49b4-8a8b-0d0a218048cc' bpmnElement='9132934c-0b2a-49b4-8a8b-0d0a218048cc'>
+				<dc:Bounds x='478' y='46' width='32' height='32'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape id='symbol-2f45b6df-7347-4251-9dd1-c1fb3ff71c2f' bpmnElement='2f45b6df-7347-4251-9dd1-c1fb3ff71c2f'>
+				<dc:Bounds x='444' y='140' width='100' height='60'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape id='symbol-12bb0060-85bd-4cee-8850-b281acae1690' bpmnElement='12bb0060-85bd-4cee-8850-b281acae1690'>
+				<dc:Bounds x='478' y='256' width='32' height='32'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge id='symbol-ba975777-90af-4772-a294-8018b6eaf004' bpmnElement='ba975777-90af-4772-a294-8018b6eaf004' sourceElement='symbol-9132934c-0b2a-49b4-8a8b-0d0a218048cc' targetElement='symbol-2f45b6df-7347-4251-9dd1-c1fb3ff71c2f'>
+				<di:waypoint x='494' y='77'/>
+				<di:waypoint x='494' y='141'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge id='symbol-b5f0a92f-2073-4237-bc17-f58b07370481' bpmnElement='b5f0a92f-2073-4237-bc17-f58b07370481' sourceElement='symbol-2f45b6df-7347-4251-9dd1-c1fb3ff71c2f' targetElement='symbol-12bb0060-85bd-4cee-8850-b281acae1690'>
+				<di:waypoint x='494' y='199'/>
+				<di:waypoint x='494' y='257'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNEdge>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</bpmn2:definitions>

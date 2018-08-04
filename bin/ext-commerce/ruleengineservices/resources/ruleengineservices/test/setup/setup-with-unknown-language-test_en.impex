@@ -1,0 +1,5 @@
+# language-unspecific impex
+$lang=en
+
+UPDATE RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang];
+;setup-with-unknown-language-test;setup with unknown language test;

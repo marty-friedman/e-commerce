@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<process name="Wait-Timeout-Process" start="87d5e7e1-d2f4-4be2-9afc-ffa21d6951b0"
+	processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel"
+	xmlns="http://www.hybris.de/xsd/processdefinition">
+	<action bean="sendOrderPlacedNotificationAction" id="87d5e7e1-d2f4-4be2-9afc-ffa21d6951b0">
+		<transition name="OK" to="195103c8-e5c6-48cf-9c3d-537e198d6f81" />
+	</action>
+	<wait id="195103c8-e5c6-48cf-9c3d-537e198d6f81" then="0f169b7d-5e18-4bf6-b7db-3a9793b1e1cb">
+		<event>CSAOrderVerified</event>
+		<timeout delay="PT3M" then="0f169b7d-5e18-4bf6-b7db-3a9793b1e1cb" />
+	</wait>
+	<end state="SUCCEEDED" id="0f169b7d-5e18-4bf6-b7db-3a9793b1e1cb"></end>
+</process>

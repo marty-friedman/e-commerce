@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<process name="Script-Task-Process" start="2f45b6df-7347-4251-9dd1-c1fb3ff71c2f" processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel" xmlns="http://www.hybris.de/xsd/processdefinition">
+    <scriptAction id="2f45b6df-7347-4251-9dd1-c1fb3ff71c2f">
+        <script type="javascript">(function() { return 'OK' })()</script>
+        <transition name="OK" to="12bb0060-85bd-4cee-8850-b281acae1690"/>
+    </scriptAction>
+    <end state="SUCCEEDED" id="12bb0060-85bd-4cee-8850-b281acae1690"></end>
+</process>

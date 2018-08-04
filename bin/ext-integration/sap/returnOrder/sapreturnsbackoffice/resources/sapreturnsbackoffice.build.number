@@ -1,0 +1,11 @@
+#Ant properties
+#Thu Mar 01 17:19:35 UTC 2018
+builddate=20180301 1719
+description=sapreturnsbackoffice
+group.id=de.hybris.platform
+module.name=platform-module
+name=sapreturnsbackoffice
+releasedate=20180226 1939
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

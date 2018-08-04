@@ -1,0 +1,127 @@
+  .perso-tree__segments-layout {
+      background-color: @background-color-grey;
+      border-left: 20px solid @border-color-light-grey1;
+      border-top: 1px solid @border-color-light-grey1;
+      border-right: 1px solid @border-color-light-grey1;
+      border-bottom: 1px solid @border-color-light-grey1;
+      margin-bottom: 10px;
+      padding-right: 10px;
+  }
+  
+  .perso-tree__collapsed-container {
+      border-left-color: @border-color-dark-grey;
+  }
+  
+  .perso-tree__empty-container .angular-ui-tree-placeholder {
+      display: none;
+  }
+  
+  .perso-tree {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+  }
+  
+  .perso-tree__btn {
+      padding-right: 10px;
+  }
+  
+  .perso-tree__container {
+      padding: 10px 0;
+  }
+  
+  .perso-tree__empty-container-node {
+      background-color: @background-color-white;
+      border: 1px dashed @border-color-light-grey1;
+      color: @text-color-very-light-grey;
+      width: 100%;
+      margin-bottom: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      display: flex;
+  }
+  
+  .perso-tree__empty-container-node--text {
+      margin: auto;
+  }
+  
+  .perso-tree__node--icon {
+      font-size: 13px;
+      padding-left: 5px;
+  }
+  
+  .perso-tree__container--btn-icon {
+      font-size: 13px;
+      padding-right: 10px;
+      padding-left: 0;
+  }
+  
+  .perso-tree__node {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: @background-color-white;
+      border: 1px solid @border-color-light-grey1;
+      .angular-ui-tree-placeholder {
+          margin: 0;
+      }
+  }
+  
+  .perso-tree__container .angular-ui-tree-placeholder {
+      margin: 0;
+  }
+  
+  .perso-tree__node--content,
+  .perso-tree__node--content:hover {
+      background-color: @background-color-white;
+      color: inherit;
+      font-weight: @font-weight-normal;
+      border: none;
+      flex: @flex-grow @flex-shrink auto;
+  }
+  
+  .perso-tree__node:hover .perso-tree__actions,
+  .perso-tree__container:hover .perso-tree__actions {
+      visibility: visible;
+  }
+  
+  .perso-tree__actions {
+      display: inline-block;
+      visibility: hidden;
+      &:hover {
+          text-decoration: none;
+      }
+  }
+  
+  .perso-tree__toggle {
+      display: inline-block;
+  }
+  
+  .perso-tree__dropdown {
+      display: inline-block;
+      margin-left: -10px;
+  }
+  
+  .perso-tree__glyphicon {
+      left: -17px;
+      position: relative;
+      color: @white;
+      &:hover {
+          opacity: @opacity_point-eight;
+      }
+  }
+  
+  .perso-tree__angular-ui-tree-handle--empty {
+      flex: @flex-grow @flex-shrink auto;
+      border: none;
+      background-color: transparent;
+  }
+  
+  .angular-ui-tree-nodes .angular-ui-tree-nodes {
+      padding-left: 10px;
+  }
+  
+  @media (max-width: 600px) {
+      .perso-tree__container {
+          flex-direction: column;
+      }
+  }

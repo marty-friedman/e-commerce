@@ -1,0 +1,73 @@
+/* *
+/* This file includes the styles used in Create New Customization modal, sliding panel
+/* The styles follow the BEM principles - http://getbem.com/introduction/
+*/
+
+.customization-form__sliderpanel {
+    .form-group {
+        margin-bottom: 30px;
+    }
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .select2-choices {
+        margin-top: 15px;
+    }
+    .ui-select-match-item {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        display: inline-block;
+        &.select2-search-choice {
+            background: @background-color-light-grey2;
+            border-style: none;
+            line-height: 22px;
+            margin-bottom: 5px;
+            margin-top: 5px;
+            margin-right: 10px;
+        }
+    }
+    .select2-disabled {
+        opacity: @opacity_point-four;
+        background: none;
+        cursor: none;
+    }
+    .ui-select-match-close {
+        position: inherit;
+        vertical-align: top;
+        padding-left: 10px;
+    }
+}
+
+.sliderpanel-body {
+    overflow: auto;
+}
+
+.sliderpanel-footer {
+    padding-top: 15px;
+}
+
+.perso-sliderpanel__btn-link {
+    font-weight: @font-weight-semibold;
+    font-family: @font-family-open-sans;
+    padding: 0;
+}
+
+.perso-sliderpanel__expression-text {
+    font-weight: @font-weight-bold;
+}
+
+.sliderpanel-row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.sliderpanel-col {
+    padding-left: 0;
+}
+
+.sliderPanelParentModal.modal-fullscreen #y-modal-dialog {
+    height: 100vh;
+}

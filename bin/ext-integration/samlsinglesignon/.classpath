@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/commons-httpclient-3.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/esapi-2.1.0.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/httpclient-4.5.2.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/httpcore-4.4.4.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/joda-convert-1.8.1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/joda-time-2.9.3.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/jstl-1.2.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/not-yet-commons-ssl-0.3.17.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/opensaml-2.6.7-hybrid.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/openws-1.5.8-hybrid.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/slf4j-ext-1.7.25.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/spring-security-saml2-core-1.0.2.RELEASE.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/standard-1.1.2.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/xercesImpl-2.11.0.SP5-redhat-1.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/xml-apis-1.0.b2.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/xml-resolver-1.2.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/xmltooling-1.4.4.jar" />
+	<classpathentry exported="true" kind="lib" path="resources" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="src" />
+	<classpathentry exported="false" output="eclipsebin/web/classes" kind="src" path="web/src" />
+	<classpathentry exported="false" output="eclipsebin/web/classes" kind="src" path="web/testsrc" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="gensrc" />
+	<classpathentry exported="false" kind="src" path="/platform" />
+				
+</classpath>
+				

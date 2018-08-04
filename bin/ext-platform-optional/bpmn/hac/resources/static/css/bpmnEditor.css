@@ -1,0 +1,93 @@
+#body {
+	overflow: scroll;
+	margin: 0px;
+	padding: 0px;
+	width: 80%;
+	height: 100%;
+	background: white;
+}
+            
+#header {
+	position: absolute;
+	top: 0px;
+	width: 81.2%;
+	left: 19.8%;
+	background: #E0E0E0;
+}
+#title {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	padding-top: 10px;
+	padding-left: 10px;
+	width: 160px;
+	font: normal normal bold 20px Unicode MS;
+	color: #666666;
+}
+                       
+#mainPage {
+	position: absolute;
+	top: 126px;
+	left: -1%;
+	right: 0px;
+	bottom: 0px;
+	width: 100%;
+	float: left;
+}
+			     
+#tools {
+	position: relative;
+	left: -131px;
+	top: -144px;
+	width: 168.8%;
+	font: normal normal bold 18px Unicode MS;
+	color: White;
+	background-color: rgba(54,62,67,0.96);
+	vertical-align: middle;
+}
+            
+.tool {
+	font: normal normal bold 18px Unicode MS;
+	color: White;
+	padding-top: 6px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-bottom: 6px;
+	width: 20px;
+	height: 20px;
+}
+		
+#editorArea {
+	position: absolute;
+	top: -107px;
+	left: 6px;
+	height: 904px;
+	width: 937px;
+}
+
+#editor {
+	position: absolute;
+	top: 0.2px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	float: left;
+	width: 75%;
+	height: 637px;
+	border: 1px solid rgb(98, 131, 167);
+}
+		
+#properties {
+	position: relative;
+	top: 0.2px;
+	background: #eee;
+	width: 247px;
+	height: 637px;
+	float: right;
+	bottom: 0px;
+	left: 14px;
+	border: 1.2px solid rgb(98, 131, 167);
+}
+.container {
+	background-color: rgb(108, 117, 132);
+}

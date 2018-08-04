@@ -1,0 +1,176 @@
+Following requests have different results from a version to another
+
+------------------------------------------------------------
+
+restServiceFactory, get
+arguments: ["STRING"]
+{"kind":"N","path":["getMethodForVoid"],"rhs":"FUNCTION"}
+{"kind":"N","path":["getMethodForSingleInstance"],"rhs":"FUNCTION"}
+{"kind":"N","path":["getMethodForArray"],"rhs":"FUNCTION"}
+
+httpAuthInterceptor, request
+arguments: [{"method":"STRING","transformRequest":["FUNCTION"],"transformResponse":{},"paramSerializer":"FUNCTION","jsonpCallbackParam":"STRING","cache":{"put":"FUNCTION","get":"FUNCTION","remove":"FUNCTION","removeAll":"FUNCTION","destroy":"FUNCTION","info":"FUNCTION"},"url":"STRING","headers":{"Accept":"STRING"}}]
+{"kind":"D","path":["promiseValue","data","catalogVersion"],"lhs":"STRING"}
+{"kind":"D","path":["promiseValue","data","uuids"],"lhs":["null"]}
+{"kind":"N","path":["promiseValue","data","itemtype"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","name"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","activeFrom"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","activeUntil"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","type"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","uid"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","uuid"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","description"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","identifier"],"rhs":"STRING"}
+
+experienceInterceptor, request
+arguments: [{"method":"STRING","transformRequest":["FUNCTION"],"transformResponse":{},"paramSerializer":"FUNCTION","jsonpCallbackParam":"STRING","cache":{"put":"FUNCTION","get":"FUNCTION","remove":"FUNCTION","removeAll":"FUNCTION","destroy":"FUNCTION","info":"FUNCTION"},"url":"STRING","headers":{"Accept":"STRING"}}]
+{"kind":"D","path":["promiseValue","data","catalogVersion"],"lhs":"STRING"}
+{"kind":"D","path":["promiseValue","data","uuids"],"lhs":["null"]}
+{"kind":"N","path":["promiseValue","data","itemtype"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","name"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","activeFrom"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","activeUntil"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","type"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","uid"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","uuid"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","description"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","data","identifier"],"rhs":"STRING"}
+
+catalogService, getContentCatalogsForSite
+arguments: ["STRING"]
+{"kind":"E","path":["promiseValue"],"lhs":{"resource":{}},"rhs":[{"catalogId":"STRING","name":{"en":"STRING"},"versions":[{"active":"BOOLEAN","pageDisplayConditions":[{"options":[{"label":"STRING","id":"STRING"}],"typecode":"STRING"}],"thumbnailUrl":"STRING","uuid":"STRING","version":"STRING"}]}]}
+
+experienceService, buildDefaultExperience
+arguments: [{"siteId":"STRING","catalogId":"STRING","catalogVersion":"STRING"}]
+{"kind":"D","path":["promiseValue"],"lhs":{"pageId":"STRING","siteDescriptor":{"previewUrl":"STRING","name":{"en":"STRING"},"redirectUrl":"STRING","uid":"STRING","contentCatalogs":["STRING"]},"catalogDescriptor":{"catalogId":"STRING","catalogVersion":"STRING","catalogVersionUuid":"STRING","name":{"en":"STRING"},"siteId":"STRING","active":"BOOLEAN"},"languageDescriptor":{"nativeName":"STRING","isocode":"STRING","name":"STRING","required":"BOOLEAN"},"time":"null","productCatalogVersions":[{"catalog":"STRING","catalogName":{"en":"STRING","de":"STRING"},"catalogVersion":"STRING","active":"BOOLEAN"}]}}
+{"kind":"N","path":["pageId"],"rhs":"STRING"}
+{"kind":"N","path":["siteDescriptor"],"rhs":{"previewUrl":"STRING","name":{"en":"STRING"},"redirectUrl":"STRING","uid":"STRING","contentCatalogs":["STRING"]}}
+{"kind":"N","path":["catalogDescriptor"],"rhs":{"catalogId":"STRING","catalogVersion":"STRING","catalogVersionUuid":"STRING","name":{"en":"STRING"},"siteId":"STRING","active":"BOOLEAN"}}
+{"kind":"N","path":["languageDescriptor"],"rhs":{"nativeName":"STRING","isocode":"STRING","name":"STRING","required":"BOOLEAN"}}
+{"kind":"N","path":["time"],"rhs":"null"}
+{"kind":"N","path":["productCatalogVersions"],"rhs":[{"catalog":"STRING","catalogName":{"en":"STRING","de":"STRING"},"catalogVersion":"STRING","active":"BOOLEAN"}]}
+
+perspectiveService, getPerspectives
+arguments: []
+{"kind":"D","path":["promiseValue",0,"name"],"lhs":"STRING"}
+{"kind":"D","path":["promiseValue",0,"system"],"lhs":"BOOLEAN"}
+{"kind":"D","path":["promiseValue",0,"setFeatures"],"lhs":"FUNCTION"}
+{"kind":"D","path":["promiseValue",0,"getFeatures"],"lhs":"FUNCTION"}
+{"kind":"N","path":["promiseValue",0,"nameI18nKey"],"rhs":"STRING"}
+
+configurationExtractorService, extractSEModules
+arguments: [{"previewTicketURI":"STRING","i18nAPIRoot":"STRING","applications.miscellaneousMocks":{"smartEditLocation":"STRING"},"applications.clickThroughOverlayModule":{"smartEditLocation":"STRING"},"applications.clickThroughOverlayTriggerModule":{"smartEditContainerLocation":"STRING"},"applications.LanguagesMocks":{"smartEditLocation":"STRING"},"applications.i18nMockModule":{"smartEditLocation":"STRING"},"applications.backendMocksUtilsModule":{"smartEditLocation":"STRING"},"applications.pagesContentSlotsComponentsMocks":{"smartEditLocation":"STRING"},"applications.pagesContentSlotsContainerMocks":{"smartEditLocation":"STRING"},"applications.pagesContentSlotsMocks":{"smartEditLocation":"STRING"},"applications.dragAndDropMocks":{"smartEditLocation":"STRING"},"applications.componentMocks":{"smartEditLocation":"STRING"},"applications.slotTypeRestrictionsMocks":{"smartEditLocation":"STRING"},"applications.cmssmarteditContainer":{"smartEditContainerLocation":"STRING"},"applications.cmssmartedit":{"smartEditLocation":"STRING"},"applications.goToApparelStagedUK":{"smartEditContainerLocation":"STRING"},"domain":"STRING","smarteditroot":"STRING"}]
+{"kind":"D","path":["appLocations"],"lhs":["STRING"]}
+{"kind":"E","path":["applications",0],"lhs":"STRING","rhs":{"name":"STRING","location":"STRING"}}
+
+bootstrapService, bootstrapSEApp
+arguments: [{"previewTicketURI":"STRING","i18nAPIRoot":"STRING","applications.miscellaneousMocks":{"smartEditLocation":"STRING"},"applications.clickThroughOverlayModule":{"smartEditLocation":"STRING"},"applications.clickThroughOverlayTriggerModule":{"smartEditContainerLocation":"STRING"},"applications.LanguagesMocks":{"smartEditLocation":"STRING"},"applications.i18nMockModule":{"smartEditLocation":"STRING"},"applications.backendMocksUtilsModule":{"smartEditLocation":"STRING"},"applications.pagesContentSlotsComponentsMocks":{"smartEditLocation":"STRING"},"applications.pagesContentSlotsContainerMocks":{"smartEditLocation":"STRING"},"applications.pagesContentSlotsMocks":{"smartEditLocation":"STRING"},"applications.dragAndDropMocks":{"smartEditLocation":"STRING"},"applications.componentMocks":{"smartEditLocation":"STRING"},"applications.slotTypeRestrictionsMocks":{"smartEditLocation":"STRING"},"applications.cmssmarteditContainer":{"smartEditContainerLocation":"STRING"},"applications.cmssmartedit":{"smartEditLocation":"STRING"},"applications.goToApparelStagedUK":{"smartEditContainerLocation":"STRING"},"domain":"STRING","smarteditroot":"STRING"}]
+{"kind":"E","lhs":null,"rhs":{}}
+
+restServiceFactory, get
+arguments: ["STRING","STRING"]
+{"kind":"N","path":["getMethodForVoid"],"rhs":"FUNCTION"}
+{"kind":"N","path":["getMethodForSingleInstance"],"rhs":"FUNCTION"}
+{"kind":"N","path":["getMethodForArray"],"rhs":"FUNCTION"}
+
+catalogService, getCatalogVersionUUid
+arguments: []
+{"kind":"N","path":["promiseValue"],"rhs":"STRING"}
+
+experienceService, getCurrentExperience
+arguments: []
+{"kind":"D","path":["promiseValue"],"lhs":{"siteDescriptor":{"previewUrl":"STRING","name":{"en":"STRING"},"redirectUrl":"STRING","uid":"STRING","contentCatalogs":["STRING"]},"catalogDescriptor":{"catalogId":"STRING","catalogVersion":"STRING","catalogVersionUuid":"STRING","name":{"en":"STRING"},"siteId":"STRING","active":"BOOLEAN"},"languageDescriptor":{"nativeName":"STRING","isocode":"STRING","name":"STRING","required":"BOOLEAN"},"time":"null","productCatalogVersions":[{"catalog":"STRING","catalogName":{"en":"STRING","de":"STRING"},"catalogVersion":"STRING","active":"BOOLEAN"}],"pageId":"STRING","pageContext":{"catalogId":"STRING","catalogName":{"en":"STRING"},"catalogVersion":"STRING","catalogVersionUuid":"STRING","siteId":"STRING","active":"BOOLEAN"}}}
+{"kind":"N","path":["siteDescriptor"],"rhs":{"previewUrl":"STRING","name":{"en":"STRING"},"redirectUrl":"STRING","uid":"STRING","contentCatalogs":["STRING"]}}
+{"kind":"N","path":["catalogDescriptor"],"rhs":{"catalogId":"STRING","catalogVersion":"STRING","catalogVersionUuid":"STRING","name":{"en":"STRING"},"siteId":"STRING","active":"BOOLEAN"}}
+{"kind":"N","path":["languageDescriptor"],"rhs":{"nativeName":"STRING","isocode":"STRING","name":"STRING","required":"BOOLEAN"}}
+{"kind":"N","path":["time"],"rhs":"null"}
+{"kind":"N","path":["productCatalogVersions"],"rhs":[{"catalog":"STRING","catalogName":{"en":"STRING","de":"STRING"},"catalogVersion":"STRING","active":"BOOLEAN"}]}
+{"kind":"N","path":["pageId"],"rhs":"STRING"}
+{"kind":"N","path":["pageContext"],"rhs":{"catalogId":"STRING","catalogName":{"en":"STRING"},"catalogVersion":"STRING","catalogVersionUuid":"STRING","siteId":"STRING","active":"BOOLEAN"}}
+
+catalogService, getAllContentCatalogsGroupedById
+arguments: []
+{"kind":"D","path":["promiseValue",0,"0","versions",0,"pageDisplayConditions",0,"options",0,"value"],"lhs":"STRING"}
+{"kind":"N","path":["promiseValue",0,"0","versions",0,"pageDisplayConditions",0,"options",0,"id"],"rhs":"STRING"}
+
+catalogService, getCatalogVersionByUuid
+arguments: ["STRING"]
+{"kind":"D","path":["promiseValue","pageDisplayConditions",0,"options",0,"value"],"lhs":"STRING"}
+{"kind":"N","path":["promiseValue","pageDisplayConditions",0,"options",0,"id"],"rhs":"STRING"}
+
+GenericEditor, onSubmit
+arguments: []
+{"kind":"E","path":["promiseValue","config","data","activationDate"],"lhs":1519319867127,"rhs":1519323237654}
+{"kind":"E","path":["promiseValue","config","data","creationtime"],"lhs":1519319867127,"rhs":1519323237654}
+{"kind":"E","path":["promiseValue","config","data","modifiedtime"],"lhs":1519319867127,"rhs":1519323237654}
+{"kind":"E","path":["promiseValue","resource","activationDate"],"lhs":1519319867127,"rhs":1519323237654}
+{"kind":"E","path":["promiseValue","resource","creationtime"],"lhs":1519319867127,"rhs":1519323237654}
+{"kind":"E","path":["promiseValue","resource","modifiedtime"],"lhs":1519319867127,"rhs":1519323237654}
+
+httpErrorInterceptor, responseError
+arguments: [{}]
+{"kind":"D","path":["promiseValue","config","headers","X-Preview-Ticket"],"lhs":"dasdfasdfasdfa"}
+{"kind":"D","path":["promiseValue","xhrStatus"],"lhs":"abort"}
+{"kind":"E","path":["promiseValue","data"],"lhs":"null","rhs":{"errors":[{"message":"This is an unrelated validation error","reason":"missing","subject":"headline","subjectType":"parameter","type":"ValidationError"}]}}
+{"kind":"E","path":["promiseValue","status"],"lhs":-1,"rhs":400}
+{"kind":"E","path":["promiseValue","config","method"],"lhs":"GET","rhs":"PUT"}
+{"kind":"E","path":["promiseValue","config","url"],"lhs":"http://127.0.0.1:7000/smartedit-build/webroot/static-resources/smartedit/modules/systemModule.js","rhs":"/cmswebservices/v1/sites/someSiteUid/cmsitems/Comp_0006456345634"}
+{"kind":"N","path":["promiseValue","config","headers","x-requested-with"],"rhs":"Angular"}
+{"kind":"N","path":["promiseValue","config","headers","Content-Type"],"rhs":"application/json;charset=utf-8"}
+{"kind":"N","path":["promiseValue","config","cache"],"rhs":false}
+{"kind":"N","path":["promiseValue","config","data"],"rhs":{"id":"MyParagraphblabla","pk":"123455667","uid":"Comp_0006456345634","uuid":"Comp_0006456345634","name":"Custom Paragraph Component","headline":"The Headline","active":true,"content":"the content to edit","activationDate":1519323237654,"creationtime":1519323237654,"modifiedtime":1519323237654,"media":"4","external":false,"visible":true,"restrictions":[null],"onlyOneRestrictionMustApply":false,"slots":["mocked_slot_id"],"identifier":"Comp_0006456345634"}}
+
+nonValidationErrorInterceptor, responseError
+arguments: [{"data":{"errors":[{"message":"STRING","reason":"STRING","subject":"STRING","subjectType":"STRING","type":"STRING"}]},"status":"NUMBER","headers":"FUNCTION","config":{"method":"STRING","transformRequest":["FUNCTION"],"transformResponse":["FUNCTION"],"paramSerializer":"FUNCTION","jsonpCallbackParam":"STRING","cache":"BOOLEAN","headers":{"x-requested-with":"STRING","Accept":"STRING","Content-Type":"STRING","X-Preview-Ticket":"STRING"},"data":{"type":"STRING","creationtime":"STRING","defaultPage":"BOOLEAN","modifiedtime":"STRING","name":"STRING","pk":"STRING","masterTemplate":"STRING","title":{"de":"STRING","en":"STRING"},"typeCode":"STRING","itemtype":"STRING","uid":"STRING","label":"STRING","restrictions":[{"uid":"STRING","uuid":"STRING","name":"STRING","typeCode":"STRING","itemtype":"STRING","description":"STRING"}],"pageStatus":"STRING","catalogVersion":"STRING","pageUuid":"STRING","template":"STRING","uriContext":{"CURRENT_CONTEXT_SITE_ID":"STRING","CURRENT_CONTEXT_CATALOG":"STRING","CURRENT_CONTEXT_CATALOG_VERSION":"STRING"},"onlyOneRestrictionMustApply":"BOOLEAN","cloneComponents":"BOOLEAN","siteId":"STRING"},"url":"STRING"},"statusText":"STRING"}]
+{"kind":"E","path":["promiseValue","config","data","activationDate"],"lhs":1519319867127,"rhs":1519323237654}
+{"kind":"E","path":["promiseValue","config","data","creationtime"],"lhs":1519319867127,"rhs":1519323237654}
+{"kind":"E","path":["promiseValue","config","data","modifiedtime"],"lhs":1519319867127,"rhs":1519323237654}
+
+httpErrorInterceptorService, responseError
+arguments: [{"data":{"errors":[{"message":"STRING","reason":"STRING","subject":"STRING","subjectType":"STRING","type":"STRING"}]},"status":"NUMBER","headers":"FUNCTION","config":{"method":"STRING","transformRequest":["FUNCTION"],"transformResponse":["FUNCTION"],"paramSerializer":"FUNCTION","jsonpCallbackParam":"STRING","cache":"BOOLEAN","headers":{"x-requested-with":"STRING","Accept":"STRING","Content-Type":"STRING","X-Preview-Ticket":"STRING"},"data":{"type":"STRING","creationtime":"STRING","defaultPage":"BOOLEAN","modifiedtime":"STRING","name":"STRING","pk":"STRING","masterTemplate":"STRING","title":{"de":"STRING","en":"STRING"},"typeCode":"STRING","itemtype":"STRING","uid":"STRING","label":"STRING","restrictions":[{"uid":"STRING","uuid":"STRING","name":"STRING","typeCode":"STRING","itemtype":"STRING","description":"STRING"}],"pageStatus":"STRING","catalogVersion":"STRING","pageUuid":"STRING","template":"STRING","uriContext":{"CURRENT_CONTEXT_SITE_ID":"STRING","CURRENT_CONTEXT_CATALOG":"STRING","CURRENT_CONTEXT_CATALOG_VERSION":"STRING"},"onlyOneRestrictionMustApply":"BOOLEAN","cloneComponents":"BOOLEAN","siteId":"STRING"},"url":"STRING"},"statusText":"STRING"}]
+{"kind":"D","path":["promiseValue","config","headers","X-Preview-Ticket"],"lhs":"dasdfasdfasdfa"}
+{"kind":"D","path":["promiseValue","xhrStatus"],"lhs":"abort"}
+{"kind":"E","path":["promiseValue","data"],"lhs":"null","rhs":{"errors":[{"message":"This is an unrelated validation error","reason":"missing","subject":"headline","subjectType":"parameter","type":"ValidationError"}]}}
+{"kind":"E","path":["promiseValue","status"],"lhs":-1,"rhs":400}
+{"kind":"E","path":["promiseValue","config","method"],"lhs":"GET","rhs":"PUT"}
+{"kind":"E","path":["promiseValue","config","url"],"lhs":"http://127.0.0.1:7000/smartedit-build/webroot/static-resources/smartedit/modules/systemModule.js","rhs":"/cmswebservices/v1/sites/someSiteUid/cmsitems/Comp_0006456345634"}
+{"kind":"N","path":["promiseValue","config","headers","x-requested-with"],"rhs":"Angular"}
+{"kind":"N","path":["promiseValue","config","headers","Content-Type"],"rhs":"application/json;charset=utf-8"}
+{"kind":"N","path":["promiseValue","config","cache"],"rhs":false}
+{"kind":"N","path":["promiseValue","config","data"],"rhs":{"id":"MyParagraphblabla","pk":"123455667","uid":"Comp_0006456345634","uuid":"Comp_0006456345634","name":"Custom Paragraph Component","headline":"The Headline","active":true,"content":"the content to edit","activationDate":1519323237654,"creationtime":1519323237654,"modifiedtime":1519323237654,"media":"4","external":false,"visible":true,"restrictions":[null],"onlyOneRestrictionMustApply":false,"slots":["mocked_slot_id"],"identifier":"Comp_0006456345634"}}
+
+genericEditorModalService, open
+arguments: [{"componentUuid":"STRING","componentType":"STRING","title":"STRING"},"null","FUNCTION"]
+{"kind":"D","path":["promiseValue","products"],"lhs":["STRING"]}
+{"kind":"D","path":["promiseValue","categories"],"lhs":["STRING"]}
+{"kind":"D","path":["promiseValue","onlyOneRestrictionMustApply"],"lhs":"BOOLEAN"}
+{"kind":"D","path":["promiseValue","restrictions"],"lhs":{}}
+{"kind":"E","path":["promiseValue","title"],"lhs":{"en":"STRING","it":"STRING"},"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","typeCode"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","itemtype"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","name"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue","tabs"],"rhs":["STRING"]}
+{"kind":"N","path":["promiseValue","uuid"],"rhs":"STRING"}
+
+DropdownPopulatorInterface, populate
+arguments: [{"field":{"idAttribute":"STRING","labelAttributes":["STRING"],"editable":"BOOLEAN","propertyType":"STRING","params":{"catalogId":"STRING","catalogVersion":"STRING"}},"model":{"linkName":{},"visible":"BOOLEAN","linkTo":"STRING","currentSelectedOptionValue":"STRING","external":"BOOLEAN","target":"BOOLEAN"}}]
+{"kind":"D","path":["promiseValue",0,"previewUrl"],"lhs":"STRING"}
+{"kind":"D","path":["promiseValue",0,"redirectUrl"],"lhs":"STRING"}
+{"kind":"D","path":["promiseValue",0,"uid"],"lhs":"STRING"}
+{"kind":"D","path":["promiseValue",0,"contentCatalogs"],"lhs":["STRING"]}
+{"kind":"N","path":["promiseValue",0,"name","de"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue",0,"label","de"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue",0,"catalogId"],"rhs":"STRING"}
+{"kind":"N","path":["promiseValue",0,"versions"],"rhs":[{"active":"BOOLEAN","version":"STRING"}]}
+
+
+cmsitemsRestService, getById
+arguments: ["null"]
+{"kind":"N","path":["promiseValue","pagination"],"rhs":{"count":"NUMBER","totalCount":"NUMBER","totalPages":"NUMBER"}}
+{"kind":"N","path":["promiseValue","response"],"rhs":{}}
+
+catalogService, getCatalogVersionByUuid
+arguments: ["STRING","STRING"]
+{"kind":"D","path":["promiseValue","pageDisplayConditions",0,"options",0,"value"],"lhs":"STRING"}
+{"kind":"N","path":["promiseValue","pageDisplayConditions",0,"options",0,"id"],"rhs":"STRING"}
+

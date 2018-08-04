@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+	<requires resource="pcmbackoffice-widgets-general.xml" />
+	<import resource="pcmbackoffice-widgets-assortment-vessel.xml" slot="first" />
+	<import resource="pcmbackoffice-widgets-assortment-vessel.xml" slot="second" />
+	<import resource="pcmbackoffice-widgets-assortment-vessel.xml" slot="third" />
+
+	<widget-extension widgetId="pcmbackoffice">
+		<setting key="dragAndDropConfigCtx" type="String">assortViewGlobal</setting>
+	</widget-extension>
+
+	<widget-extension widgetId="pcmbackoffice-contents">
+
+		<widget id="pcmbackoffice-assortment-view-propextractor" widgetDefinitionId="com.hybris.cockpitng.widgets.common.propextractor"
+		        slotId="cockpitWidgetChildrenInvisible" template="false">
+			<widget id="pcmbackoffice-assortment-view-conditionevaluator" widgetDefinitionId="com.hybris.cockpitng.conditionevaluator"
+			        slotId="cockpitWidgetChildrenInvisible" template="false">
+				<setting key="expression" type="String">#root.toString().equals('pcmbackoffice-assortment-view')</setting>
+				<setting key="socketDataType_$T" type="String">java.lang.String</setting>
+				<virtual-sockets/>
+			</widget>
+			<setting key="expression" type="String">#root.iterator().next()</setting>
+			<setting key="socketDataType_$T" type="String">java.lang.String</setting>
+			<virtual-sockets/>
+		</widget>
+
+		<widget id="pcmbackoffice-assortment-view" widgetDefinitionId="com.hybris.cockpitng.extendedsplitlayout"
+		        template="false" slotId="views">
+			<widget id="pcmbackoffice-assortment-catalog-propextractor-first-selected-item" widgetDefinitionId="com.hybris.cockpitng.widgets.common.propextractor"
+			        slotId="cockpitWidgetChildrenInvisible" template="false">
+				<setting key="expression" type="String">#this.get(0)</setting>
+				<setting key="socketDataType_$T" type="String">java.lang.Object</setting>
+				<virtual-sockets/>
+			</widget>
+			<setting key="showToolbar" type="Boolean">true</setting>
+			<setting key="actionsConfigCtx" type="String">pcmbackoffice-actions-extended-split-layout</setting>
+			<setting key="dragAndDropConfigCtx" type="String">pcmbackoffice-DragAndDrop</setting>
+			<setting key="splitLayoutConfigCtx" type="String">pcmbackoffice-assortment-split-layout</setting>
+			<virtual-sockets>
+				<output id="com.hybris.cockpitng.action.splitlayoutchooser.success" type="java.lang.Object"/>
+			</virtual-sockets>
+		</widget>
+
+	</widget-extension>
+
+	<widget-connection sourceWidgetId="pcmbackoffice-assortment-view" outputId="com.hybris.cockpitng.action.splitlayoutchooser.success"
+	                   targetWidgetId="pcmbackoffice-assortment-view" inputId="chooseLayout"/>
+
+	<widget-connection sourceWidgetId="pcmbackoffice-contents" outputId="selectedViews"
+	                   targetWidgetId="pcmbackoffice-assortment-view-propextractor" inputId="genericInput"/>
+	<widget-connection sourceWidgetId="pcmbackoffice-assortment-view-propextractor" outputId="genericOutput"
+	                   targetWidgetId="pcmbackoffice-assortment-view-conditionevaluator" inputId="input"/>
+
+	<!-- Connect main assortment view layout with it's children -->
+	<!-- Quick List Selection -->
+	<widget-connection sourceWidgetId="pcmbackoffice-selectedreference-propertyextractor" outputId="genericOutput"
+	                   targetWidgetId="pcmbackoffice-editorArea-quicklist" inputId="selectItem"/>
+	<widget-connection sourceWidgetId="pcmbackoffice-navigationhistory" outputId="historyOutput"
+	                   targetWidgetId="pcmbackoffice-editorArea-quicklist" inputId="selectItem"/>
+	<widget-connection sourceWidgetId="pcmbackoffice-collectionBrowser-propextractor-first-selected-item" outputId="genericOutput"
+	                   targetWidgetId="pcmbackoffice-editorArea-quicklist" inputId="selectItem"/>
+	<widget-connection sourceWidgetId="pcmbackoffice-item-selection-proxy" outputId="genericOutput"
+	                   targetWidgetId="pcmbackoffice-editorArea-quicklist" inputId="selectItem"/>
+
+	<widget-connection sourceWidgetId="STUB_com.hybris.wizard.widgets.action.CreateAction" outputId="createContext"
+	                   targetWidgetId="configurableFlow" inputId="context"/>
+
+	<widget-connection sourceWidgetId="pcmbackoffice-assortment-catalog-propextractor-first-selected-item" outputId="genericOutput"
+	                   targetWidgetId="pcmbackoffice-editorArea-area" inputId="inputObject"/>
+	<widget-connection sourceWidgetId="pcmbackoffice-assortment-catalog-propextractor-first-selected-item" outputId="genericOutput"
+	                   targetWidgetId="pcmbackoffice-editorarea-summaryview" inputId="inputObject"/>
+
+</widgets>

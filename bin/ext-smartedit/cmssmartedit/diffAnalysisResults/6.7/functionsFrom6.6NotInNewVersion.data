@@ -1,0 +1,136 @@
+Following requests from previous version were not found in new version
+
+------------------------------------------------------------
+
+previewTicketInterceptor, request
+
+componentHandlerService, getFromSelector
+
+UrlServiceInterface, buildUriContext
+
+DecoratorServiceClass, addMappings
+
+smartEditContractChangeListener, onComponentsAdded
+
+smartEditContractChangeListener, onComponentsRemoved
+
+smartEditContractChangeListener, onComponentResized
+
+smartEditContractChangeListener, onComponentRepositioned
+
+smartEditContractChangeListener, onComponentChanged
+
+smartEditContractChangeListener, onPageChanged
+
+componentHandlerService, getPageUUID
+
+componentHandlerService, getFirstSmartEditComponentChildren
+
+smartEditContractChangeListener, initListener
+
+featureService, addContextualMenuButton
+
+featureService, addDecorator
+
+componentHandlerService, isSmartEditComponent
+
+componentHandlerService, getParent
+
+componentHandlerService, buildOverlayQuery
+
+componentHandlerService, getOverlay
+
+componentHandlerService, isOverlayOn
+
+componentHandlerService, getCatalogVersionUUIDFromPage
+
+componentHandlerService, getPageUID
+
+positionRegistry, getRepositionedComponents
+
+languageServiceGateway, subscribe
+
+languageService, registerSwitchLanguage
+
+renderService, renderPage
+
+componentHandlerService, getClosestSmartEditComponent
+
+DecoratorServiceClass, enable
+
+componentHandlerService, getAllSlotsSelector
+
+componentHandlerService, getAllComponentsSelector
+
+ContextualMenuServiceClass, addItems
+
+componentHandlerService, getId
+
+componentHandlerService, getComponent
+
+componentHandlerService, getOriginalComponent
+
+componentHandlerService, getCatalogVersionUuid
+
+componentHandlerService, isExternalComponent
+
+positionRegistry, unregister
+
+positionRegistry, register
+
+resizeListener, register
+
+resizeListener, fix
+
+componentHandlerService, getParentSlotForComponent
+
+componentHandlerService, getOverlayComponent
+
+DecoratorServiceClass, getDecoratorsForComponent
+
+ContextualMenuServiceClass, getContextualMenuByType
+
+componentHandlerService, getParentSlotUuidForComponent
+
+componentHandlerService, getSlotOperationRelatedId
+
+componentHandlerService, getOriginalComponentsWithinSlot
+
+componentHandlerService, getComponentPositionInSlot
+
+componentHandlerService, getSlotOperationRelatedType
+
+ContextualMenuServiceClass, getContextualMenuItems
+
+DecoratorServiceClass, disable
+
+ContextualMenuServiceClass, removeItemByKey
+
+resizeListener, unregister
+
+componentHandlerService, getComponentInOverlay
+
+componentHandlerService, getComponentUnderSlot
+
+componentHandlerService, getOverlayComponentWithinSlot
+
+yPopupOverlayUtilsClickOrderService, register
+
+yPopupOverlayUtilsClickOrderService, unregister
+
+renderService, renderSlots
+
+UrlServiceInterface, buildPageUriContext
+
+SlotVisibilityService, reloadSlotsInfo
+
+cmsitemsRestService, getByIds
+
+SlotVisibilityService, getSlotsForComponent
+
+componentHandlerService, getSlotOperationRelatedUuid
+
+componentHandlerService, getOriginalComponentWithinSlot
+
+componentHandlerService, getUuid
+

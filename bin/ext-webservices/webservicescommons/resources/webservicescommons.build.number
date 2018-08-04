@@ -1,0 +1,11 @@
+#Ant properties
+#Mon Mar 05 08:56:50 UTC 2018
+builddate=20180305 0856
+description=webservicescommons
+group.id=de.hybris.platform
+module.name=platform-module
+name=webservicescommons
+releasedate=20180302 1302
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

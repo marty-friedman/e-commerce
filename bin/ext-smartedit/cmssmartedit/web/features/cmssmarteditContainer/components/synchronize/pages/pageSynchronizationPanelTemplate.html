@@ -1,0 +1,18 @@
+<synchronization-panel data-ng-if="!pageSync.showSyncButton"
+    data-item-id="pageSync.itemId"
+    data-get-sync-status="pageSync.getSyncStatus"
+    data-perform-sync="pageSync.performSync"
+    data-header-template-url="pageSync.headerTemplateUrl"
+    data-sync-items="pageSync.syncItems"
+    data-on-selected-items-update="pageSync.onSelectedItemsUpdate"
+    data-on-sync-status-ready="pageSync.onSyncStatusReady($syncStatus)"
+    data-get-api="pageSync.getApi($api)">
+</synchronization-panel>
+<synchronization-panel data-ng-if="pageSync.showSyncButton"
+    data-item-id="pageSync.itemId"
+    data-get-sync-status="pageSync.getSyncStatus"
+    data-perform-sync="pageSync.performSync"
+    data-header-template-url="pageSync.headerTemplateUrl"
+    data-on-sync-status-ready="pageSync.onSyncStatusReady($syncStatus)"
+    data-get-api="pageSync.getApi($api)">
+</synchronization-panel>

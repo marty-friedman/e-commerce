@@ -1,0 +1,11 @@
+#Ant properties
+#Thu Mar 01 13:42:40 UTC 2018
+builddate=20180301 1342
+description=ondemandsampledata
+group.id=de.hybris.platform
+module.name=platform-module
+name=ondemandsampledata
+releasedate=20170116 1041
+vendor=hybris
+version=6.3.0.0-SNAPSHOT
+version.api=6.3.0

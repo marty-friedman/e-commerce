@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<alias name="sapDefaultProductConfigModelFactory" alias="sapProductConfigModelFactory" />
+	<bean id="sapDefaultProductConfigModelFactory" class="de.hybris.platform.sap.productconfig.runtime.interf.impl.ConfigModelFactoryImpl">
+		<property name="targetClassNameConfigModel" value="de.hybris.platform.sap.productconfig.runtime.interf.model.impl.ConfigModelImpl" />
+		<property name="targetClassNameInstanceModel" value="de.hybris.platform.sap.productconfig.runtime.interf.model.impl.InstanceModelImpl" />
+		<property name="targetClassNameCsticModel" value="de.hybris.platform.sap.productconfig.runtime.interf.model.impl.CsticModelImpl" />
+		<property name="targetClassNameCsticValueModel" value="de.hybris.platform.sap.productconfig.runtime.interf.model.impl.CsticValueModelImpl" />
+		<property name="targetClassNameCsticGroupModel" value="de.hybris.platform.sap.productconfig.runtime.interf.model.impl.CsticGroupModelImpl" />
+		<property name="targetClassNamePriceModel" value="de.hybris.platform.sap.productconfig.runtime.interf.model.impl.PriceModelImpl" />
+		<property name="targetClassNamePriceSummaryModel" value="de.hybris.platform.sap.productconfig.runtime.interf.model.PriceSummaryModel" />
+		<property name="targetClassNameSolvableConflictModel" value="de.hybris.platform.sap.productconfig.runtime.interf.model.impl.SolvableConflictModelImpl" />
+		<property name="targetClassNameConflictingAssumptionModel" value="de.hybris.platform.sap.productconfig.runtime.interf.model.impl.ConflictingAssumptionModelImpl" />
+	</bean>
+
+	<!-- alias ensures backward compability with 6.5-->
+	<alias name="sapProductConfigPricingParameters" alias="sapproductconfigPricingParameters" />
+
+	<alias name="sapProductConfigDefaultPricingParameters" alias="sapProductConfigPricingParameters" />
+	<bean id="sapProductConfigDefaultPricingParameters" class="de.hybris.platform.sap.productconfig.runtime.interf.impl.DefaultPricingConfigurationParameter">
+		<property name="commonSalesAreaService" ref="sapDefaultSalesAreaService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+	</bean>
+
+	<alias alias="sapPCModuleConfigurationAccess" name="sapDefaultPCModuleConfigurationAccess" />
+	<bean id="sapDefaultPCModuleConfigurationAccess" parent="sapCoreModuleConfigurationAccess">
+		<property name="moduleId" value="sapproductconfiguration" />
+	</bean>
+
+	<alias name="sapProductConfigDefaultAnalyticsProvider" alias="sapProductConfigAnalyticsProvider" />
+	<bean id="sapProductConfigDefaultAnalyticsProvider" class="de.hybris.platform.sap.productconfig.runtime.interf.impl.DefaultAnalyticsProviderImpl">
+	</bean>
+
+	<alias name="sapProductConfigDefaultPricingProvider" alias="sapProductConfigPricingProvider" />
+	<bean id="sapProductConfigDefaultPricingProvider" class="de.hybris.platform.sap.productconfig.runtime.interf.impl.DefaultPricingProviderImpl">
+	</bean>
+
+</beans>

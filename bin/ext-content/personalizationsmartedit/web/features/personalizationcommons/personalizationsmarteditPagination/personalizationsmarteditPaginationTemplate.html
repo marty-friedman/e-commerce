@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-xs-4"></div>
+    <div class="col-xs-4">
+        <ul class="pagination pagination-lg">
+            <li class="no-underline"
+                data-ng-if="showArrows()"
+                data-ng-click="leftClick()"
+                data-ng-class="hasPrevious()?'enabled':'disabled'"><a>&laquo;</a></li>
+            <li class="no-underline"
+                data-ng-repeat="i in pagesToDisplay()"
+                data-ng-class="isActive({{i}})?'active':''"><a data-ng-click="pageClick(i)">{{i+1}}</a></li>
+            <li class="no-underline"
+                data-ng-if="showArrows()"
+                data-ng-click="rightClick()"
+                data-ng-class="hasNext()?'enabled':'disabled'"><a>&raquo;</a></li>
+        </ul>
+    </div>
+    <div class="col-xs-2"></div>
+    <div data-uib-dropdown
+        class="col-xs-2"
+        data-ng-if="!isFixedPageSize()">
+        <button type="button"
+            data-uib-dropdown-toggle
+            class="btn btn-link pull-right">
+            <span data-ng-bind="getCurrentPageSize()"></span>
+            <span data-translate="personalization.commons.pagination.rowsperpage"></span>
+            <span class="list-arrow hyicon hyicon-arrow"></span>
+        </button>
+        <ul data-uib-dropdown-menu
+            class="pull-right text-left"
+            role="menu">
+            <li data-ng-repeat="i in availablePageSizes() track by $index"><a data-ng-click="pageSizeClick(i)">{{i}}</a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="output" path="bin"/>
+
+	<classpathentry exported="true" kind="src" path="/acceleratorservices" />
+	<classpathentry exported="true" kind="src" path="/subscriptioncockpits" />
+	<classpathentry exported="true" kind="lib" path="lib/commons-httpclient-3.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/hybris-cis-api-subscription-6.7.0.0-RC1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/hybris-cis-subscription-rest-client-6.7.0.0-RC1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/javax.annotation-api-1.2.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jersey-media-jaxb-2.23.2.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/jstl-impl-1.2.jar" />
+	<classpathentry exported="true" kind="lib" path="resources" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="src" />
+	<classpathentry exported="false" output="eclipsebin/web/classes" kind="src" path="web/src" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="gensrc" />
+	<classpathentry exported="false" kind="src" path="/platform" />
+				
+</classpath>
+				

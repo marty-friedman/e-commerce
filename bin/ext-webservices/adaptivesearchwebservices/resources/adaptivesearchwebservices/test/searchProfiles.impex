@@ -1,0 +1,40 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+#
+# Import the Solr configuration for the spTest store
+#
+$productCatalog=spTestProductCatalog
+$serverConfigName=spTestSolrServerConfig
+$indexConfigName=spTestSolrIndexConfig
+$searchConfigName=spTestPageSize
+$facetSearchConfigName=spTestIndex
+$facetSearchConfigDescription=spTest Solr Index
+$searchIndexNamePrefix=spTest
+$solrIndexedType=spTestProductType
+$indexBaseSite=spTest
+$catalogVersion=hwcatalog:Online;
+$lang=en
+
+#
+# Setup the Solr server, indexer, and search configs
+#
+
+# Create Catalog version
+
+INSERT_UPDATE Catalog;id[unique=true];name[lang=en];defaultCatalog
+;hwcatalog;Computer hardware;false
+
+INSERT_UPDATE CatalogVersion;catalog(id)[unique=true];version[unique=true];active
+;hwcatalog;online;true
+
+# Search profile
+INSERT_UPDATE AsSimpleSearchProfile;code[unique=true];name[lang=$lang];indexType;catalogVersion(catalog(id),version)[unique=true]
+;simpleProfile;Simple search profile;testIndex;hwcatalog:online

@@ -1,0 +1,63 @@
+<bpmn2:definitions id='9b1720ad-92b8-4ce9-b0df-28b2a2aac560' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:bpmn2='http://www.omg.org/spec/BPMN/20100524/MODEL' xmlns:bpmndi='http://www.omg.org/spec/BPMN/20100524/DI' xmlns:di='http://www.omg.org/spec/DD/20100524/DI' xmlns:dc='http://www.omg.org/spec/DD/20100524/DC' xmlns:y='http://www.sap.com/bpmn2/hybris' name='ContextParameter-Process' targetNamespace='http://www.sap.com/bpmn2/hybris'>
+	<bpmn2:process id='process-9b1720ad-92b8-4ce9-b0df-28b2a2aac560' name='ContextParameter-Process'>
+		<bpmn2:property id='5dada9d8-3b73-45e1-96fe-5eba81381fdc' name='boundaryNotVisibleProperty'/>
+		<bpmn2:startEvent id='1998b775-4e7f-4102-b0e6-710f020ecc0d' name='StartEvent' parallelMultiple='false' isInterrupting='true'>
+			<bpmn2:outgoing>13ec1d47-a4f3-4f59-b89f-96bbba026238</bpmn2:outgoing>
+		</bpmn2:startEvent>
+		<bpmn2:task id='d22691c0-9e58-4ab7-b6cd-547cffcdd0e4' name='sendOrderPlacedNotificationAction' startQuantity='0' completionQuantity='0' isForCompensation='false'>
+			<bpmn2:incoming>13ec1d47-a4f3-4f59-b89f-96bbba026238</bpmn2:incoming>
+			<bpmn2:outgoing>4c7bf69d-ce44-4048-96f5-c875d9554428</bpmn2:outgoing>
+		</bpmn2:task>
+		<bpmn2:endEvent id='34b38430-42d2-438c-996a-76a8a01f6861' name='SUCCEEDED'>
+			<bpmn2:incoming>4c7bf69d-ce44-4048-96f5-c875d9554428</bpmn2:incoming>
+		</bpmn2:endEvent>
+		<bpmn2:dataObject id='10820a72-4a93-4759-8b6c-e383409f4d96' name='de.hybris.platform.orderprocessing.model.OrderProcessModel as processClass' isCollection='false'>
+			<y:extensionElements>
+				<processContext/>
+				<dataType/>
+				<mandatory>false</mandatory>
+			</y:extensionElements>
+		</bpmn2:dataObject>
+		<bpmn2:dataObject id='e7630d55-57a6-4624-84f8-f52b6698d48f' name='required java.lang.String as customer' isCollection='false'>
+			<y:extensionElements>
+				<processContext>true</processContext>
+			</y:extensionElements>
+		</bpmn2:dataObject>
+		<bpmn2:sequenceFlow id='13ec1d47-a4f3-4f59-b89f-96bbba026238' name='' sourceRef='1998b775-4e7f-4102-b0e6-710f020ecc0d' targetRef='d22691c0-9e58-4ab7-b6cd-547cffcdd0e4' isImmediate='false'/>
+		<bpmn2:sequenceFlow id='4c7bf69d-ce44-4048-96f5-c875d9554428' name='OK' sourceRef='d22691c0-9e58-4ab7-b6cd-547cffcdd0e4' targetRef='34b38430-42d2-438c-996a-76a8a01f6861' isImmediate='false'/>
+	</bpmn2:process>
+	<bpmndi:BPMNDiagram id='diagram-9b1720ad-92b8-4ce9-b0df-28b2a2aac560' name='ContextParameter-Process' resolution='96.0'>
+		<bpmndi:BPMNPlane bpmnElement='process-9b1720ad-92b8-4ce9-b0df-28b2a2aac560'>
+			<bpmndi:BPMNShape id='symbol-1998b775-4e7f-4102-b0e6-710f020ecc0d' bpmnElement='1998b775-4e7f-4102-b0e6-710f020ecc0d'>
+				<dc:Bounds x='419' y='18' width='32' height='32'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape id='symbol-d22691c0-9e58-4ab7-b6cd-547cffcdd0e4' bpmnElement='d22691c0-9e58-4ab7-b6cd-547cffcdd0e4'>
+				<dc:Bounds x='385' y='100' width='100' height='60'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape id='symbol-34b38430-42d2-438c-996a-76a8a01f6861' bpmnElement='34b38430-42d2-438c-996a-76a8a01f6861'>
+				<dc:Bounds x='419' y='218' width='32' height='32'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape id='symbol-10820a72-4a93-4759-8b6c-e383409f4d96' bpmnElement='10820a72-4a93-4759-8b6c-e383409f4d96'>
+				<dc:Bounds x='271' y='-28' width='34' height='40'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape id='symbol-e7630d55-57a6-4624-84f8-f52b6698d48f' bpmnElement='e7630d55-57a6-4624-84f8-f52b6698d48f'>
+				<dc:Bounds x='617' y='4' width='34' height='40'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge id='symbol-13ec1d47-a4f3-4f59-b89f-96bbba026238' bpmnElement='13ec1d47-a4f3-4f59-b89f-96bbba026238' sourceElement='symbol-1998b775-4e7f-4102-b0e6-710f020ecc0d' targetElement='symbol-d22691c0-9e58-4ab7-b6cd-547cffcdd0e4'>
+				<di:waypoint x='435' y='49'/>
+				<di:waypoint x='435' y='101'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge id='symbol-4c7bf69d-ce44-4048-96f5-c875d9554428' bpmnElement='4c7bf69d-ce44-4048-96f5-c875d9554428' sourceElement='symbol-d22691c0-9e58-4ab7-b6cd-547cffcdd0e4' targetElement='symbol-34b38430-42d2-438c-996a-76a8a01f6861'>
+				<di:waypoint x='435' y='159'/>
+				<di:waypoint x='435' y='219'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNEdge>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</bpmn2:definitions>

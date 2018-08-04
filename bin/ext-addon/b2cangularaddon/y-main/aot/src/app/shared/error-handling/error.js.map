@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../../src/app/shared/error-handling/error.ts"],"names":[],"mappings":"AAAA;IAOE,eAAY,OAAc,EAAE,OAAc;QAExC,IAAI,CAAC,OAAO,GAAG,OAAO,CAAC;QACvB,IAAI,CAAC,OAAO,GAAG,OAAO,CAAC;IACzB,CAAC;IACH,YAAC;AAAD,CAZA,AAYC,IAAA","file":"error.js","sourceRoot":""}

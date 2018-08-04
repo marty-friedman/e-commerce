@@ -1,0 +1,75 @@
+
+/********************************************************
+                    Y-Popover
+*********************************************************/
+
+//popover
+.popover {
+	max-width: none;
+	z-index: @z-index-level-5;
+	border: none;
+	border-radius: 0;
+}
+
+.popover-title {
+	background-color: @smartedit-grey40;
+	padding: .4*@smartedit-gutter .4*@smartedit-gutter 0 .4*@smartedit-gutter;
+	border: none;
+	font-weight: @font-weight--semibold;
+	font-family: @font-open-sans;
+	font-size: 19px;
+}
+
+.popover-content {
+	padding: .4*@smartedit-gutter;
+}
+
+.se-ypopover {
+	color: @smartedit-white;
+	background-color: @smartedit-grey40;
+	border: 0;
+	z-index: @z-index-level-5;
+	position: relative;
+	display: block;
+	max-width: 276px;
+
+	&.top {
+		margin-bottom: 10px;
+	}
+
+	&.top,
+	&.bottom,
+	&.left,
+	&.right {
+		.arrow {
+			margin: 0;
+		}
+	}
+	&.top {
+		margin-top: 0;
+		> .arrow:after {
+			border-top-color: @smartedit-grey40;
+		}
+	}
+	&.bottom > .arrow:after {
+		border-bottom-color: @smartedit-grey40;
+	}
+	&.left {
+		margin-right: 10px;
+		> .arrow:after {
+			border-left-color: @smartedit-grey40;
+		}
+	}
+	&.right > .arrow:after {
+		border-right-color: @smartedit-grey40;
+	}
+}
+
+.se-ypopover--inner-content {
+	max-width: 320px;
+}
+
+.se-popover-popup {
+	z-index: 9999;
+	display: block;
+}

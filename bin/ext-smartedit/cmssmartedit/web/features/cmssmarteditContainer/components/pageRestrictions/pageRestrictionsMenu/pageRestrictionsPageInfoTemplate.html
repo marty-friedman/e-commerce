@@ -1,0 +1,24 @@
+<div class="ySERestrictionsPageInfoContainer">
+    <div class="row">
+        <div class="col-xs-6">
+            <p class="ySERestrictonMenuLabel">{{ ctrl.pageNameLabelI18nKey | translate }}</p>
+            <h3 class="restrictionsPageName ySERestrictionsPageInfoContainer--page-name"
+                data-ng-bind="ctrl.pageName"></h3>
+        </div>
+        <div class="col-xs-6">
+            <p class="ySERestrictonMenuLabel">{{ ctrl.pageDisplayConditionsLabelI18nKey | translate }}</p>
+            <h3 class="restrictionsPageName ySERestrictionsPageInfoContainer--displayconditions-value">{{ ctrl.displayConditionsI18nKey[ctrl.getDisplayConditionsValue()].value | translate }}</h3>
+        </div>
+    </div>
+    <div ng-if="ctrl.pageIsPrimary">
+        <p class="ySERestrictonMenuLabel ySERestrictionsPageInfoContainer--displayconditions-description">{{ ctrl.displayConditionsI18nKey[ctrl.getDisplayConditionsValue()].description | translate }}</p>
+    </div>
+    <div class="row"
+        ng-if="!ctrl.pageIsPrimary">
+        <div class="col-xs-6">
+            <p class="ySERestrictonMenuLabel">{{ ctrl.associatedPrimaryPageLabelI18nKey | translate }}</p>
+            <h3 class="restrictionsPageName ySERestrictionsPageInfoContainer--associatedprimarypage-name"
+                data-ng-bind="ctrl.associatedPrimaryPageName"></h3>
+        </div>
+    </div>
+</div>

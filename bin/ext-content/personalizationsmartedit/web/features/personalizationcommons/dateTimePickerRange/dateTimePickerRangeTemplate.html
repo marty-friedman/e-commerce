@@ -1,0 +1,92 @@
+<div class="pe-datetime-range">
+    <div class="col-md-6 pe-datetime-range__from"
+        data-ng-class="{'has-error': !isFromDateValid}">
+        <label for="customization-start-date"
+            data-translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.startdate"
+            class="personalization-modal__label"></label>
+        <y-help data-template="'<span data-translate=personalization.modal.customizationvariationmanagement.basicinformationtab.details.startdate.help></span>'">
+        </y-help>
+        <div class="input-group date pe-date-field"
+            id="date-picker-range-from"
+            data-ng-show="isEditable">
+            <input type='text'
+                name="date_from_key"
+                class="form-control pe-date-field__input"
+                placeholder="{{ placeholderText | translate}}"
+                data-ng-disabled="!isEditable"
+                name="{{name}}"
+                isdatevalidorempty
+                data-ng-model="dateFrom"
+                id="customization-start-date" />
+            <span class="input-group-addon pe-datetime-range__picker"
+                data-ng-show="isEditable">
+                <span class="glyphicon glyphicon-calendar pe-datetime-range__picker__icon"></span>
+            </span>
+        </div>
+        <div class="input-group date pe-date-field"
+            id="date-picker-range-from"
+            data-ng-show="!isEditable">
+            <input type='text'
+                name="date_from_key"
+                class="form-control pe-date-field__input "
+                data-ng-class="{'pe-input--is-disabled': !isEditable}"
+                data-ng-model="dateFrom"
+                data-date-formatter
+                id="customization-start-date"
+                isdatevalidorempty
+                data-ng-disabled="true"
+                data-format-type="short">
+        </div>
+        <span data-ng-if="!isFromDateValid"
+            class="help-block pe-datetime__error-msg pe-datetime__msg"
+            data-translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.wrongdateformatfrom.description">
+        </span>
+    </div>
+    <div class="col-md-6 pe-datetime-range__to"
+        data-ng-class="{'has-error':!isToDateValid, 'has-warning':isEndDateInThePast}">
+        <label for="customization-end-date"
+            data-translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.enddate"
+            class="personalization-modal__label"></label>
+        <y-help data-template="'<span data-translate=personalization.modal.customizationvariationmanagement.basicinformationtab.details.enddate.help></span>'">
+        </y-help>
+        <div class="input-group date pe-date-field"
+            id="date-picker-range-to">
+            <input type='text'
+                name="date_to_key"
+                class="form-control pe-date-field__input"
+                placeholder="{{ placeholderText | translate}}"
+                data-ng-disabled="!isEditable"
+                name="{{name}}"
+                isdatevalidorempty
+                data-ng-model="dateTo"
+                id="customization-end-date" />
+            <span class="input-group-addon pe-datetime-range__picker"
+                data-ng-show="isEditable">
+                <span class="glyphicon glyphicon-calendar pe-datetime-range__picker__icon"></span>
+            </span>
+        </div>
+        <div class="input-group date pe-date-field"
+            id="date-picker-range-to"
+            data-ng-show="!isEditable">
+            <input type='text'
+                name="date_to_key"
+                class="form-control pe-date-field__input "
+                data-ng-class="{'pe-input--is-disabled': !isEditable}"
+                data-ng-model="dateTo"
+                data-date-formatter
+                id="customization-end-date"
+                isdatevalidorempty
+                data-ng-disabled="true"
+                data-format-type="short">
+        </div>
+        <span class="help-block pe-datetime__error-msg pe-datetime__msg"
+            data-ng-if="!isToDateValid"
+            data-translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.wrongdateformat.description">
+        </span>
+        <span data-ng-if="isEndDateInThePast"
+            class="help-block pe-datetime__warning-msg pe-datetime__msg">
+            <span class="hyicon hyicon-msgwarning"></span>
+            <span data-translate="personalization.modal.customizationvariationmanagement.basicinformationtab.details.enddateinthepast.description"></span>
+        </span>
+    </div>
+</div>

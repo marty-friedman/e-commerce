@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="Order" type="Order"/>
+<xs:complexType name="simpleHybrisField">
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute type="xs:string" name="header"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="localizedHybrisField">
+<xs:sequence>
+<xs:element name="value" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute type="xs:string" name="locale"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+<xs:attribute type="xs:string" name="header"/>
+</xs:complexType>
+<xs:complexType name="Order">
+<xs:sequence>
+<xs:element type="simpleHybrisField" name="code">
+<xs:unique name="unique_order_code">
+<xs:selector xpath="order"/>
+<xs:field xpath="code"/>
+</xs:unique>
+</xs:element>
+<xs:element type="Currency" name="currency"/>
+<xs:element type="simpleHybrisField" name="date"/>
+<xs:element type="User" name="user"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Currency">
+<xs:sequence>
+<xs:element type="simpleHybrisField" name="isocode">
+<xs:unique name="unique_currency_isocode">
+<xs:selector xpath="currency"/>
+<xs:field xpath="isocode"/>
+</xs:unique>
+</xs:element>
+<xs:element type="simpleHybrisField" name="symbol"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="User">
+<xs:sequence>
+<xs:element type="simpleHybrisField" name="uid">
+<xs:unique name="unique_user_uid">
+<xs:selector xpath="user"/>
+<xs:field xpath="uid"/>
+</xs:unique>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

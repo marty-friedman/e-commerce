@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<process xmlns="http://www.hybris.de/xsd/processdefinition"
+	start="9E1F2E71-1980-4687-8765-76123D08C277" name="sap-return-process"
+	processClass="de.hybris.platform.returns.model.ReturnProcessModel">
+
+	<action id="9E1F2E71-1980-4687-8765-76123D08C277" bean="initialReturnAction">
+		<transition name="ONLINE" to="68DA4016-E367-4C99-B977-4949EB633888" />
+		<transition name="INSTORE" to="8CE34A8A-B49E-4BE8-B0BE-747209782C89" />
+	</action>
+
+	<wait id="68DA4016-E367-4C99-B977-4949EB633888" prependProcessCode="true"
+		then="F5323DAC-8076-4DFD-8CA7-F3565341A9EC">
+		<case event="ConfirmOrCancelRefundEvent">
+			<choice id="cancelReturn" then="8C13D999-897E-475F-BF23-357EDACBCCDE" />
+			<choice id="approveReturn" then="B32FC50A-8185-49AE-A9AA-A19DD3F96B7B" />
+		</case>
+	</wait>
+
+	<action id="B32FC50A-8185-49AE-A9AA-A19DD3F96B7B" bean="approveReturnAction">
+		<transition name="OK" to="EECDBE83-44C4-4E08-A1A9-0053397C8059" />
+	</action>
+
+
+	<action id="EECDBE83-44C4-4E08-A1A9-0053397C8059" bean="sapOrderexchangeSendReturnOrderToDataHubAction">
+		<transition name="OK" to="E9F0A374-8AF4-44F6-8317-25B137275457" />
+		<transition name="NOK" to="4DD6EC11-D566-4ABE-B758-2FFDDDF14784" />
+	</action>
+
+	<wait id="E9F0A374-8AF4-44F6-8317-25B137275457" then="AAE5B8DA-55FC-4E45-9382-4830786D0E60"
+		prependProcessCode="false">
+		<event>ReturnRequestCreationEvent_${process.returnRequest.code}</event>
+	</wait>
+
+	<wait id="AAE5B8DA-55FC-4E45-9382-4830786D0E60" prependProcessCode="false"
+		then="85C79CEA-CA16-4040-B672-AB1241588070">
+		<event>ApproveOrCancelGoodsEvent_${process.returnRequest.code}</event>
+	</wait>
+
+	<action id="85C79CEA-CA16-4040-B672-AB1241588070" bean="acceptGoodsAction">
+		<transition name="OK" to="2957A21B-778B-45C2-B39B-EC5946205679" />
+	</action>
+	
+	<wait id="2957A21B-778B-45C2-B39B-EC5946205679" prependProcessCode="false"
+		then="8CE34A8A-B49E-4BE8-B0BE-747209782C89">
+		<event>PaymentReversalEvent_${process.returnRequest.code}</event>
+	</wait>
+
+	<action id="8CE34A8A-B49E-4BE8-B0BE-747209782C89" bean="captureRefundAction">
+		<transition name="OK" to="7DAFC07C-91A8-44F2-B076-ED6B74C5E666" />
+		<transition name="NOK" to="F666DDCE-46B1-4666-B159-6536DFEFF629" />
+	</action>
+
+	<wait id="F666DDCE-46B1-4666-B159-6536DFEFF629" prependProcessCode="true"
+		then="F5323DAC-8076-4DFD-8CA7-F3565341A9EC">
+		<case event="FailCaptureActionEvent">
+			<choice id="bypassCapture" then="94A0E37F-0025-49E3-B54F-E5850381D519" />
+			<choice id="cancelReturn" then="8C13D999-897E-475F-BF23-357EDACBCCDE" />
+		</case>
+	</wait>
+
+	<action id="7DAFC07C-91A8-44F2-B076-ED6B74C5E666" bean="successCaptureAction">
+		<transition name="OK" to="94A0E37F-0025-49E3-B54F-E5850381D519" />
+	</action>
+
+	<action id="94A0E37F-0025-49E3-B54F-E5850381D519" bean="taxReverseAction">
+		<transition name="OK" to="1D2AEC6D-FD97-48DC-A682-E06CC994866D" />
+		<transition name="NOK" to="8F670F76-B0EA-462C-8D1A-A441F61B7C61" />
+	</action>
+
+	<wait id="8F670F76-B0EA-462C-8D1A-A441F61B7C61" then="15F66D3F-F08A-4087-918D-036CFDA0F9CA"
+		prependProcessCode="true">
+		<event>FailTaxReverseEvent</event>
+	</wait>
+
+	<action id="1D2AEC6D-FD97-48DC-A682-E06CC994866D" bean="successTaxReverseAction">
+		<transition name="OK" to="15F66D3F-F08A-4087-918D-036CFDA0F9CA" />
+	</action>
+
+	<action id="15F66D3F-F08A-4087-918D-036CFDA0F9CA" bean="inventoryUpdateAction">
+		<transition name="OK" to="25ECC4FC-58A6-4ED9-A9A0-3813C7EB2432" />
+	</action>
+
+	<action id="8C13D999-897E-475F-BF23-357EDACBCCDE" bean="cancelReturnAction">
+		<transition name="OK" to="25ECC4FC-58A6-4ED9-A9A0-3813C7EB2432" />
+	</action>
+	<end id="4DD6EC11-D566-4ABE-B758-2FFDDDF14784" state="ERROR">Sending to ERP went wrong.</end>
+	<end id="F5323DAC-8076-4DFD-8CA7-F3565341A9EC" state="FAILED">Return issue detected.</end>
+	<end id="25ECC4FC-58A6-4ED9-A9A0-3813C7EB2432" state="SUCCEEDED">Return process ended as expected.</end>
+</process>

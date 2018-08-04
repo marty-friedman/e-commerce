@@ -1,0 +1,11 @@
+#Ant properties
+#Wed Mar 07 08:17:59 UTC 2018
+builddate=20180307 0817
+description=b2cbtgaddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=b2cbtgaddon
+releasedate=20180305 1940
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="32px" height="32px"
+  xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+  <circle class="endEvent" stroke="#CC2424" stroke-width="3" fill="#FFE6E5" cx="16" cy="16" r="14"></circle>
+</svg>

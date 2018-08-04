@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Mar 13 20:10:27 UTC 2018
+builddate=20180313 2010
+description=cmssmartedit
+group.id=de.hybris.platform
+module.name=platform-module
+name=cmssmartedit
+releasedate=20180308 1939
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

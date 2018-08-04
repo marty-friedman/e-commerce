@@ -1,0 +1,19 @@
+<div class="ySEVisibilityMenu"
+    data-ng-if="$ctrl.pageIsPrimary !== undefined">
+    <div class="ySEVisibilityMenu__header">
+        <restrictions-page-info data-page-id="$ctrl.pageId"
+            data-page-name="$ctrl.pageName"
+            data-page-type="$ctrl.pageType"
+            data-page-is-primary="$ctrl.pageIsPrimary"
+            data-associated-primary-page-name="$ctrl.associatedPrimaryPageName">
+        </restrictions-page-info>
+    </div>
+    <div class="ySEVisibilityMenu__restrictions"
+        data-ng-if="!$ctrl.pageIsPrimary">
+        <restrictions-table data-editable="false"
+            data-restrictions="$ctrl.restrictions"
+            data-restriction-criteria="$ctrl.restrictionCriteria"
+            data-custom-class="'ySERestrictionMenu'">
+        </restrictions-table>
+    </div>
+</div>

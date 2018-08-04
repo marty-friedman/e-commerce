@@ -1,0 +1,128 @@
+ /* *
+/* This file includes the common styles used in Personalization
+/* The styles follow the BEM principles - http://getbem.com/introduction/
+*/
+ /* new: the active status is now called enabled
+ /* the inactive status is now called disabled 
+ */
+ 
+ @perso__cc-icon--font-size: 24px;
+
+ .status-active {
+     color: @text-color-green;
+ }
+ 
+ .status-ignore,
+ .status-inactive {
+     color: @text-color-grey;
+ }
+
+.select2-highlighted {
+    .status-active, .status-inactive, .status-ignore {
+        color: @background-color-white;
+    }
+}
+ 
+ .perso__scrollzone {
+     position: fixed;
+     z-index: 10000;
+     left: 0;
+     width: 100%;
+     height: 10%;
+ }
+
+ .perso__scrollzone--normal {
+  	background-color: @background-color-grey;
+ }
+  
+ .perso__scrollzone--transparent {
+ 	background-color: transparent;
+ } 
+ 
+ .perso__scrollzone--top {
+     top: 0;
+ }
+ 
+ .perso__scrollzone--bottom {
+     bottom: 0;
+ }
+ 
+ .perso__datetimepicker--error-border {
+     border: 2px solid @border-color-red;
+ }
+ 
+ .perso__datetimepicker--warning-border {
+     border: 2px solid @border-color-orange;
+ }
+ 
+ .perso__datetimepicker--error-text {
+     color: @text-color-red;
+ }
+ 
+ .col-reset-padding {
+     padding-left: 0;
+     padding-right: 0;
+ }
+ 
+ .perso-list__status--value {
+     font-size: 12px;
+     text-transform: uppercase;
+     font-weight: @font-weight-bold;
+ }
+ 
+ .perso-list__dates-layout {
+     font-size: 12px;
+ }
+ 
+ .perso__filter-layout .ui-select-container {
+     width: 100%;
+     text-align: left;
+ }
+ 
+ .perso-list__primary-data {
+     font-weight: @font-weight-semibold;
+ }
+ 
+ .personalization-modal__label {
+     font-size: 13px;
+     font-weight: @font-weight-bold;
+ }
+ 
+.perso__cc-icon {
+    margin-left: -5px;
+    vertical-align: middle;
+    color: @light-grey;
+    &:before {
+        font-size: @perso__cc-icon--font-size;
+    }
+}
+
+.perso__globe-icon {
+    color: @light-grey;
+    &:before {
+        font-size: @perso__globe-icon--font-size;
+    }
+}
+
+.perso__cc-icon--hidden {
+    visibility: hidden;
+}
+ 
+ .perso-wrap-ellipsis {
+     overflow: hidden;
+     white-space: nowrap;
+     text-overflow: ellipsis;
+ }
+ 
+ .perso__scrollbar--hidden {
+     -ms-overflow-style: none; // IE 10+
+     &::-webkit-scrollbar {
+         display: none; // Safari and Chrome
+     }
+ }
+
+ .perso__page-level-help-message {
+     font-size: @perso__default-text--font-size;
+     font-style: italic;
+     color: @text-color-grey;
+ }

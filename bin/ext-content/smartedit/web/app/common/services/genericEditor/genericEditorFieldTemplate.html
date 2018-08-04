@@ -1,0 +1,13 @@
+<div validation-id="{{geField.field.qualifier}}"
+    data-ng-cloak
+    class="ySEField">
+
+    <div data-ng-if="geField.field.template"
+        class="ySEGenericEditorField"
+        data-ng-include="geField.field.template"></div>
+
+    <se-generic-editor-field-messages data-field="geField.field"
+        data-qualifier="geField.qualifier"></se-generic-editor-field-messages>
+    <div data-ng-if="geField.field.postfix"
+        class="ySEText ySEFieldPostfix">{{geField.field.postfix | translate}}</div>
+</div>

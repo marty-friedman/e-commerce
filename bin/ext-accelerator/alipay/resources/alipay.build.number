@@ -1,0 +1,11 @@
+#Ant properties
+#Thu Feb 22 06:47:22 UTC 2018
+builddate=20180222 0647
+description=alipay
+group.id=de.hybris.platform
+module.name=platform-module
+name=alipay
+releasedate=20180208 1939
+vendor=hybris
+version=6.6.0.0
+version.api=6.6.0

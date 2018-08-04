@@ -1,0 +1,14 @@
+Following components from previous version were not found in new version
+
+------------------------------------------------------------
+
+html, {"directiveName":"html"}
+
+sanitizeHtmlInput, {"directiveName":"sanitizeHtmlInput"}
+
+slotContextualMenu, {"directiveName":"slotContextualMenu","scope":{},"bindToController":{"smarteditComponentId":"@","smarteditComponentType":"@","componentAttributes":"<","active":"="}}
+
+contextualMenu, {"directiveName":"contextualMenu","scope":{},"bindToController":{"smarteditComponentId":"@","smarteditComponentType":"@","smarteditContainerId":"@","smarteditContainerType":"@","componentAttributes":"<","active":"="}}
+
+contextualMenuItem, {"directiveName":"contextualMenuItem","bindings":{"mode":"@","index":"<","componentAttributes":"<","slotAttributes":"<","itemConfig":"<"}}
+

@@ -1,0 +1,83 @@
+<bpmn2:definitions id='da38f1d1-e40f-4618-b54d-e76a650f1f0c' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:bpmn2='http://www.omg.org/spec/BPMN/20100524/MODEL' xmlns:bpmndi='http://www.omg.org/spec/BPMN/20100524/DI' xmlns:di='http://www.omg.org/spec/DD/20100524/DI' xmlns:dc='http://www.omg.org/spec/DD/20100524/DC' xmlns:y='http://www.sap.com/bpmn2/hybris' name='Simple-Action-Process' targetNamespace='http://www.sap.com/bpmn2/hybris'>
+	<bpmn2:process id='process-da38f1d1-e40f-4618-b54d-e76a650f1f0c' name='Simple-Action-Process'>
+		<bpmn2:property id='a4e9521c-2f4c-47a1-9db1-0d7323948524' name='boundaryNotVisibleProperty'/>
+		<bpmn2:dataObject id='7fe7c060-27df-4a74-947a-c15176b78989' name='de.hybris.platform.orderprocessing.model.OrderProcessModel as processClass' isCollection='false'>
+			<y:extensionElements>
+				<processContext/>
+				<dataType/>
+				<mandatory>false</mandatory>
+			</y:extensionElements>
+		</bpmn2:dataObject>
+		<bpmn2:startEvent id='22f24cf7-105b-4027-b2e6-8dea49db6e88' name='StartEvent' parallelMultiple='false' isInterrupting='true'>
+			<bpmn2:outgoing>60b02c7e-9624-4e83-87b5-0eb398d334cf</bpmn2:outgoing>
+		</bpmn2:startEvent>
+		<bpmn2:task id='e81660ee-7cfd-46ae-92e2-ce2fe3c9e4b0' name='checkOrderAction' startQuantity='0' completionQuantity='0' isForCompensation='false'>
+			<bpmn2:incoming>60b02c7e-9624-4e83-87b5-0eb398d334cf</bpmn2:incoming>
+			<bpmn2:outgoing>db4af8c4-74e5-4d55-a9c4-8915355dd0a2</bpmn2:outgoing>
+		</bpmn2:task>
+		<bpmn2:exclusiveGateway id='718f153e-c149-4271-b30f-1936d542aabb' name='Gateway1' gatewayDirection='Diverging'>
+			<bpmn2:incoming>db4af8c4-74e5-4d55-a9c4-8915355dd0a2</bpmn2:incoming>
+			<bpmn2:outgoing>3d7c1282-e319-425f-a78e-2a537187e83a</bpmn2:outgoing>
+			<bpmn2:outgoing>e054c094-8a78-4096-bfcd-57b790a8b853</bpmn2:outgoing>
+		</bpmn2:exclusiveGateway>
+		<bpmn2:endEvent id='ef31423a-0a73-4efd-b97e-8326b3881488' name='ERROR[Process ended in ERROR]'>
+			<bpmn2:incoming>3d7c1282-e319-425f-a78e-2a537187e83a</bpmn2:incoming>
+		</bpmn2:endEvent>
+		<bpmn2:endEvent id='7013e85c-cb6a-49bb-9a57-3bf37a7a0dd7' name='SUCCEEDED[Process was successful]'>
+			<bpmn2:incoming>e054c094-8a78-4096-bfcd-57b790a8b853</bpmn2:incoming>
+		</bpmn2:endEvent>
+		<bpmn2:sequenceFlow id='60b02c7e-9624-4e83-87b5-0eb398d334cf' name='' sourceRef='22f24cf7-105b-4027-b2e6-8dea49db6e88' targetRef='e81660ee-7cfd-46ae-92e2-ce2fe3c9e4b0' isImmediate='false'/>
+		<bpmn2:sequenceFlow id='db4af8c4-74e5-4d55-a9c4-8915355dd0a2' name='' sourceRef='e81660ee-7cfd-46ae-92e2-ce2fe3c9e4b0' targetRef='718f153e-c149-4271-b30f-1936d542aabb' isImmediate='false'/>
+		<bpmn2:sequenceFlow id='3d7c1282-e319-425f-a78e-2a537187e83a' name='NOK' sourceRef='718f153e-c149-4271-b30f-1936d542aabb' targetRef='ef31423a-0a73-4efd-b97e-8326b3881488' isImmediate='false'/>
+		<bpmn2:sequenceFlow id='e054c094-8a78-4096-bfcd-57b790a8b853' name='OK' sourceRef='718f153e-c149-4271-b30f-1936d542aabb' targetRef='7013e85c-cb6a-49bb-9a57-3bf37a7a0dd7' isImmediate='false'/>
+	</bpmn2:process>
+	<bpmndi:BPMNDiagram id='diagram-da38f1d1-e40f-4618-b54d-e76a650f1f0c' name='Simple-Action-Process' resolution='96.0'>
+		<bpmndi:BPMNPlane bpmnElement='process-da38f1d1-e40f-4618-b54d-e76a650f1f0c'>
+			<bpmndi:BPMNShape id='symbol-7fe7c060-27df-4a74-947a-c15176b78989' bpmnElement='7fe7c060-27df-4a74-947a-c15176b78989'>
+				<dc:Bounds x='263' y='38' width='34' height='40'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape id='symbol-22f24cf7-105b-4027-b2e6-8dea49db6e88' bpmnElement='22f24cf7-105b-4027-b2e6-8dea49db6e88'>
+				<dc:Bounds x='424' y='58' width='32' height='32'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape id='symbol-e81660ee-7cfd-46ae-92e2-ce2fe3c9e4b0' bpmnElement='e81660ee-7cfd-46ae-92e2-ce2fe3c9e4b0'>
+				<dc:Bounds x='384' y='131' width='112' height='60'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape id='symbol-718f153e-c149-4271-b30f-1936d542aabb' bpmnElement='718f153e-c149-4271-b30f-1936d542aabb'>
+				<dc:Bounds x='419' y='240' width='42' height='42'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape id='symbol-ef31423a-0a73-4efd-b97e-8326b3881488' bpmnElement='ef31423a-0a73-4efd-b97e-8326b3881488'>
+				<dc:Bounds x='315' y='308' width='32' height='32'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNShape id='symbol-7013e85c-cb6a-49bb-9a57-3bf37a7a0dd7' bpmnElement='7013e85c-cb6a-49bb-9a57-3bf37a7a0dd7'>
+				<dc:Bounds x='424' y='350' width='32' height='32'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNShape>
+			<bpmndi:BPMNEdge id='symbol-60b02c7e-9624-4e83-87b5-0eb398d334cf' bpmnElement='60b02c7e-9624-4e83-87b5-0eb398d334cf' sourceElement='symbol-22f24cf7-105b-4027-b2e6-8dea49db6e88' targetElement='symbol-e81660ee-7cfd-46ae-92e2-ce2fe3c9e4b0'>
+				<di:waypoint x='440' y='90'/>
+				<di:waypoint x='440' y='131'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge id='symbol-db4af8c4-74e5-4d55-a9c4-8915355dd0a2' bpmnElement='db4af8c4-74e5-4d55-a9c4-8915355dd0a2' sourceElement='symbol-e81660ee-7cfd-46ae-92e2-ce2fe3c9e4b0' targetElement='symbol-718f153e-c149-4271-b30f-1936d542aabb'>
+				<di:waypoint x='440' y='191'/>
+				<di:waypoint x='440' y='240'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge id='symbol-3d7c1282-e319-425f-a78e-2a537187e83a' bpmnElement='3d7c1282-e319-425f-a78e-2a537187e83a' sourceElement='symbol-718f153e-c149-4271-b30f-1936d542aabb' targetElement='symbol-ef31423a-0a73-4efd-b97e-8326b3881488'>
+				<di:waypoint x='440' y='261'/>
+				<di:waypoint x='331' y='261'/>
+				<di:waypoint x='331' y='308'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNEdge>
+			<bpmndi:BPMNEdge id='symbol-e054c094-8a78-4096-bfcd-57b790a8b853' bpmnElement='e054c094-8a78-4096-bfcd-57b790a8b853' sourceElement='symbol-718f153e-c149-4271-b30f-1936d542aabb' targetElement='symbol-7013e85c-cb6a-49bb-9a57-3bf37a7a0dd7'>
+				<di:waypoint x='440' y='261'/>
+				<di:waypoint x='440' y='350'/>
+				<bpmndi:BPMNLabel/>
+			</bpmndi:BPMNEdge>
+		</bpmndi:BPMNPlane>
+	</bpmndi:BPMNDiagram>
+</bpmn2:definitions>

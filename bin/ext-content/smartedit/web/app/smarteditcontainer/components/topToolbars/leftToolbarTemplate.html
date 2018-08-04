@@ -1,0 +1,70 @@
+<div class="se-left-menu">
+    <nav class="se-left-nav"
+        data-ng-if="showLeftMenu">
+
+        <ul class="se-left-nav__section se-left-nav__section--top">
+            <li class="se-left-nav__section__close">
+                <a href="#"
+                    class="se-left-nav__section__close--link"
+                    data-ng-click="closeLeftToolbar($event)">
+                    <span class="hyicon hyicon-close > se-left-nav__section__close--icon"></span>
+                </a>
+            </li>
+            <li class="se-left-nav__section--top__item">
+                <p class="se-user-name">{{username | uppercase}}</p>
+            </li>
+            <li class="se-left-nav__section--top__item">
+                <a class="se-sign-out__link"
+                    data-ng-click="signOut($event)">{{'se.left.toolbar.sign.out' | translate}}</a>
+            </li>
+
+            <li class="se-left-nav__section--top__item">
+                <language-selector class="se-left-nav__section--top__language"></language-selector>
+            </li>
+        </ul>
+
+        <ul data-ng-show="!showLevel2"
+            class="se-left-nav__section se-left-nav__section--level1"
+            id="hamburger-menu-level1">
+            <li class="se-left-nav__section__list-item">
+                <a class="se-left-nav__link"
+                    data-ng-click="showSites()">{{'se.left.toolbar.sites' | translate}}</a>
+            </li>
+            <li class="se-left-nav__section__list-item"
+                has-operation-permission="configurationCenterReadPermissionKey">
+                <a id="configurationCenter"
+                    class="se-left-nav__link"
+                    data-ng-click="showCfgCenter($event)">{{'se.left.toolbar.configuration.center' | translate}}
+                    <span class="hyicon hyicon-chevron"></span>
+                </a>
+            </li>
+        </ul>
+        <ul data-ng-show="showLevel2"
+            class="se-left-nav__section se-left-nav__section--level2"
+            id="hamburger-menu-level2">
+            <li class="se-left-nav__section__list-item">
+                <a data-ng-click="goBack()"
+                    class="se-left-nav__link">
+                    <span class="hyicon hyicon-back"></span>
+                    <span class="">{{'se.left.toolbar.back' | translate}}</span>
+                </a>
+            </li>
+            <li class="se-left-nav__section__list-item">
+                <general-configuration class="se-left-nav__link" />
+            </li>
+        </ul>
+    </nav>
+
+    <div class="navbar-header se-menu-button-wrapper">
+        <button type="button"
+            class="navbar-toggle se-menu-button__toggle"
+            id="nav-expander"
+            data-ng-click="showToolbar($event) ">
+            <span class="sr-only ">{{'se.left.toolbar.toggle.navigation' | translate}}</span>
+            <span class="icon-bar se-menu-button__icon-bar"></span>
+            <span class="icon-bar se-menu-button__icon-bar"></span>
+            <span class="icon-bar se-menu-button__icon-bar"></span>
+        </button>
+    </div>
+
+</div>

@@ -1,0 +1,11 @@
+#Ant properties
+#Wed Feb 21 09:54:51 UTC 2018
+builddate=20180221 0954
+description=eventtrackingwsaddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=eventtrackingwsaddon
+releasedate=20180213 1941
+vendor=hybris
+version=6.6.0.0
+version.api=6.6.0

@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Mar 06 14:17:01 UTC 2018
+builddate=20180306 1416
+description=promotionengineatddtests
+group.id=de.hybris.platform
+module.name=platform-module
+name=promotionengineatddtests
+releasedate=20180305 1940
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

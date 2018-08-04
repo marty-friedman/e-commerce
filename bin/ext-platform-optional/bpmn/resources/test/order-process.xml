@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<process xmlns="http://www.hybris.de/xsd/processdefinition" start="319CC634-6B46-4782-B439-232BA22622CF"
+	name="order-process" processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel">
+	
+	<!-- Check Order -->
+	<action id="319CC634-6B46-4782-B439-232BA22622CF" bean="checkOrderAction">
+		<transition name="OK" to="AE53C35E-C1D0-4E3A-9B48-7CE79924BABD"/>
+		<transition name="NOK" to="573FD06A-BDBC-4A34-A980-F0B91551260A"/>
+	</action>
+	
+	<!-- Fraud Check -->
+	<action id="AE53C35E-C1D0-4E3A-9B48-7CE79924BABD" bean="fraudCheckOrderInternalAction">
+		<transition name="OK" to="3D767FAC-56F2-4A43-A21F-82A01685A9AA"/>
+		<transition name="POTENTIAL" to="4BC1CAB3-E313-427D-A3EE-6F6EFF1121FC"/>
+		<transition name="FRAUD" to="5FAFA2D9-9908-42B0-84F0-A060529057D7"/>
+	</action>
+	
+	<!-- Fraud Check : OK -->
+	<action id="3D767FAC-56F2-4A43-A21F-82A01685A9AA" bean="sendOrderPlacedNotificationAction">
+		<transition name="OK" to="9AED4FB8-0501-4E1E-BA65-7373DD801947"/>
+	</action>
+	
+	<!-- Fraud Check : FRAUD -->
+	<action id="5FAFA2D9-9908-42B0-84F0-A060529057D7" bean="cancelOrderAction">
+		<transition name="OK" to="BCBF6E42-DAB6-4B13-BC30-DAAE6D6CA492"/>
+	</action>
+	
+	<action id="BCBF6E42-DAB6-4B13-BC30-DAAE6D6CA492" bean="notifyCustomerAboutFraudAction">
+		<transition name="OK" to="3694AE42-4EE4-4270-9FD0-F54331AC0C8B"/>
+	</action>
+	
+	<!-- Fraud Check : POTENTIAL -->
+	<action id="4BC1CAB3-E313-427D-A3EE-6F6EFF1121FC" bean="prepareOrderForManualCheckAction">
+		<transition name="OK" to="726605F1-21F6-43AE-892C-91C60041DA52"/>
+	</action>
+	
+	<wait id="726605F1-21F6-43AE-892C-91C60041DA52" then="712D5984-34D1-48B4-9384-AEAECB57D3B4" prependProcessCode="true">
+		<event>CSAOrderVerified</event>
+	</wait>
+
+	<action id="712D5984-34D1-48B4-9384-AEAECB57D3B4" bean="orderManualCheckedAction">
+		<transition name="OK" to="3D767FAC-56F2-4A43-A21F-82A01685A9AA"/>
+		<transition name="NOK" to="5FAFA2D9-9908-42B0-84F0-A060529057D7"/>
+	</action>
+	
+	<!-- Sourcing and Allocation -->
+	<action id="9AED4FB8-0501-4E1E-BA65-7373DD801947" bean="geocodeShippingAddressAction">
+		<transition name="OK" to="E7EA8865-6DCA-420B-9C2D-D4CBA4A55E4F"/>
+	</action>
+	
+	<action id="E7EA8865-6DCA-420B-9C2D-D4CBA4A55E4F" bean="sourceOrderAction">
+		<transition name="OK" to="F5ED95F4-286C-4DAE-860C-CAAC0772FCD7"/>
+	</action>
+	
+	<!-- Wait to perform action on Order -->
+	<wait id="F5ED95F4-286C-4DAE-860C-CAAC0772FCD7" prependProcessCode="true" then="3694AE42-4EE4-4270-9FD0-F54331AC0C8B">
+		<case event="OrderActionEvent">
+			<choice id="consignmentProcessEnded" then="A3C65578-D2F7-4B67-B799-98B46A0EA306"/>
+			<choice id="cancelOrder" then="13882398-43F2-428C-814D-046F4B6B349A"/>
+		</case>
+	</wait>
+	
+	<!-- Wait for order cancellation to be completed -->
+	<wait id="13882398-43F2-428C-814D-046F4B6B349A" then="F9B96046-08AD-4D77-A3CB-2E3D896ECD3B" prependProcessCode="true">
+		<event>CancellationCompletionEvent</event>
+	</wait>
+	
+	<action id="F9B96046-08AD-4D77-A3CB-2E3D896ECD3B" bean="verifyOrderPostCancellationAction">
+		<transition name="NOK" to="A3C65578-D2F7-4B67-B799-98B46A0EA306"/>
+		<transition name="OK" to="09644420-3E74-400F-A371-6C793147C18E"/>
+		<transition name="WAIT" to="F5ED95F4-286C-4DAE-860C-CAAC0772FCD7"/>
+	</action>
+	
+	<action id="A3C65578-D2F7-4B67-B799-98B46A0EA306" bean="verifyOrderCompletionAction">
+		<transition name="OK" to="B9FC344B-5DCD-4626-B3C7-A6D84FA10D88"/>
+		<transition name="NOK" to="F5ED95F4-286C-4DAE-860C-CAAC0772FCD7"/>
+	</action>
+	
+	<!-- Tax and Payment -->
+	<action id="B9FC344B-5DCD-4626-B3C7-A6D84FA10D88" bean="postTaxesAction">
+		<transition name="OK" to="F3BCCB31-0520-486F-B5E1-D514876270EC"/>
+	</action>
+	
+	<action id="F3BCCB31-0520-486F-B5E1-D514876270EC" bean="takePaymentAction">
+		<transition name="OK" to="23FD4FC8-8D83-48BE-BE26-7E0DDC4DE973"/>
+		<transition name="NOK" to="4C4FBD35-5A5A-4AAF-9A26-6A71BE15AF18"/>
+	</action>
+	
+	<action id="23FD4FC8-8D83-48BE-BE26-7E0DDC4DE973" bean="completeOrderAction">
+		<transition name="OK" to="09644420-3E74-400F-A371-6C793147C18E"/>
+	</action>
+	
+	<action id="4C4FBD35-5A5A-4AAF-9A26-6A71BE15AF18" bean="sendPaymentFailedNotificationAction">
+		<transition name="OK" to="3694AE42-4EE4-4270-9FD0-F54331AC0C8B"/>
+	</action>
+	
+	<end id="573FD06A-BDBC-4A34-A980-F0B91551260A" state="ERROR">Order process error.</end>
+	<end id="3694AE42-4EE4-4270-9FD0-F54331AC0C8B" state="FAILED">Order process failed.</end>
+	<end id="09644420-3E74-400F-A371-6C793147C18E" state="SUCCEEDED">Order process completed.</end>
+	
+</process>

@@ -1,0 +1,26 @@
+<div class="ySENavigationNodeEditor">
+    <se-breadcrumb data-node-uid="ctrl.nodeUid"
+        data-uri-context="ctrl.uriContext"
+        data-ng-if="ctrl.nodeUid"></se-breadcrumb>
+    <div class="row">
+        <navigation-node-editor-attributes data-submit="ctrl.submit"
+            data-reset="ctrl.reset"
+            data-is-dirty="ctrl.isDirty"
+            data-node-uid="ctrl.nodeUid"
+            data-parent-uid="ctrl.parentUid"
+            data-uri-context="ctrl.uriContext" />
+    </div>
+    <div class="ySENavigationDivider"></div>
+    <div class="row">
+        <div class="col-sm-6 ySENavigationNodeEditor__nodelist">
+            <navigation-node-editor-entry-list data-navigation-node-entry-data="ctrl.navigationNodeEntryData"
+                data-node-uid="ctrl.nodeUid"
+                data-entry-index="ctrl.entryIndex"
+                data-uri-context="ctrl.uriContext" />
+        </div>
+        <div class="col-sm-6 ySENavigationNodeEditor__nodedata">
+            <navigation-node-editor-create-entry data-navigation-node-entry-data="ctrl.navigationNodeEntryData"
+                data-uri-context="ctrl.uriContext" />
+        </div>
+    </div>
+</div>

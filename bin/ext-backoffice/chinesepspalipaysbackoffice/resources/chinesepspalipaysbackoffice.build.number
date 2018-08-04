@@ -1,0 +1,11 @@
+#Ant properties
+#Mon Feb 26 01:11:57 UTC 2018
+builddate=20180226 0111
+description=chinesepspalipaysbackoffice
+group.id=de.hybris.platform
+module.name=platform-module
+name=chinesepspalipaysbackoffice
+releasedate=20180223 1939
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

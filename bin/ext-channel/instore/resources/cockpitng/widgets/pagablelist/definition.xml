@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<widget-definition id="com.hybris.instore.widgets.pageabelist" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd">
+ 
+<name>Pageable List</name>
+<description>A pagable list widget</description>
+  <defaultTitle>List</defaultTitle>
+  <author>hybris</author>
+  <version>0.1</version>
+  <!-- view src="pageablelistZKbased.zul"/-->
+    <view src="pageablelist.zul"/>
+  <keywords>
+    <keyword>Mobile</keyword>
+  </keywords>
+  
+  <sockets>
+  	<input id="pageable" type="com.hybris.instore.widgets.pageablelist.Pageable&lt;de.hybris.platform.commercefacades.product.data.ProductData&gt;" />
+ 	<input id="pageablelist" type="[T]" multiplicity="List" />
+  	<output id="selecteditem" type="[T]" />
+  </sockets>
+  
+  <controller class="com.hybris.instore.widgets.pageablelist.PageableListController"/>
+  <settings>
+  	<setting key="list" default-value="false" type="Boolean"/>
+  	<setting key="pageSize" default-value="10" type="Integer"/>
+  </settings>
+</widget-definition>

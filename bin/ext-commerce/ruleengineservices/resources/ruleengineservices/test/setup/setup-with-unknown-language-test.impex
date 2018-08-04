@@ -1,0 +1,4 @@
+# language-unspecific impex
+
+INSERT_UPDATE RuleConditionDefinitionCategory;id[unique=true];priority
+;setup-with-unknown-language-test;1000

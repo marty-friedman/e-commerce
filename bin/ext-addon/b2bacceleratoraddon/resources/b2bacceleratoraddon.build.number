@@ -1,0 +1,11 @@
+#Ant properties
+#Fri Mar 09 19:02:34 UTC 2018
+builddate=20180309 1902
+description=b2bacceleratoraddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=b2bacceleratoraddon
+releasedate=20180306 1940
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

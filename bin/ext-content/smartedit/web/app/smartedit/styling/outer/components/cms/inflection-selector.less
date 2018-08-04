@@ -1,0 +1,59 @@
+.yDddlbResolution {
+	box-shadow: none;
+	padding: 15px (1/2*@smartedit-gutter);
+	background-color: @smartedit-blue;
+}
+
+.yDddlbResolution:focus,
+.yDddlbResolution:active,
+.yDddlbResolution:active:focus {
+	background-color: @smartedit-blue;
+}
+
+#inflectionPtDropdown {
+	margin-right: (1/2*@smartedit-gutter);
+}
+
+#inflectionPtDropdown.open .yDddlbResolution {
+	background-color: @smartedit-lightblue;
+	img {
+		opacity: 0.6;
+	}
+}
+
+.yDddlbResolution:hover,
+.yDddlbResolution:active {
+	box-shadow: none;
+	background-color: @smartedit-blue;
+	img {
+		opacity: 0.8;
+	}
+	border: none;
+}
+
+.yDdResolution {
+	width: auto;
+	position: relative;
+	top: 0;
+	float: none;
+	margin: 0;
+	border: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.yDdResolution li > a.inflection-point-dropdown--option:hover,
+.yDdResolution li > a.inflection-point-dropdown--option:focus {
+	opacity: 0.6;
+	background-color: inherit;
+}
+
+.yDdResolution li > a {
+	border-top: 1px solid fade(@smartedit-white, 35%);
+}
+
+.yDdResolution li > a.inflection-point-dropdown--selected:hover,
+.yDdResolution li > a.inflection-point-dropdown--selected:active {
+	opacity: 1;
+	background-color: inherit;
+}

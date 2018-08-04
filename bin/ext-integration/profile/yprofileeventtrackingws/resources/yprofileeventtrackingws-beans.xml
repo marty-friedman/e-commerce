@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="de.hybris.eventtracking.model.events.AbstractTrackingEvent" type="event">
+		<property name="consentReference" type="String"/>
+		<property name="userAgent" type="String"/>
+		<property name="accept" type="String"/>
+		<property name="acceptLanguage" type="String"/>
+		<property name="referer" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.eventtracking.publisher.csv.model.TrackingEventCsvData">
+		<property name="consentReference" type="String"/>
+		<property name="productPrice" type="String"/>
+		<property name="userAgent" type="String"/>
+		<property name="accept" type="String"/>
+		<property name="acceptLanguage" type="String"/>
+		<property name="referer" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.eventtracking.services.constants.TrackingEventJsonFields">
+		<property type="consent_reference" name="CONSENT_REFERENCE"/>
+		<property type="user_agent" name="USER_AGENT"/>
+		<property type="accept" name="ACCEPT"/>
+		<property type="accept_language" name="ACCEPT_LANGUAGE"/>
+		<property type="referer" name="REFERER"/>
+	</bean>
+
+	<bean class="de.hybris.eventtracking.model.events.AbstractProductAwareTrackingEvent" type="event"
+		  extends="de.hybris.eventtracking.model.events.AbstractTrackingEvent">
+		<property name="categoryId" type="String"/>
+		<property name="productPrice" type="String"/>
+	</bean>
+
+</beans>

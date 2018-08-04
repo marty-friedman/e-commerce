@@ -1,0 +1,23 @@
+<div class="ySEAdd-Nav-button"
+    data-ng-if="!nav.readOnly">
+    <button class="y-add-btn"
+        data-ng-click="nav.actions.addTopLevelNode()">
+        <span class="hyicon hyicon-add"></span>
+        <span data-translate="se.cms.navigationmanagement.add.top.level.node"></span>
+    </button>
+</div>
+<div class="ySEAdd-Nav-tree categoryTable">
+
+    <div class="tablehead clearfix hidden-xs ySENavigationTree-head">
+        <div data-translate="se.ytree.template.header.name"
+            class="col-md-offset-1 col-sm-5"></div>
+        <div data-translate="se.ytree.template.header.type"
+            class="col-sm-6"></div>
+    </div>
+
+    <ytree data-node-uri="nav.nodeURI"
+        data-root-node-uid="nav.rootNodeUid"
+        data-node-template-url="nav.nodeTemplateUrl"
+        data-node-actions="nav.actions"
+        data-drag-options="nav.dragOptions"></ytree>
+</div>

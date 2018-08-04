@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	
+	<!-- Expose component in API -->
+	<bean id="recommendationSubclassMapping" parent="subclassMapping">
+		<property name="parentClass" value="de.hybris.platform.cmswebservices.data.AbstractCMSComponentData" />
+		<property name="subclassesSet">
+			<set merge="true">
+				<value>com.hybris.ymkt.recommendationwebservices.data.RecommendationComponentWsDTO</value>
+				<value>com.hybris.ymkt.recommendationwebservices.data.OfferRecommendationComponentWsDTO</value>
+			</set>
+		</property>
+	</bean>
+	
+	<bean id="recommendationComponentFieldMapper" parent="fieldMapper">
+		<property name="sourceClass" value="com.hybris.ymkt.recommendationwebservices.data.RecommendationComponentWsDTO" />
+		<property name="destClass"   value="com.hybris.ymkt.recommendationwebservices.data.RecommendationComponentData" />
+	</bean>
+
+	<bean id="offerRecommendationComponentFieldMapper" parent="fieldMapper">
+		<property name="sourceClass" value="com.hybris.ymkt.recommendationwebservices.data.OfferRecommendationComponentWsDTO" />
+		<property name="destClass"   value="com.hybris.ymkt.recommendationwebservices.data.OfferRecommendationComponentData" />
+	</bean>	
+</beans>

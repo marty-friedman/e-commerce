@@ -1,0 +1,11 @@
+{  
+   "name":"bpmnbackoffice",
+   "version":"6.6.0.0",
+   "dependencies":{  
+      "d3":"3.3.5",
+      "dagre":"0.7.1",
+      "hammerjs":"1.0.5",
+      "klayjs":"0.3.2",
+      "log4javascript":"1.4.1"
+   }
+}

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!-- Page Actions -->
+
+	<alias alias="CreateLocalizedPageAction" name="multiCountryCreateLocalizedPageAction"/>
+	<bean id="multiCountryCreateLocalizedPageAction"
+		  class="de.hybris.platform.cmsmulticountrycockpit.actions.MultiCountryCreateLocalizedPageAction"
+		  scope="prototype">
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+		<property name="userService" ref="userService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="cmsCockpitService" ref="cmsCockpitService"/>
+		<property name="cmsCatalogLevelService" ref="cmsCatalogLevelService"/>
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+
+	<alias alias="CreatePersonalizedPageAction" name="multiCountryCreatePersonalizedPageAction"/>
+	<bean id="multiCountryCreatePersonalizedPageAction"
+		  class="de.hybris.platform.cmsmulticountrycockpit.actions.MultiCountryCreatePersonalizedPageAction"
+		  scope="prototype">
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+	</bean>
+
+	<alias alias="DeepCopyPageAction" name="multiCountryDeepCopyPageAction"/>
+	<bean id="multiCountryDeepCopyPageAction"
+		  class="de.hybris.platform.cmsmulticountrycockpit.actions.MultiCountryDeepCopyPageAction"
+		  scope="prototype"/>
+
+	<alias alias="RemoveContentElementAction" name="multiCountryRemoveContentElementAction"/>
+	<bean id="multiCountryRemoveContentElementAction"
+		  class="de.hybris.platform.cmsmulticountrycockpit.actions.MultiCountryRemoveContentElementAction"
+		  scope="prototype"/>
+
+	<alias alias="RemovePageBrowserAction" name="multicountryCMSRemovePageBrowserAction"/>
+	<bean id="multicountryCMSRemovePageBrowserAction"
+		  class="de.hybris.platform.cmsmulticountrycockpit.actions.MultiCountryRemovePageBrowserAction"
+		  scope="prototype">
+		<property name="modelService" ref="modelService"/>
+	</bean>
+
+	<alias alias="ShowLocalizedPageAction" name="multiCountryShowLocalizedPageAction"/>
+	<bean id="multiCountryShowLocalizedPageAction"
+		  class="de.hybris.platform.cmsmulticountrycockpit.actions.MultiCountryShowLocalizedPageAction"
+		  scope="prototype">
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+		<property name="cmsSiteService" ref="cmsSiteService"/>
+		<property name="cmsCockpitService" ref="cmsCockpitService"/>
+		<property name="userService" ref="userService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+
+
+	<!-- Action Columns -->
+
+	<bean id="PageHeaderMultiViewSelectListActionColumn"
+		  class="de.hybris.platform.cockpit.components.listview.impl.DefaultActionColumnConfiguration"
+		  scope="prototype">
+		<constructor-arg value="Actions"/>
+		<property name="actions">
+			<list>
+				<ref bean="CreatePersonalizedPageAction"/>
+				<ref bean="CreateLocalizedPageAction"/>
+				<ref bean="ShowLocalizedPageAction"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="MultiCountryPageContentBrowserActionColumn"
+		  class="de.hybris.platform.cockpit.components.listview.impl.DefaultActionColumnConfiguration"
+		  scope="prototype">
+		<constructor-arg value="Actions"/>
+		<property name="actions">
+			<list>
+				<ref bean="ApprovalPageStatusAction"/>
+				<ref bean="SynchronizationAction"/>
+				<ref bean="EditPageBrowserAction"/>
+				<ref bean="RemovePageBrowserAction"/>
+				<ref bean="DeepCopyPageAction"/>
+			</list>
+		</property>
+	</bean>
+
+
+	<!-- Catalog -->
+
+	<alias alias="CatalogPerspective" name="multiCountryCatalogPerspective"/>
+	<bean id="multiCountryCatalogPerspective" class="de.hybris.platform.cmsmulticountrycockpit.session.impl.MultiCountryCmsCockpitPerspective" parent="BasePerspective" scope="session">
+		<property name="uid" value="cmscockpit.perspective.catalog"/>
+		<property name="label" value="cmscockpit.perspective.catalog"/>
+		<property name="customCsaURI" value="/cmscockpit/catalogCSA.zul"/>
+		<property name="cmsAdminComponentService" ref="cmsAdminComponentService"/>
+		<property name="cmsAdminContentSlotService" ref="cmsAdminContentSlotService"/>
+		<property name="cmsAdminSiteService" ref="cmsAdminSiteService"/>
+		<property name="dragAndDropWrapperService" ref="dragAndDropWrapperService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="navigationArea">
+			<ref bean="CatalogNavigationArea"/>
+		</property>
+		<property name="browserArea">
+			<bean class="de.hybris.platform.cmscockpit.session.impl.CatalogBrowserArea">
+				<property name="cmsCatalogBrowserModelFactory" ref="cmsCatalogBrowserModelFactory"/>
+				<property name="rootSearchTypeCode" value="AbstractPage"/>
+				<property name="viewURI" value="/cmscockpit/catalogBrowser.zul"/>
+				<property name="welcomeBrowserModel" ref="CatalogWelcomeBrowserModel"/>
+				<property name="defaultBrowserViewMapping">
+					<map>
+						<entry key="cockpitgroup" value="GRID"/>
+						<entry key="cmsmanagergroup" value="GRID"/>
+					</map>
+				</property>
+				<property name="multiSelectActions">
+					<ref bean="MultiCountryPageContentBrowserActionColumn"/>
+				</property>
+				<property name="additionalToolbarActions">
+					<ref bean="PageContentAdditionalToolbarActionColumn"/>
+				</property>
+				<property name="inspectorRenderer" ref="coverageInspectorRenderer"/>
+				<property name="openInspectorOnSelect" value="true"/>
+			</bean>
+		</property>
+		<property name="editorArea">
+			<bean id="CatalogEditorAreaModel" parent="BaseEditorAreaModel">
+				<property name="editorAreaController">
+					<ref bean="CatalogViewEditorAreaController"/>
+				</property>
+				<property name="commonI18NService" ref="commonI18NService"/>
+				<property name="sessionService" ref="sessionService"/>
+				<property name="valueHandlerRegistry" ref="valueHandlerRegistry"/>
+			</bean>
+		</property>
+		<property name="popupEditorArea">
+			<bean id="CmsCatalogPopupEditor" parent="BasePopupEditor">
+				<property name="editorAreaController">
+					<ref bean="CmsPopupEditorAreaController"/>
+				</property>
+				<property name="cockpitTypeService" ref="cockpitTypeService"/>
+				<property name="commonI18NService" ref="commonI18NService"/>
+				<property name="sessionService" ref="sessionService"/>
+				<property name="systemService" ref="systemService"/>
+				<property name="undoManager" ref="undoManager"/>
+				<property name="valueHandlerRegistry" ref="valueHandlerRegistry"/>
+				<property name="valueService" ref="valueService"/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="CatalogNavigationArea" class="de.hybris.platform.cmscockpit.session.impl.CatalogNavigationArea" parent="BaseNavigationArea" scope="session">
+		<property name="cmsCatalogBrowserModelFactory" ref="cmsCatalogBrowserModelFactory"/>
+		<property name="sectionModel">
+			<ref bean="CatalogNavigationAreaModel"/>
+		</property>
+		<property name="infoSlotRenderer">
+			<bean class="de.hybris.platform.cockpit.components.navigationarea.renderer.InfoBoxRenderer"/>
+		</property>
+		<property name="infoSlotAttachmentTypes">
+			<ref bean="WorkflowAttachmentData"/>
+		</property>
+		<property name="sections">
+			<list>
+				<ref bean="CatalogSpecialCollectionsSection"/>
+				<ref bean="SiteSelectorSection"/>
+				<ref bean="CatalogQuerySection"/>
+				<ref bean="CmsUndoSection"/>
+			</list>
+		</property>
+		<property name="cockpitTypeService" ref="cockpitTypeService"/>
+		<property name="dynamicQueryService" ref="dynamicQueryService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="objectCollectionService" ref="objectCollectionService"/>
+		<property name="savedQueryService" ref="savedQueryService"/>
+		<property name="uiComponentCache" ref="uiComponentCache"/>
+		<property name="uiConfigurationService" ref="uiConfigurationService"/>
+	</bean>
+
+</beans>

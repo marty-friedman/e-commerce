@@ -1,0 +1,11 @@
+#Ant properties
+#Thu Mar 01 13:34:23 UTC 2018
+builddate=20180301 1334
+description=b2bordermanagementfacades
+group.id=de.hybris.platform
+module.name=platform-module
+name=b2bordermanagementfacades
+releasedate=20180301 1041
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

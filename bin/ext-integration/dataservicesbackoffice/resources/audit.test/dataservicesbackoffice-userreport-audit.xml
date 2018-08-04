@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2018 SAP SE or an SAP affiliate company.
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of SAP
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with SAP.
+  -->
+<audit-report-config name="userTestReport">
+    <given-root-type>User</given-root-type>
+    <types>
+        <type code="User" displayName="User">
+            <atomic-attributes>
+                <atomic-attribute qualifier="name" displayName="name"/>
+                <atomic-attribute qualifier="unknownAttr" displayName="unknownAttr"/>
+                <atomic-attribute qualifier="uid" displayName="uid"/>
+            </atomic-attributes>
+            <reference-attributes>
+                <reference-attribute qualifier="defaultPaymentAddress" type="Address" displayName="defaultPaymentAddress">
+                    <resolves-by resolverBeanId="typeReferencesResolver" expression="defaultpaymentaddress"/>
+                </reference-attribute>
+                <reference-attribute qualifier="profilepicture" type="Media" displayName="profilepicture">
+                    <resolves-by resolverBeanId="typeReferencesResolver" expression="profilepicture"/>
+                </reference-attribute>
+                <reference-attribute qualifier="sessionCurrency" type="Currency" displayName="sessionCurrency">
+                    <resolves-by resolverBeanId="typeReferencesResolver" expression="sessioncurrency"/>
+                </reference-attribute>
+                <reference-attribute qualifier="unknownRef" type="Currency" displayName="unknownRef"/>
+            </reference-attributes>
+            <virtual-attributes>
+                <virtual-attribute expression="owner" type="Address" many="true" displayName="owned addresses"/>
+            </virtual-attributes>
+            <relation-attributes>
+                <relation-attribute relation="User2Addresses" displayName="User2Addresses" many="true" type="Address"/>
+                <relation-attribute relation="PrincipalGroupRelation" displayName="PrincipalGroupRelation" many="true" type="UserGroup"/>
+                <relation-attribute relation="unknownRelation" displayName="PrincipalGroupRelation" many="true" type="UserGroup"/>
+            </relation-attributes>
+        </type>
+        <type code="Address">
+            <atomic-attributes>
+                <!--pk should not populated in XSD-->
+                <atomic-attribute qualifier="pk" displayName="pk"/>
+                <atomic-attribute qualifier="streetname" displayName="Street"/>
+                <atomic-attribute qualifier="town" displayName="City"/>
+            </atomic-attributes>
+            <reference-attributes>
+                <reference-attribute qualifier="title" type="Title" displayName="title">
+                    <resolves-by resolverBeanId="typeReferencesResolver" expression="title"/>
+                </reference-attribute>
+            </reference-attributes>
+        </type>
+        <type code="Title">
+            <atomic-attributes>
+                <atomic-attribute qualifier="code" displayName="code"/>
+                <atomic-attribute qualifier="name" displayName="name"/>
+            </atomic-attributes>
+        </type>
+        <type code="Media">
+            <atomic-attributes>
+                <atomic-attribute qualifier="code" displayName="Profile picture"/>
+            </atomic-attributes>
+        </type>
+        <type code="Currency">
+
+        </type>
+        <type code="UserGroup">
+
+        </type>
+    </types>
+</audit-report-config>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<process name="Join-Process" start="c39941c3-e3a1-494b-bad9-7d2b237a5651" processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel" xmlns="http://www.hybris.de/xsd/processdefinition">
+    <action bean="checkOrderAction" id="c39941c3-e3a1-494b-bad9-7d2b237a5651">
+        <transition name="NOK" to="1a2b7c98-6a52-4e41-a389-42fc47db01c0"/>
+        <transition name="OK" to="4b9e9925-94f2-4fee-be9f-ede86a3a0b99"/>
+    </action>
+    <action bean="prepareOrderForManualCheckAction" id="1a2b7c98-6a52-4e41-a389-42fc47db01c0">
+        <transition name="OK" to="a42f7469-7b9d-44ab-a26a-90c6e7fcd115"/>
+    </action>
+    <end state="SUCCEEDED" id="a42f7469-7b9d-44ab-a26a-90c6e7fcd115"></end>
+    <action bean="sendOrderPlacedNotificationAction" id="4b9e9925-94f2-4fee-be9f-ede86a3a0b99">
+        <transition name="OK" to="a42f7469-7b9d-44ab-a26a-90c6e7fcd115"/>
+    </action>
+</process>

@@ -1,0 +1,11 @@
+#Ant properties
+#Wed Mar 07 15:32:16 UTC 2018
+builddate=20180307 1532
+description=customerinterestsservices
+group.id=de.hybris.platform
+module.name=platform-module
+name=customerinterestsservices
+releasedate=20180305 1940
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

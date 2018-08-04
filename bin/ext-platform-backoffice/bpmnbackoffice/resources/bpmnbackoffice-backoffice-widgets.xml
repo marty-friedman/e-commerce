@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widgets.xsd">
+
+    <widget-extension widgetId="hmc2">
+        <widget id="bpmnWidgetContainer" widgetDefinitionId="com.sap.hybris.bpmnWidgetContainer" slotId="cockpitWidgetChildrenInvisible" title="bpmnWidget.title" template="true">
+            <widget id="bpmnWidget" widgetDefinitionId="com.sap.hybris.bpmnWidget" slotId="bpmwidget" template="false">
+                <setting key="widgetStyleClass" type="String"></setting>
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <virtual-sockets/>
+            </widget>
+            <widget id="bpmnNotificationarea" widgetDefinitionId="com.hybris.backoffice.notificationarea" slotId="bpmnNotificationarea" template="false">
+                <setting key="widgetStyleClass" type="String"></setting>
+                <setting key="widgetStyleAttribute" type="String"></setting>
+                <setting key="useDynamicNotificationId" type="Boolean">true</setting>
+                <virtual-sockets/>
+            </widget>
+            <instance-settings socketEventRoutingMode="LAST_USED">
+                <create onInit="false" reuseExisting="true">
+                    <incoming-events>
+                        <socket-event id="inputProcess"/>
+                    </incoming-events>
+                </create>
+                <close>
+                    <outgoing-events>
+                        <socket-event id="currentProcessStatusSuccess"/>
+                    </outgoing-events>
+                </close>
+                <select onInit="false"/>
+            </instance-settings>
+            <setting key="widgetStyleClass" type="String"></setting>
+            <setting key="widgetStyleAttribute" type="String"></setting>
+            <setting key="_width" type="String">90%</setting>
+            <setting key="_height" type="String">90%</setting>
+            <virtual-sockets/>
+        </widget>
+    </widget-extension>
+
+    <widget-connection sourceWidgetId="bpmnWidgetContainer" outputId="currentProcess" targetWidgetId="bpmnWidget" inputId="editorContentInput"/>
+    <widget-connection sourceWidgetId="bpmnWidget" outputId="editorContentOutput" targetWidgetId="bpmnWidgetContainer" inputId="saveProcess"/>
+    <widget-connection sourceWidgetId="STUB_com.hybris.cockpitng.action.openBPMN" outputId="selectedProcess" targetWidgetId="bpmnWidgetContainer" inputId="inputProcess"/>
+
+</widgets>

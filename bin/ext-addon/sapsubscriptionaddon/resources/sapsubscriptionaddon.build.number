@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Mar 13 12:40:30 UTC 2018
+builddate=20180313 1240
+description=sapsubscriptionaddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=sapsubscriptionaddon
+releasedate=20180307 1940
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

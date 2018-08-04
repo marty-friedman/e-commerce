@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="properties" ref="hybrisProperties" />
+	</bean>
+	
+	<alias name="sapDefaultProductConfigProviderFactory" alias="sapProductConfigConfigurationProviderFactory" />
+	<alias name="sapDefaultProductConfigProviderFactory" alias="sapProductConfigProviderFactory" />
+	<bean id="sapDefaultProductConfigProviderFactory" class="de.hybris.platform.sap.productconfig.services.impl.ProviderFactoryImpl">
+		<property name="sessionAccessService" ref="sapProductConfigSessionAccessService" />
+	</bean>
+	
+	<alias name="sapProductConfigDefaultConfigurationService" alias="sapProductConfigConfigurationService" />
+	<bean id="sapProductConfigDefaultConfigurationService" class="de.hybris.platform.sap.productconfig.services.impl.ProductConfigurationServiceImpl">
+		<property name="providerFactory" ref="sapProductConfigProviderFactory" />
+		<property name="maxLocksPerMap" value="${sapproductconfigservices.maxLocksPerMap}" />
+		<property name="sessionAccessService" ref="sapProductConfigSessionAccessService" />
+		<property name="recorder" ref="sapProductConfigTrackingRecorder"></property>
+		<property name="configurationPricingOrderIntegrationService" ref="sapProductConfigConfigurationPricingOrderIntegrationService"></property>
+	</bean>
+
+	<alias name="sapProductConfigDefaultConfigurationPricingOrderIntegrationService" alias="sapProductConfigConfigurationPricingOrderIntegrationService" />
+	<bean id="sapProductConfigDefaultConfigurationPricingOrderIntegrationService" class="de.hybris.platform.sap.productconfig.services.impl.ProductConfigurationPricingOrderIntegrationServiceImpl">
+		<property name="sessionAccessService" ref="sapProductConfigSessionAccessService" />
+		<property name="recorder" ref="sapProductConfigTrackingRecorder"></property>
+		<property name="pricingService" ref="sapProductConfigPricingService"></property>
+		<property name="configurationService" ref="sapProductConfigConfigurationService" />
+		<property name="modelService" ref="modelService" />
+		<property name="commerceCartService" ref="commerceCartService" />		
+	</bean>
+
+
+ 	<alias name="sapProductConfigDefaultPricingService" alias="sapProductConfigPricingService" />
+  	<bean id="sapProductConfigDefaultPricingService" class="de.hybris.platform.sap.productconfig.services.impl.PricingServiceImpl">
+		<property name="providerFactory" ref="sapProductConfigProviderFactory" />
+		<property name="pricingConfigurationParameter" ref="sapProductConfigPricingParameters" />
+		<property name="sessionAccessService" ref="sapProductConfigSessionAccessService" />		
+	</bean>
+	
+	<alias name="sapProductConfigFindPricingStrategy" alias="currentFactoryFindPricingStrategy" />
+	<bean id="sapProductConfigFindPricingStrategy" class="de.hybris.platform.sap.productconfig.services.impl.FindPricingForConfigurableProductsStrategy"
+		parent="abstractBusinessService">
+		<property name="cpqConfigurableChecker" ref="sapProductConfigCPQConfigurableChecker"/>
+	</bean>
+	
+	<alias name="sapProductConfigDefaultPlaceOrderHook" alias="sapProductConfigPlaceOrderHook" />
+	<bean id="sapProductConfigDefaultPlaceOrderHook" class="de.hybris.platform.sap.productconfig.services.impl.ProductConfigurationPlaceOrderHookImpl">
+		<property name="productConfigurationService" ref="sapProductConfigConfigurationService" />
+		<property name="sessionAccessService" ref="sapProductConfigSessionAccessService" />
+	</bean>
+	<bean id="sapProductConfigPlaceOrderMethodHooksListMergeDirective" depends-on="commercePlaceOrderMethodHooks" parent="listMergeDirective">
+		<property name="add" ref="sapProductConfigPlaceOrderHook" />
+	</bean>
+	<alias name="sapProductConfigDefaultUpdateCartEntryHook" alias="sapProductConfigUpdateCartEntryHook" />
+	<bean id="sapProductConfigDefaultUpdateCartEntryHook" class="de.hybris.platform.sap.productconfig.services.impl.ProductConfigurationUpdateCartEntryHookImpl">
+		<property name="productConfigurationService" ref="sapProductConfigConfigurationService" />
+		<property name="sessionAccessService" ref="sapProductConfigSessionAccessService" />
+		<property name="recorder" ref="sapProductConfigTrackingRecorder"></property>
+	</bean>
+	<bean id="sapProductConfigUpdateCartEntryMethodHooksListMergeDirective" depends-on="commerceUpdateCartEntryMethodHooks"
+		parent="listMergeDirective">
+		<property name="add" ref="sapProductConfigUpdateCartEntryHook" />
+	</bean>
+	<alias name="sapProductConfigDefaultAddToCartHook" alias="sapProductConfigAddToCartHook" />
+	<bean id="sapProductConfigDefaultAddToCartHook" class="de.hybris.platform.sap.productconfig.services.impl.ProductConfigAddToCartHookImpl">
+		<property name="productConfigurationService" ref="sapProductConfigConfigurationService" />
+		<property name="sessionAccessService" ref="sapProductConfigSessionAccessService" />
+		<property name="modelService" ref="modelService" />
+		<property name="commerceCartService" ref="commerceCartService" />
+		<property name="recorder" ref="sapProductConfigTrackingRecorder" />
+		<property name="configurationPricingOrderIntegrationService" ref="sapProductConfigConfigurationPricingOrderIntegrationService" />    
+		<property name="cpqConfigurableChecker" ref="sapProductConfigCPQConfigurableChecker"/>
+	</bean>
+	<bean id="sapProductConfigAddToCartHookHooksListMergeDirective" depends-on="commerceAddToCartMethodHooks" parent="listMergeDirective">
+		<property name="add" ref="sapProductConfigAddToCartHook" />
+	</bean>
+
+	<alias name="sapProductConfigDefaultSessionAccessService" alias="sapProductConfigSessionAccessService" />
+	<bean id="sapProductConfigDefaultSessionAccessService" class="de.hybris.platform.sap.productconfig.services.impl.SessionAccessServiceImpl">
+		<property name="sessionService" ref="sessionService" />
+		<property name="maxCachedConfigsInSession" value="${sapproductconfigservices.maxCachedConfigsInSession}" />
+	</bean>
+
+	<alias name="sapProductConfigDefaultCartEntryValidationStrategy" alias="sapProductConfigCartEntryValidationStrategy" />
+	<bean id="sapProductConfigDefaultCartEntryValidationStrategy" class="de.hybris.platform.sap.productconfig.services.strategies.impl.ProductConfigurationCartEntryValidationStrategyImpl">
+		<property name="productConfigurationService" ref="sapProductConfigConfigurationService" />
+		<property name="modelService" ref="modelService" />
+		<property name="configurationPricingOrderIntegrationService" ref="sapProductConfigConfigurationPricingOrderIntegrationService" />  
+	</bean>
+
+	<alias name="sapProductConfigDefaultCartValidationStrategy" alias="cartValidationStrategy" />
+	<bean id="sapProductConfigDefaultCartValidationStrategy" class="de.hybris.platform.sap.productconfig.services.strategies.impl.ProductConfigurationCartValidationStrategyImpl"
+		parent="defaultCartValidationStrategy">
+		<property name="productConfigurationCartEntryValidationStrategy" ref="sapProductConfigCartEntryValidationStrategy" />
+	</bean>
+
+	<alias alias="sapProductConfigCartConfigurationRestrictionEvaluator" name="sapProductConfigDefaultCartConfigurationRestrictionEvaluator" />
+	<bean id="sapProductConfigDefaultCartConfigurationRestrictionEvaluator" class="de.hybris.platform.sap.productconfig.services.evaluator.CMSCartConfigurationRestrictionEvaluator"
+		scope="tenant">
+	</bean>
+
+	<bean id="cmsCartConfigurationRestrictionEvaluatorMapping" class="de.hybris.platform.cms2.servicelayer.services.evaluator.CMSRestrictionEvaluatorMapping"
+		scope="tenant">
+		<property name="restrictionTypeCode" value="CMSCartConfigurationRestriction" />
+		<property name="restrictionEvaluator" ref="sapProductConfigCartConfigurationRestrictionEvaluator" />
+	</bean>
+
+	<bean id="sapProductConfigCartRestrictionDynamicDescription" class="de.hybris.platform.sap.productconfig.services.attributehandlers.CartRestrictionDynamicDescription"
+		scope="tenant" />
+
+	<alias name="sapProductConfigDefaultCommerceCartMergingStrategy" alias="commerceCartMergingStrategy" />
+	<bean id="sapProductConfigDefaultCommerceCartMergingStrategy" class="de.hybris.platform.sap.productconfig.services.strategies.impl.ProductConfigCommerceCartMergingStrategyImpl"
+		parent="defaultCommerceCartMergingStrategy">
+		<property name="configurationPricingOrderIntegrationService" ref="sapProductConfigConfigurationPricingOrderIntegrationService" />    
+		<property name="cpqConfigurableChecker" ref="sapProductConfigCPQConfigurableChecker"/>
+	</bean>
+
+	<bean id="sapProductConfigConfigurationHandlerRegistrar" parent="mapMergeDirective" depends-on="productConfigurationHandlers">
+		<property name="key" value="CPQCONFIGURATOR" />
+		<property name="value" ref="sapProductConfigCPQConfigurationHandler" />
+	</bean>
+
+	<alias name="sapProductConfigDefaultCPQConfigurationHandler" alias="sapProductConfigCPQConfigurationHandler" />
+	<bean id="sapProductConfigDefaultCPQConfigurationHandler" class="de.hybris.platform.sap.productconfig.services.impl.CPQConfigurationHandler">
+		<property name="sessionAccessService" ref="sapProductConfigSessionAccessService" />
+		<property name="productConfigurationService" ref="sapProductConfigConfigurationService" />
+	</bean>
+
+	<alias name="defaultCPQMultidimentionalProductFlagValueProvider" alias="multidimentionalProductFlagValueProvider" />
+	<bean id="defaultCPQMultidimentionalProductFlagValueProvider"
+		class="de.hybris.platform.sap.productconfig.services.search.provider.impl.MultidimentionalConfigurableProductFlagValueProvider"
+		parent="defaultMultidimentionalProductFlagValueProvider">
+		<property name="configuratorSettingsService" ref="configuratorSettingsService" />
+	</bean>
+
+	<alias name="sapProductConfigDefaultVariantSearchService" alias="sapProductConfigVariantSearchService" />
+	<bean id="sapProductConfigDefaultVariantSearchService" class="de.hybris.platform.sap.productconfig.services.impl.ProductConfigurationVariantSearchServiceImpl">
+		<property name="productConfigurationService" ref="sapProductConfigConfigurationService" />
+		<property name="productSearchService" ref="commerceProductSearchService" />
+		<property name="threadContextService" ref="threadContextService" />
+		<property name="searchAttributeSelectionStrategy" ref="sapProductConfigSearchAttributeSelectionStrategy" />
+		<property name="sessionAccessService" ref="sapProductConfigSessionAccessService" />
+	</bean>
+
+	<alias name="sapProductConfigDefaultSearchAttributeSelectionStrategy" alias="sapProductConfigSearchAttributeSelectionStrategy" />
+	<bean id="sapProductConfigDefaultSearchAttributeSelectionStrategy" class="de.hybris.platform.sap.productconfig.services.impl.SearchAttributeSelectionStrategyImpl">
+		<property name="solrFacetSearchConfigSelectionStrategy" ref="solrFacetSearchConfigSelectionStrategy" />
+		<property name="sessionAccessService" ref="sapProductConfigSessionAccessService" />
+	</bean>
+
+	<bean id="sapProductConfigDefaultBaseValueResolver" class="de.hybris.platform.sap.productconfig.services.search.provider.impl.BaseProductValueResolver"
+		parent="abstractValueResolver">
+	</bean>
+
+	<alias name="sapProductConfigDefaultTrackingRecorder" alias="sapProductConfigTrackingRecorder" />
+	<bean id="sapProductConfigDefaultTrackingRecorder" class="de.hybris.platform.sap.productconfig.services.tracking.impl.TrackingRecorderImpl" parent="sapProductConfigAbstractTrackingRecorder">
+	</bean>
+
+	<alias name="sapProductConfigDefaultAbstractTrackingRecorder" alias="sapProductConfigAbstractTrackingRecorder" />
+	<bean id="sapProductConfigDefaultAbstractTrackingRecorder" class="de.hybris.platform.sap.productconfig.services.tracking.impl.AbstractTrackingRecorderImpl">
+		<property name="sessionAccessService" ref="sapProductConfigSessionAccessService" />
+		<property name="trackingEnabled" value="${sapproductconfigruntimeinterface.tracking.enabled}" />		
+		<property name="writers">
+			<list>
+				<ref bean="sapProductConfigTrackingWriter" />
+			</list>
+		</property>
+	</bean>
+
+	<alias name="sapProductConfigDefaultTrackingWriter" alias="sapProductConfigTrackingWriter" />
+	<bean id="sapProductConfigDefaultTrackingWriter" class="de.hybris.platform.sap.productconfig.services.tracking.impl.TrackingToLogWriterImpl">
+	</bean>
+	
+	  <bean id="sapProductConfigLoginEventListener"
+          class="de.hybris.platform.sap.productconfig.services.event.impl.ProductConfigUserChangedEventListener"
+          parent="abstractEventListener">
+          		<lookup-method name="getSessionAccessService" bean="sapProductConfigSessionAccessService"/>
+    </bean>
+    
+	<alias name="sapProductConfigDefaultCloneAbstractOrderStrategy" alias="cloneAbstractOrderStrategy" />
+	<bean id="sapProductConfigDefaultCloneAbstractOrderStrategy" class="de.hybris.platform.sap.productconfig.services.strategies.impl.ProductConfigCloneAbstractOrderStrategyImpl">
+		<property name="sessionAccessService" ref="sapProductConfigSessionAccessService" />
+		<property name="productConfigurationService" ref="sapProductConfigConfigurationService" />
+		<property name="defaultCloneAbstractOrderStrategy" ref="defaultCloneAbstractOrderStrategy" />
+	</bean>    
+	
+	<alias name="sapProductConfigDefaultSaveCartRestorationStrategy" alias="commerceSaveCartRestorationStrategy" />
+	<bean id="sapProductConfigDefaultSaveCartRestorationStrategy" class="de.hybris.platform.sap.productconfig.services.strategies.impl.ProductConfigurationSaveCartRestorationStrategyImpl">
+		<property name="sessionAccessService" ref="sapProductConfigSessionAccessService" />
+		<property name="commerceSaveCartRestorationStrategy" ref="defaultCommerceSaveCartRestorationStrategy" />
+	</bean>		
+	
+	<alias name="sapProductConfigDefaultAnalyticsService" alias="sapProductConfigAnalyticsService" />
+	<bean id="sapProductConfigDefaultAnalyticsService" class="de.hybris.platform.sap.productconfig.services.analytics.impl.AnalyticsServiceImpl">
+		<property name="providerFactory" ref="sapProductConfigProviderFactory" />
+		<property name="sessionAccessService" ref="sapProductConfigSessionAccessService" />
+	</bean>
+	
+	<alias alias="productCsticAndValueParameterProviderService" name="defaultProductCsticAndValueParameterProviderService"/>
+	<bean id="defaultProductCsticAndValueParameterProviderService" class="de.hybris.platform.sap.productconfig.services.impl.ProductCsticAndValueParameterProviderServiceImpl">
+		<property name="providerFactory" ref="sapProductConfigProviderFactory" />
+	</bean>
+
+	<alias alias="sapProductConfigCPQConfigurableChecker" name="sapProductConfigDefaultCPQConfigurableChecker"/>
+	<bean id="sapProductConfigDefaultCPQConfigurableChecker" class="de.hybris.platform.sap.productconfig.services.impl.CPQConfigurableChecker" parent="productConfigurableChecker">
+	</bean>
+	
+</beans>
+

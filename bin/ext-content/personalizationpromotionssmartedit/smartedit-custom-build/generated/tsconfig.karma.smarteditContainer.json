@@ -1,0 +1,56 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "es2015",
+        "moduleResolution": "node",
+        "lib": [
+            "dom",
+            "es5",
+            "scripthost",
+            "es2015",
+            "es2015.iterable"
+        ],
+        "allowJs": false,
+        "checkJs": false,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "strictNullChecks": false,
+        "forceConsistentCasingInFileNames": true,
+        "noEmitOnError": true,
+        "baseUrl": "../../jsTarget/",
+        "typeRoots": [
+            "../../node_modules/@types",
+            "/rp/tmp/pipelines/20180313145425_personalization_artifact_develop_b09b137/prepare/build/source/personalizationpromotionssmartedit/smartedit-build/@types",
+            "!/rp/tmp/pipelines/20180313145425_personalization_artifact_develop_b09b137/prepare/build/source/personalizationpromotionssmartedit/smartedit-build/@types/smartedit",
+            "/rp/tmp/pipelines/20180313145425_personalization_artifact_develop_b09b137/prepare/build/source/personalizationpromotionssmartedit/smartedit-build/test/@types"
+        ],
+        "traceResolution": true,
+        "listEmittedFiles": true,
+        "skipLibCheck": true,
+        "pretty": true,
+        "declaration": false,
+        "experimentalDecorators": true,
+        "paths": {
+            "smarteditcommons": [
+                "/rp/tmp/pipelines/20180313145425_personalization_artifact_develop_b09b137/prepare/build/source/personalizationpromotionssmartedit/smartedit-build/@types/smarteditcommons"
+            ],
+            "smarteditcontainer": [
+                "/rp/tmp/pipelines/20180313145425_personalization_artifact_develop_b09b137/prepare/build/source/personalizationpromotionssmartedit/smartedit-build/@types/smarteditcontainer"
+            ],
+            "testhelpers": [
+                ".././smartedit-build/test/unit"
+            ],
+            "personalizationpromotionssmarteditcontainer/*": [
+                "web/features/personalizationpromotionssmarteditContainer/*"
+            ],
+            "personalizationpromotionssmarteditcommons": [
+                "web/features/personalizationpromotionssmarteditcommons"
+            ],
+            "personalizationpromotionssmarteditcommons*": [
+                "web/features/personalizationpromotionssmarteditcommons*"
+            ]
+        }
+    }
+}

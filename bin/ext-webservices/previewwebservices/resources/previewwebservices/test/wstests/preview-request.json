@@ -1,0 +1,10 @@
+{
+   "catalog" : "testContentCatalog",
+   "catalogVersion" : "Online",
+   "language" : "en",
+   "pageId" : "homepage",
+   "resourcePath" : "https://127.0.0.1:9002/yacceleratorstorefront?site=testCmsSite",
+   "time" : "2013-02-14T21:15:03+0000",
+   "user" : "testoauthcustomer",
+   "userGroup" : "regulargroup"
+}

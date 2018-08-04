@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Mar 06 15:43:28 UTC 2018
+builddate=20180306 1543
+description=assistedservicecustomerinterestsaddon
+group.id=de.hybris.platform
+module.name=platform-module
+name=assistedservicecustomerinterestsaddon
+releasedate=20180302 1302
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

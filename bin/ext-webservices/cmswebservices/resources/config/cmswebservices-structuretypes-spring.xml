@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:util="http://www.springframework.org/schema/util"
+		xmlns:p="http://www.springframework.org/schema/p"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- Component Types -->
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeStructure" p:typecode="SimpleBannerComponent" p:populators-ref="defaultComponentTypePopulators" p:typeDataClass="de.hybris.platform.cmswebservices.data.SimpleBannerComponentData" />
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeStructure" p:typecode="CMSParagraphComponent" p:populators-ref="defaultComponentTypePopulators" p:typeDataClass="de.hybris.platform.cmswebservices.data.CMSParagraphComponentData" />
+
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeStructure" p:typecode="SimpleResponsiveBannerComponent" p:populators-ref="defaultComponentTypePopulators" p:typeDataClass="de.hybris.platform.cmswebservices.data.SimpleResponsiveBannerComponentData" />
+	
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeStructure" p:typecode="NavigationComponent" p:populators-ref="defaultComponentTypePopulators" p:typeDataClass="de.hybris.platform.cmswebservices.data.NavigationComponentData" />
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeStructure" p:typecode="CategoryNavigationComponent" p:populators-ref="defaultComponentTypePopulators" p:typeDataClass="de.hybris.platform.cmswebservices.data.NavigationComponentData" />
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeStructure" p:typecode="FooterNavigationComponent" p:populators-ref="defaultComponentTypePopulators" p:typeDataClass="de.hybris.platform.cmswebservices.data.NavigationComponentData" />
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeStructure" p:typecode="ProductCarouselComponent" p:populators-ref="defaultComponentTypePopulators" p:typeDataClass="de.hybris.platform.cmswebservices.data.ProductCarouselComponentData" />
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeStructure" p:typecode="CMSLinkComponent" p:populators-ref="defaultComponentTypePopulators" p:typeDataClass="de.hybris.platform.cmswebservices.data.CMSLinkComponentData" />
+
+	<!-- Page Types -->
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeStructure" p:typecode="ContentPage" p:category="PAGE" p:populators-ref="defaultPageComponentTypePopulators" p:typeDataClass="de.hybris.platform.cmswebservices.data.ContentPageData" />
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeStructure" p:typecode="ProductPage" p:category="PAGE" p:populators-ref="defaultPageComponentTypePopulators" p:typeDataClass="de.hybris.platform.cmswebservices.data.ProductPageData" />
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeStructure" p:typecode="CategoryPage" p:category="PAGE" p:populators-ref="defaultPageComponentTypePopulators" p:typeDataClass="de.hybris.platform.cmswebservices.data.CategoryPageData" />
+
+	<!-- Restriction Types -->
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeStructure" p:typecode="CMSTimeRestriction" p:category="RESTRICTION" p:populators-ref="defaultRestrictionComponentTypePopulators" p:typeDataClass="de.hybris.platform.cmswebservices.data.TimeRestrictionData" />
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeStructure" p:typecode="CMSCategoryRestriction" p:category="RESTRICTION" p:populators-ref="defaultRestrictionComponentTypePopulators" p:typeDataClass="de.hybris.platform.cmswebservices.data.CategoryRestrictionData" />
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeStructure" p:typecode="CMSUserGroupRestriction" p:category="RESTRICTION" p:populators-ref="defaultRestrictionComponentTypePopulators" p:typeDataClass="de.hybris.platform.cmswebservices.data.UserGroupRestrictionData" />
+
+	<bean id="userGroupSearchUriComponentTypeAttributePopulator" class="de.hybris.platform.cmsfacades.types.populator.UriComponentTypeAttributePopulator">
+		<property name="uri" value="/cmswebservices/v1/usergroups" />
+	</bean>
+
+	<bean class="de.hybris.platform.cmsfacades.types.service.impl.DefaultComponentTypeAttributeStructure" p:typecode="CMSUserGroupRestriction" p:qualifier="userGroups">
+		<property name="populators">
+			<set>
+				<ref bean="userGroupSearchUriComponentTypeAttributePopulator" />
+			</set>
+		</property>
+	</bean>
+	
+</beans>

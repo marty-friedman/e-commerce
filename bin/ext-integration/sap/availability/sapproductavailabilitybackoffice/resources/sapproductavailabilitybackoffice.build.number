@@ -1,0 +1,11 @@
+#Ant properties
+#Mon Feb 19 16:31:03 UTC 2018
+builddate=20180219 1631
+description=sapproductavailabilitybackoffice
+group.id=de.hybris.platform
+module.name=platform-module
+name=sapproductavailabilitybackoffice
+releasedate=20180215 1941
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

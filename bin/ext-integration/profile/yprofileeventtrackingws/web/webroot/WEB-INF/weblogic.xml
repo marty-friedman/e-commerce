@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<weblogic-web-app xmlns="http://www.bea.com/ns/weblogic/90" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <container-descriptor>
+        <prefer-application-packages>
+            <package-name>org.glassfish.jersey.*</package-name>
+            <package-name>org.glassfish.hk2.*</package-name>
+            <package-name>org.jvnet.hk2.*</package-name>
+            <package-name>jersey.repackaged.org.objectweb.asm.*</package-name>
+        </prefer-application-packages>
+
+        <prefer-application-resources>
+            <resource-name>META-INF/services/javax.servlet.ServletContainerInitializer</resource-name>
+            <resource-name>META-INF/services/javax.ws.rs.ext.RuntimeDelegate</resource-name>
+
+            <!-- jersey -->
+            <resource-name>META-INF/services/org.glassfish.jersey.*</resource-name>
+            <resource-name>org.glassfish.jersey.*</resource-name>
+            <resource-name>jersey.repackaged.*</resource-name>
+
+            <!-- hk2 -->
+            <resource-name>META-INF/services/org.glassfish.hk2.*</resource-name>
+        </prefer-application-resources>
+    </container-descriptor>
+</weblogic-web-app>

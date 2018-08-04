@@ -1,0 +1,162 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+
+$lang=en
+$defaultPromoGrp=electronicsPromoGrp
+$defaultRuleStatus=UNPUBLISHED
+$contentCatalog=electronicsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$regulargroup=regulargroup
+$customergroup=customergroup
+$siteUid=electronics
+
+$defaultPassword=12341234
+
+$promotionModuleName="promotions-module"
+$promotionPreviewModuleName="promotions-preview-module"
+
+# Create Customer Group
+INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append]
+;electronics-cxmanagergroup;cxmanagergroup
+;electronics-cxusergroup;cxusergroup
+
+INSERT_UPDATE Employee;UID[unique=true];password[default=$defaultPassword];backOfficeLoginDisabled;groups(uid)[mode=append];name;description
+;cxmanager-electronics		;;;electronics-cxmanagergroup;Personalization Manager For Electronics;Personalization Manager For Electronics
+;cxuser-electronics			;;;electronics-cxusergroup;Personalization User For Electronics;Personalization Read Only User For Electronics
+
+INSERT_UPDATE Employee;UID[unique=true];groups(uid)[mode=append];
+;cxmanager;electronics-cxmanagergroup;
+;cxuser;electronics-cxusergroup
+
+INSERT_UPDATE CatalogVersion; catalog(id)[unique=true]; version[unique=true];readPrincipals(uid)[mode=append];writePrincipals(uid)[mode=append]
+;electronicsContentCatalog;Staged;electronics-cxusergroup;electronics-cxmanagergroup
+;electronicsContentCatalog;Online;electronics-cxusergroup,electronics-cxmanagergroup;cxmanager
+
+INSERT_UPDATE CxSegment;code[unique=true];
+;CATEGORY Canon;
+;CATEGORY brand_10;
+;CATEGORY Camera Lenses;
+;CATEGORY 577; #Webcams
+;CATEGORY 588; #Camera Lenses
+
+INSERT_UPDATE Customer;uid[unique=true];groups(uid);password[default=$defaultPassword];name;&userref;
+;alistair@hybris.com;customergroup;;Alistair;alistair@hybris.com;
+;canonlover@hybris.com;customergroup;;Canon Lover;;canonlover@hybris.com;
+;cameralenslover@hybris.com;customergroup;;Camera Lens Lover;;cameralenslover@hybris.com;
+
+INSERT_UPDATE CxUserToSegment;segment(code)[unique=true];user(uid)[unique=true];affinity[default=1];baseSite(uid)[unique=true,default=$siteUid]
+;CATEGORY Canon;canonlover@hybris.com;;
+;CATEGORY Camera Lenses;cameralenslover@hybris.com;;
+;CATEGORY 577;menvipgold@hybris.com;;
+;CATEGORY 588;menvipgold@hybris.com;;
+;CATEGORY 577;menover30@hybris.com;;
+;VIPGold;vipgold@hybris.com;;
+;20-29;vipgold@hybris.com;;
+;VIPSilver;vipsilver@hybris.com;;
+;VIPBronze;vipbronze@hybris.com;;
+;Women;women@hybris.com;;
+;Women;womenvipgold@hybris.com;;
+;VIPGold;womenvipgold@hybris.com;;
+;Women;womenvipsilver@hybris.com;;
+;VIPSilver;womenvipsilver@hybris.com;;
+;Men;men@hybris.com;;
+;Men;menvipbronze@hybris.com;;
+;VIPBronze;menvipbronze@hybris.com;;
+;Men;menvipgold@hybris.com;;
+;VIPGold;menvipgold@hybris.com;;
+;30-39;menvipgold@hybris.com;;
+;Men;menover30@hybris.com;;
+;30-39;menover30@hybris.com;;
+;40-49;menover30@hybris.com;;
+;50-59;menover30@hybris.com;;
+;60-69;menover30@hybris.com;;
+;60-69;menover30@hybris.com;;
+;70-79;menover30@hybris.com;;
+;80-89;menover30@hybris.com;;
+;90-99;menover30@hybris.com;;
+
+INSERT_UPDATE CxCustomizationsGroup;code;$contentCV[unique=true]
+"#% beforeEach: de.hybris.platform.personalizationsampledataaddon.util.CxAddOnSampleDataUtils.verifyIfCxCustomizationsGroupExists(line, 1, impex, 1);"
+;electronicsCustomizationGroup;;
+
+#Cx Customizations
+INSERT_UPDATE CxCustomization;code[unique=true];name;$contentCV[unique=true];group(code,$contentCV)[default='electronicsCustomizationGroup'];status(code)[default=ENABLED]
+;SummerSale;SummerSale;;
+;CategoryLovers;CategoryLovers;;
+;VIPCust;VIPCust;;
+
+UPDATE CxCustomizationsGroup;code[unique=true];$contentCV[unique=true];customizations(code,$contentCV)[mode=append]
+;electronicsCustomizationGroup;;SummerSale,VIPCust,CategoryLovers
+
+INSERT_UPDATE CxVariation;code[unique=true];name;$contentCV[unique=true];enabled[default=true];customization(code,$contentCV)[unique=true];status(code)[default=ENABLED]
+;canonLover;canonLover;;;CategoryLovers;
+;cameraLensesLover;cameraLensesLover;;;CategoryLovers;
+;VipGoldAndWomenNotCameraLensLoverOrOver30Man;VipGoldAndWomenNotCameraLensLoverOrOver30Man;;;VIPCust;
+;SummerSaleCameraLenseLoverOrWebcamLoverAndOver30Man;SummerSaleCameraLenseLoverOrWebcamLoverAndOver30Man;;;SummerSale;
+;VIPDefault;VIPDefault;;;VIPCust;DISABLED
+;SummerSaleDefault;SummerSaleDefault;;;SummerSale;DISABLED
+
+INSERT_UPDATE CxSegmentTrigger;code[unique=true];variation(code,$contentCV)[unique=true];$contentCV[unique=true];segments(code);groupBy(code)[default='OR'];
+;trigger08;canonLover;;CATEGORY Canon,CATEGORY brand_10;
+;trigger09;cameraLensesLover;;CATEGORY Camera Lenses,CATEGORY 588;
+
+INSERT_UPDATE CxExpressionTrigger;code[unique=true];variation(code,$contentCV)[unique=true];$contentCV[unique=true];expression;
+;expressionTrigger1;VipGoldAndWomenNotCameraLensLoverOrOver30Man;;"{""type"":""groupExpression"",""elements"":[{""type"":""segmentExpression"",""code"":""VIPGold""},{""type"":""groupExpression"",""elements"":[{""type"":""groupExpression"",""elements"":[{""type"":""segmentExpression"",""code"":""Women""},{""type"":""negationExpression"",""element"":{""type"":""groupExpression"",""elements"":[{""type"":""segmentExpression"",""code"":""CATEGORY 577""}],""operator"":""AND""}}],""operator"":""AND""},{""type"":""groupExpression"",""elements"":[{""type"":""segmentExpression"",""code"":""30-39""},{""type"":""segmentExpression"",""code"":""Men""}],""operator"":""AND""}],""operator"":""OR""}],""operator"":""AND""}"
+;expressionTrigger2;SummerSaleCameraLenseLoverOrWebcamLoverAndOver30Man;;"{""type"":""groupExpression"",""elements"":[{""type"":""groupExpression"",""elements"":[{""type"":""segmentExpression"",""code"":""CATEGORY 577""},{""type"":""segmentExpression"",""code"":""CATEGORY 588""}],""operator"":""OR""},{""type"":""segmentExpression"",""code"":""30-39""},{""type"":""segmentExpression"",""code"":""Men""}],""operator"":""AND""}"
+
+INSERT_UPDATE CxDefaultTrigger;code[unique=true];variation(code,$contentCV)[unique=true];$contentCV[unique=true];
+;defaultTrigger1;VIPDefault;
+;defaultTrigger2;SummerSaleDefault;
+
+UPDATE CxCustomization;code[unique=true];name;$contentCV[unique=true];variations(code,$contentCV)
+;SummerSale;SummerSale;;SummerSaleCameraLenseLoverOrWebcamLoverAndOver30Man,SummerSaleDefault;
+;CategoryLovers;CategoryLovers;;canonLover,cameraLensesLover;
+;VIPCust;VIPCust;;VipGoldAndWomenNotCameraLensLoverOrOver30Man,VIPDefault;
+
+#Cx Models
+INSERT_UPDATE CxCmsAction;containerId;componentId;code[unique=true];type(code);target;&actionRef;$contentCV[unique=true];componentCatalog[default=$contentCatalog];
+"#% beforeEach: de.hybris.platform.personalizationsampledataaddon.util.CxAddOnSampleDataUtils.verifyIfCxActionExists(line, 3, impex, 6);"
+;Section1SlotHomepageCxContainer;VipGoldAndWomenNotCameraLensLoverOrOver30ManHompageSplashBannerComponent;actionVipGoldAndWomenNotCameraLensLoverOrOver30Man;PLAIN;cxCmsActionPerformable;actionVipGoldAndWomenNotCameraLensLoverOrOver30Man;;
+;Section1SlotHomepageCxContainer;loyalCustomersSplashBannerComponent;actionLoyalCustomers;PLAIN;cxCmsActionPerformable;actionLoyalCustomers;;
+;Section1SlotHomepageCxContainer;specialOffersSplashBannerComponent;actionSpecialOffers;PLAIN;cxCmsActionPerformable;actionSpecialOffers;;
+;Section1SlotHomepageCxContainer;variationCameraLensesElectronicsHomepageSplashBannerComponent;actionCameraLensesLover;PLAIN;cxCmsActionPerformable;actionCameraLensesLover;;
+;Section1SlotHomepageCxContainer;variationCanonLoverElectronicsHomepageSplashBannerComponent;actionCanonLover;PLAIN;cxCmsActionPerformable;actionCanonLover;;
+;Section1SlotHomepageCxContainer;variationCameraLensesElectronicsHomepageSplashBannerComponent;actionSummerSaleCameraLenseLoverOrWebcamLoverAndOver30Man;PLAIN;cxCmsActionPerformable;actionSummerSaleCameraLenseLoverOrWebcamLoverAndOver30Man;;
+
+UPDATE CxVariation;code[unique=true];name;actions(&actionRef)[mode=append];enabled[default=true];customization(code,$contentCV)[unique=true]
+;canonLover;canonLover;actionCanonLover;;CategoryLovers
+;cameraLensesLover;cameraLensesLover;actionCameraLensesLover;;CategoryLovers
+;VipGoldAndWomenNotCameraLensLoverOrOver30Man;VipGoldAndWomenNotCameraLensLoverOrOver30Man;actionVipGoldAndWomenNotCameraLensLoverOrOver30Man;;VIPCust
+;SummerSaleCameraLenseLoverOrWebcamLoverAndOver30Man;SummerSaleCameraLenseLoverOrWebcamLoverAndOver30Man;actionSummerSaleCameraLenseLoverOrWebcamLoverAndOver30Man;;SummerSale
+;VIPDefault;VIPDefault;actionLoyalCustomers;;VIPCust
+;SummerSaleDefault;SummerSaleDefault;actionSpecialOffers;;SummerSale
+
+INSERT_UPDATE PromotionSourceRule;code[unique=true];name[lang=$lang];messageFired[lang=$lang];priority;stackable[default=false];status(code)[default=$defaultRuleStatus];website(identifier)[default=$defaultPromoGrp];ruleGroup(code);conditions;actions;excludeFromStorefrontDisplay[default=true];
+"#% beforeEach:
+if(de.hybris.platform.personalizationsampledataaddon.util.CxAddOnSampleDataUtils.isPromotionSourceRuleUnmodifiable(line.get(new Integer(1)))){
+    line.clear();
+}";
+"#% afterEach: de.hybris.platform.core.Registry.getApplicationContext().getBean(""ruleEngineSystemSetup"").registerSourceRuleForDeployment(impex.getLastImportedItem(), new String[]{$promotionModuleName, $promotionPreviewModuleName});"
+;personalized_el_buy_2_cameras_get_1_camera_free;Buy 2 cameras get 1 for free;Buy 2 cameras get 1 free!;80;;;;productPromotionRuleGroup;"[{""definitionId"":""y_container"",""parameters"":{""id"":{""type"":""java.lang.String"",""value"":""CONTAINER_X""}},""children"":[{""definitionId"":""y_group"",""parameters"":{""operator"":{""type"":""Enum(de.hybris.platform.ruleengineservices.definitions.conditions.RuleGroupOperator)"",""value"":""OR""}},""children"":[{""definitionId"":""y_qualifying_categories"",""parameters"":{""quantity"":{""type"":""java.lang.Integer"",""value"":2},""categories_operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.CollectionOperator)"",""value"":""CONTAINS_ANY""},""excluded_categories"":{""type"":""List(ItemType(Category))""},""categories"":{""type"":""List(ItemType(Category))"",""value"":[""571""]},""excluded_products"":{""type"":""List(ItemType(Product))""},""operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""GREATER_THAN_OR_EQUAL""}},""children"":[]}]}]},{""definitionId"":""y_container"",""parameters"":{""id"":{""type"":""java.lang.String"",""value"":""CONTAINER_Y""}},""children"":[{""definitionId"":""y_group"",""parameters"":{""operator"":{""type"":""Enum(de.hybris.platform.ruleengineservices.definitions.conditions.RuleGroupOperator)"",""value"":""OR""}},""children"":[{""definitionId"":""y_qualifying_categories"",""parameters"":{""quantity"":{""type"":""java.lang.Integer"",""value"":1},""categories_operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.CollectionOperator)"",""value"":""CONTAINS_ANY""},""excluded_categories"":{""type"":""List(ItemType(Category))""},""categories"":{""type"":""List(ItemType(Category))"",""value"":[""571""]},""excluded_products"":{""type"":""List(ItemType(Product))""},""operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""GREATER_THAN_OR_EQUAL""}},""children"":[]}]}]},{""definitionId"":""cx_aware_promotion"",""parameters"":{},""children"":[]}]";"[{""definitionId"":""y_partner_order_entry_percentage_discount"",""parameters"":{""selection_strategy"":{""type"":""Enum(de.hybris.platform.ruleengineservices.enums.OrderEntrySelectionStrategy)"",""value"":""CHEAPEST""},""qualifying_containers"":{""type"":""Map(java.lang.String,java.lang.Integer)"",""value"":{""CONTAINER_X"":2}},""target_containers"":{""type"":""Map(java.lang.String,java.lang.Integer)"",""value"":{""CONTAINER_Y"":1}},""value"":{""type"":""java.math.BigDecimal"",""value"":100}}}]"
+;personalized_el_cameras_lover_fixed_discount;Cameras product category fixed discount;Get a 10$ discount on your favorite products.;90;;;;productPromotionRuleGroup;"[{""definitionId"":""y_qualifying_categories"",""parameters"":{""quantity"":{""type"":""java.lang.Integer"",""value"":1},""categories_operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.CollectionOperator)"",""value"":""CONTAINS_ANY""},""excluded_categories"":{""type"":""List(ItemType(Category))""},""categories"":{""type"":""List(ItemType(Category))"",""value"":[""571""]},""excluded_products"":{""type"":""List(ItemType(Product))"",""value"":[]},""operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""GREATER_THAN_OR_EQUAL""}},""children"":[]},{""definitionId"":""cx_aware_promotion"",""parameters"":{},""children"":[]}]";"[{""definitionId"":""y_order_entry_fixed_discount"",""parameters"":{""value"":{""type"":""Map(ItemType(Currency),java.math.BigDecimal)"",""value"":{""EUR"":10}}}}]"
+;personalized_el_order_threshold_percentage_discount;Order threshold percentage discount;10% discount on orders over 100$;90;true;UNPUBLISHED;electronicsPromoGrp;orderPromotionRuleGroup;"[{""definitionId"":""y_cart_total"",""parameters"":{""value"":{""type"":""Map(ItemType(Currency),java.math.BigDecimal)"",""value"":{""USD"":100}},""operator"":{""type"":""Enum(de.hybris.platform.ruledefinitions.AmountOperator)"",""value"":""GREATER_THAN_OR_EQUAL""}},""children"":[]},{""definitionId"":""cx_aware_promotion"",""parameters"":{},""children"":[]}]";"[{""definitionId"":""y_order_percentage_discount"",""parameters"":{""value"":{""type"":""java.math.BigDecimal"",""value"":10}}}]";true
+;personalized_el_vip_gold_customer_percentage_discount_cart;VIP Gold customer specific percentage discount;20% discount for loyal customers.;100;true;;;customerPromotionRuleGroup;"[{""definitionId"":""cx_aware_promotion"",""parameters"":{},""children"":[]}]";"[{""definitionId"":""y_order_percentage_discount"",""parameters"":{""value"":{""type"":""java.math.BigDecimal"",""value"":20}}}]"
+;personalized_el_vip_silver_customer_percentage_discount_cart;VIP Silver customer specific percentage discount;10% discount for loyal customers.;100;true;;;customerPromotionRuleGroup;"[{""definitionId"":""cx_aware_promotion"",""parameters"":{},""children"":[]}]";"[{""definitionId"":""y_order_percentage_discount"",""parameters"":{""value"":{""type"":""java.math.BigDecimal"",""value"":10}}}]"
+;personalized_el_vip_bronze_customer_percentage_discount_cart;VIP Bronze customer specific percentage discount;5% discount for loyal customers.;100;true;;;customerPromotionRuleGroup;"[{""definitionId"":""cx_aware_promotion"",""parameters"":{},""children"":[]}]";"[{""definitionId"":""y_order_percentage_discount"",""parameters"":{""value"":{""type"":""java.math.BigDecimal"",""value"":5}}}]"
+
+INSERT_UPDATE CxPromotionAction;code[unique=true];promotionId[unique=true];variation(code,$contentCV)[unique=true];target;type(code);$contentCV[unique=true]
+"#% beforeEach: de.hybris.platform.personalizationsampledataaddon.util.CxAddOnSampleDataUtils.verifyIfCxActionExists(line, 1, impex, 5);"
+;promotionaction_VipGoldAndWomenNotCameraLensLoverOrOver30Man_customer_percentage_discount_cart;personalized_el_vip_gold_customer_percentage_discount_cart;VipGoldAndWomenNotCameraLensLoverOrOver30Man;cxPromotionActionPerformable;PLAIN;
+;promotionaction_VipGoldAndWomenNotCameraLensLoverOrOver30Man_cameras_lover_fixed_discount;personalized_el_cameras_lover_fixed_discount;VipGoldAndWomenNotCameraLensLoverOrOver30Man;cxPromotionActionPerformable;PLAIN;
+;promotionaction_VipGoldAndWomenNotCameraLensLoverOrOver30Man_order_threshold_percentage_discount;personalized_el_order_threshold_percentage_discount;VipGoldAndWomenNotCameraLensLoverOrOver30Man;cxPromotionActionPerformable;PLAIN;
+;promotionaction_SummerSaleCameraLenseLoverOrWebcamLoverAndOver30Man_buy_2_cameras_get_1_camera_free;personalized_el_buy_2_cameras_get_1_camera_free;SummerSaleCameraLenseLoverOrWebcamLoverAndOver30Man;cxPromotionActionPerformable;PLAIN;
+;promotionaction_SummerSaleCameraLenseLoverOrWebcamLoverAndOver30Man_order_threshold_percentage_discount;personalized_el_order_threshold_percentage_discount;SummerSaleCameraLenseLoverOrWebcamLoverAndOver30Man;cxPromotionActionPerformable;PLAIN;
+

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<!-- 
+  WARNING: This is the Spring WEB configuration file. If you want to replace
+  items or managers you have to do this from the extensions core configuration 
+  file (yprofileeventtrackingws/resources/yprofileeventtrackingws-spring.xml) 
+  -->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:annotation-config/>
+	<context:component-scan base-package="com.hybris.yprofile.eventtracking" scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver"  />
+
+	<!-- Spring managed FilterChain for hybris Filter stack -->
+	<bean id="yProfileEventTrackingFilterChain" class="de.hybris.platform.servicelayer.web.PlatformFilterChain">
+		<constructor-arg>
+			<list>
+				<ref bean="log4jFilter" />
+				<ref bean="tenantActivationFilter" />
+				<!-- This filter creates new jalo session and close it after request is handled. -->
+				<ref bean="restSessionFilter" />
+				<ref bean="eventTrackingCorsFilter"/>
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="restSessionFilter" class="de.hybris.platform.webservicescommons.filter.RestSessionFilter">
+		<property name="sessionService" ref="sessionService" />
+	</bean>
+
+	<alias name="defaultEventTrackingCorsFilter" alias="eventTrackingCorsFilter"/>
+	<bean id="defaultEventTrackingCorsFilter" class="com.hybris.yprofile.eventtracking.filters.EventTrackingCorsFilter">
+		<constructor-arg>
+			<bean class="org.springframework.web.util.UrlPathHelper"/>
+		</constructor-arg>
+	</bean>
+
+	<!-- json raw event enricher -->
+	<alias name="defaultRawEventEnricher" alias="rawEventEnricher"/>
+	<bean id="defaultRawEventEnricher" class="com.hybris.yprofile.eventtracking.services.DefaultRawEventEnricher">
+		<property name="consentService" ref="consentService"/>
+		<property name="objectMapper" ><bean class="com.fasterxml.jackson.databind.ObjectMapper" /></property>
+	</bean>
+
+	<!--Event endpoint -->
+	<alias name="defaultEventsController" alias="eventsController"/>
+	<bean id="defaultEventsController" class="com.hybris.yprofile.eventtracking.rest.EventsController">
+		<constructor-arg ref="rawTrackingEventsChannel"/>
+		<constructor-arg ref="rawEventEnricher"/>
+		<constructor-arg ref="consentService"/>
+	</bean>
+
+
+</beans>

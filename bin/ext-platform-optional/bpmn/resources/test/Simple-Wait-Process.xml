@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<process name="Simple-Wait-Process" start="ff6a3f14-b928-4e94-a7c4-71a491fdc2db" processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel" xmlns="http://www.hybris.de/xsd/processdefinition">
+    <action bean="checkOrderAction" id="ff6a3f14-b928-4e94-a7c4-71a491fdc2db">
+        <transition name="NOK" to="22cdae1c-768b-4fa1-bf91-5d70c7a0c20c"/>
+        <transition name="OK" to="b230538e-bb09-4a4c-bbf7-95ed7dfc9e6f"/>
+    </action>
+    <end state="ERROR" id="22cdae1c-768b-4fa1-bf91-5d70c7a0c20c"></end>
+    <wait then="9b5142d3-f397-48ee-b6b4-889430a236dd" id="b230538e-bb09-4a4c-bbf7-95ed7dfc9e6f">
+        <event>CSAOrderVerified</event>
+    </wait>
+    <end state="SUCCEEDED" id="9b5142d3-f397-48ee-b6b4-889430a236dd"></end>
+</process>

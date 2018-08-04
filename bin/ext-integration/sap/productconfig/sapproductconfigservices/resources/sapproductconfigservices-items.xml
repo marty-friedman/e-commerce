@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+
+
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<enumtypes>
+		<enumtype code="ConfiguratorType" generate="true" autocreate="false" dynamic="true">
+			<value code="CPQCONFIGURATOR" />
+		</enumtype>
+	</enumtypes>
+
+	<maptypes>
+		<maptype code="CPQStatusSummaryMap" argumenttype="ProductInfoStatus" returntype="java.lang.Integer" autocreate="true"
+			generate="false" />
+	</maptypes>
+
+	<itemtypes>
+		<itemtype code="CMSCartConfigurationRestriction" jaloclass="de.hybris.platform.sap.productconfig.services.jalo.CMSCartConfigurationRestriction"
+			extends="AbstractRestriction" autocreate="true" generate="true">
+			<attributes>
+				<attribute qualifier="description" redeclare="true" type="java.lang.String">
+					<persistence type="dynamic" attributeHandler="sapProductConfigCartRestrictionDynamicDescription" />
+					<modifiers write="false" />
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		
+
+
+		<itemtype code="ClassificationAttribute" autocreate="false" generate="false">
+			<attributes>
+				<attribute qualifier="cpqMedia" type="MediaContainer">
+					<persistence type="property" />
+					<description>It is a media container with images corresponding to the characteristic</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="ClassificationAttributeValue" autocreate="false" generate="false">
+			<attributes>
+				<attribute qualifier="cpqMedia" type="MediaContainer">
+					<persistence type="property" />
+					<description>It is a media container with images corresponding to the value</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="CPQConfiguratorSettings" extends="AbstractConfiguratorSetting" autocreate="true" generate="true"
+			jaloclass="de.hybris.platform.sap.productconfig.services.jalo.CPQConfiguratorSettings">
+			<description>CPQ Configurator</description>
+		</itemtype>
+
+		<itemtype code="CPQOrderEntryProductInfo" extends="AbstractOrderEntryProductInfo " autocreate="true" generate="true"
+			jaloclass="de.hybris.platform.sap.productconfig.services.jalo.CPQOrderEntryProductInfo">
+			<description>CPQ configuration result for abstract order entry</description>
+			<attributes>
+				<attribute qualifier="cpqCharacteristicName" type="java.lang.String">
+					<persistence type="property" />
+					<description>Language independent name of the characteristic for the inline configuration display</description>
+				</attribute>
+				<attribute qualifier="cpqCharacteristicAssignedValues" type="java.lang.String">
+					<persistence type="property">
+					   <columntype>
+							<value>HYBRIS.LONG_STRING</value>
+						</columntype>
+				   </persistence>
+					<description>Language independent name of the characteristic assigned values for the inline configuration display</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="AbstractOrderEntry" autocreate="false" generate="false">
+			<description>Extending AbstractOrderEntry type with additional attributes.</description>
+			<attributes>
+				<attribute qualifier="cpqStatusSummaryMap" type="CPQStatusSummaryMap">
+					<description>Status of the configuration and number of errors.</description>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

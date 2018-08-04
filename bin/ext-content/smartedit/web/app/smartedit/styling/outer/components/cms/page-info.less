@@ -1,0 +1,111 @@
+
+/****************************************************
+				page-info
+****************************************************/
+@page-info-header-height: 123px;
+@page-info-container-header-height: 67px;
+
+.ySEPageInfoMenu__header {
+	background-color: @smartedit-lightblue;
+}
+
+.ySEPageInfoMenu {
+	margin: 0;
+	border: none;
+	padding: 0;
+	width: 780px;
+	cursor: initial;
+}
+
+.ySEPageInfoHeaderContainer {
+	padding: .5*@smartedit-gutter @smartedit-gutter;
+	color: @smartedit-white;
+	height: @page-info-header-height;
+}
+
+.pageInfoPageName {
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+
+.pageInfoPageTemplateName {
+	margin: 0;
+}
+
+.ySEPageInfoEditInfoContainer {
+	@grid-selector-columns: 6;
+	.ySErow {
+		height: 130px;
+		.make-sm-column(@grid-selector-columns);
+		margin-left: 0;
+		margin-right: 0;
+
+		&:nth-of-type(even) {
+			padding-right: .5*@smartedit-gutter;
+			padding-left: 35px;;
+
+		}
+		&:nth-of-type(odd) {
+			padding-left: .5*@smartedit-gutter;
+			padding-right: 35px;
+		}
+
+		.ySEField input {
+			padding-left: 0;
+			padding-right: 0;
+			border: none;
+			background-color: transparent;
+			box-shadow: none;
+		}
+
+		y-tab .ySEField input {
+			border: 1px solid @default-grey-700;
+			padding-left: 15px;
+			padding-right: 15px;
+		}
+	}
+}
+
+.ySEPageInfoStaticInfoContainer,
+.ySEPageInfoEditInfoContainer {
+	color: @smartedit-grey21;
+	background-color: @smartedit-white;
+}
+
+.ySEPageInfoStaticInfoContainer {
+	padding: .25*@smartedit-gutter @smartedit-gutter;
+	margin-left: 0;
+	margin-right: 0;
+	border-bottom: 1px solid @smartedit-grey17;
+	height: @page-info-container-header-height;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.ySEPageInfoEditInfoContainer {
+	padding: .25*@smartedit-gutter 0 0 0;
+	max-height: ~"calc(100vh -" ((2 * @toolbar--height) + @page-info-header-height + @page-info-container-header-height) ~")";
+	overflow-y: scroll;
+}
+
+.ySEPageInfoEditInfoContainer--title {
+	text-transform: uppercase;
+}
+
+.ySEPageInfoEditInfoContent {
+	padding-bottom: .25*@smartedit-gutter;
+}
+
+.ySEHeaderText {
+	text-transform: uppercase;
+	font-size: 15px;
+	font-weight: @font-weight--semibold;
+	font-family: @font-open-sans;
+	margin: 0;
+}
+
+.ySEPageInfo__edit-btn {
+	font-family: @font-open-sans;
+	font-size: 15px;
+}

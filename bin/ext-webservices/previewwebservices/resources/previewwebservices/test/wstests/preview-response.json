@@ -1,0 +1,12 @@
+{
+   "catalog" : "testContentCatalog",
+   "catalogVersion" : "Online",
+   "catalogVersions" : [{"catalog": "testContentCatalog", "catalogVersion":"Online"}],
+   "language" : "en",
+   "pageId" : "homepage",
+   "resourcePath" : "https://127.0.0.1:9002/yacceleratorstorefront?site=testCmsSite",
+   "ticketId" : "647597440127913625a4f983-8c1b-46ba-b008-3937c3c2a44b",
+   "time" : "2013-02-14T21:15:03+0000",
+   "user" : "testoauthcustomer",
+   "userGroup" : "regulargroup"
+}

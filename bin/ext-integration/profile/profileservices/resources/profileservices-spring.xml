@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <alias name="defaultRetrieveRestClientStrategy" alias="retrieveRestClientStrategy"/>
+    <bean id="defaultRetrieveRestClientStrategy" class="com.hybris.yprofile.services.impl.DefaultRetrieveRestClientStrategy">
+        <property name="yaasServiceFactory" ref="yaasServiceFactory" />
+    </bean>
+    <!--//-->
+
+    <alias name="defaultProfileConfigurationService" alias="profileConfigurationService"/>
+    <bean name="defaultProfileConfigurationService" class="com.hybris.yprofile.services.impl.DefaultProfileConfigurationService">
+        <property name="yaasConfigurationService" ref="yaasConfigurationService" />
+        <property name="baseSiteService" ref="baseSiteService"/>
+        <property name="retrieveRestClientStrategy" ref="retrieveRestClientStrategy"/>
+        <property name="profileTrackingPaused" value="${profileservices.profile.tracking.pause}"/>
+        <property name="sessionService" ref="sessionService"/>
+    </bean>
+
+
+    <alias name="defaultConsentService" alias="consentService"/>
+    <bean id="defaultConsentService" class="com.hybris.yprofile.consent.services.DefaultConsentService">
+        <property name="profileConfigurationService" ref="profileConfigurationService"/>
+        <property name="cookieGenerator" ref="consentCookieGenerator"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="userService" ref="userService"/>
+        <property name="retrieveRestClientStrategy" ref="retrieveRestClientStrategy"/>
+        <property name="baseSiteService" ref="baseSiteService"/>
+    </bean>
+
+    <alias name="defaultConsentCookieGenerator" alias="consentCookieGenerator"/>
+    <bean id="defaultConsentCookieGenerator" class="com.hybris.yprofile.consent.cookie.EnhancedCookieGenerator" >
+        <property name="cookieSecure" value="true"/>
+        <property name="cookieMaxAge" value="360000000"/>
+        <property name="useDefaultPath" value="true"/>
+        <property name="httpOnly" value="false"/>
+    </bean>
+
+    <!--Add this filter to your filter chain to enable the consent layer for Hybris Profile integration-->
+    <bean id="consentLayerFilter" class="com.hybris.yprofile.consent.filters.ConsentLayerFilter">
+        <property name="profileConfigurationService" ref="profileConfigurationService"/>
+        <property name="consentService" ref="consentService"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="userService" ref="userService"/>
+        <property name="enabled" value="${profileservices.automatic.consent-reference.generation.enabled}"/>
+        <property name="excludeUrlPatterns" value="${profileservices.exclude.url.patterns}">
+        </property>
+    </bean>
+
+
+    <!-- Listeners -->
+
+    <bean id="newOrderEventListener" class="com.hybris.yprofile.listeners.NewOrderEventListener"
+          parent="abstractEventListener">
+        <property name="profileTransactionService" ref="profileTransactionService"/>
+    </bean>
+
+    <bean id="consignmentEventListener" class="com.hybris.yprofile.listeners.ConsignmentEventListener"
+          parent="abstractEventListener">
+        <property name="profileTransactionService" ref="profileTransactionService"/>
+    </bean>
+
+    <bean id="returnOrderEventListener" class="com.hybris.yprofile.listeners.ReturnOrderEventListener"
+          parent="abstractEventListener">
+        <property name="profileTransactionService" ref="profileTransactionService"/>
+    </bean>
+
+    <!-- Services -->
+
+    <alias name="defaultProfileTransactionService" alias="profileTransactionService"/>
+    <bean id="defaultProfileTransactionService" class="com.hybris.yprofile.services.impl.DefaultProfileTransactionService">
+        <property name="retrieveRestClientStrategy" ref="retrieveRestClientStrategy"/>
+        <property name="profileConfigurationService" ref="profileConfigurationService"/>
+        <property name="profileReturnEventConverter" ref="profileReturnEventConverter"/>
+        <property name="profileConsignmentEventConverter" ref="profileConsignmentEventConverter"/>
+        <property name="profileOrderEventConverter" ref="profileOrderEventConverter"/>
+        <property name="profileUserEventConverter" ref="profileUserEventConverter"/>
+    </bean>
+
+
+    <bean id="profilePlaceOrderMethodHook" class="com.hybris.yprofile.services.order.ProfilePlaceOrderMethodHook">
+        <property name="modelService" ref="modelService"/>
+        <property name="consentService" ref="consentService"/>
+        <property name="profileConfigurationService" ref="profileConfigurationService"/>
+    </bean>
+
+    <bean id="profilePlaceOrderMethodHooksMergeDirective" depends-on="commercePlaceOrderMethodHooks"
+          parent="listMergeDirective">
+        <property name="add" ref="profilePlaceOrderMethodHook"/>
+    </bean>
+
+    <alias name="profileCustomerFacade" alias="customerFacade"/>
+    <bean id="profileCustomerFacade" class="com.hybris.yprofile.services.customer.ProfileCustomerFacade"
+          parent="defaultCustomerFacade">
+        <property name="baseSiteService" ref="baseSiteService"/>
+        <property name="profileTransactionService" ref="profileTransactionService"/>
+        <property name="consentService" ref="consentService"/>
+        <property name="defaultSessionTokenService" ref="defaultSessionTokenService"/>
+        <property name="profileConfigurationService" ref="profileConfigurationService"/>
+    </bean>
+
+    <alias name="profileCustomerAccountService" alias="customerAccountService"/>
+    <bean id="profileCustomerAccountService" class="com.hybris.yprofile.services.customer.ProfileCustomerAccountService"
+          parent="defaultCustomerAccountService">
+        <property name="profileTransactionService" ref="profileTransactionService"/>
+        <property name="consentService" ref="consentService"/>
+        <property name="defaultSessionTokenService" ref="defaultSessionTokenService"/>
+        <property name="profileConfigurationService" ref="profileConfigurationService"/>
+    </bean>
+
+
+    <!-- populators and converters -->
+
+    <bean id="profileOrderEventPopulator" class="com.hybris.yprofile.populators.OrderEventPopulator">
+        <property name="profileConsumerConverter" ref="profileConsumerConverter"/>
+        <property name="profileAddressConverter" ref="profileAddressConverter"/>
+        <property name="profileOrderLineItemConverter" ref="profileOrderLineItemConverter"/>
+        <property name="defaultSessionTokenService" ref="defaultSessionTokenService"/>
+    </bean>
+    <bean id="profileUserEventPopulator" class="com.hybris.yprofile.populators.UserEventPopulator">
+        <property name="profileAddressConverter" ref="profileAddressConverter"/>
+        <property name="profileConsumerConverter" ref="profileConsumerConverter"/>
+        <property name="profileIdentitiesConverter" ref="profileIdentitiesConverter"/>
+    </bean>
+    <bean id="profileConsignmentEventPopulator" class="com.hybris.yprofile.populators.ConsignmentEventPopulator">
+        <property name="profileAddressConverter" ref="profileAddressConverter"/>
+        <property name="profileOrderLineItemConverter" ref="profileOrderLineItemConverter"/>
+    </bean>
+    <bean id="profileReturnEventPopulator" class="com.hybris.yprofile.populators.ReturnEventPopulator">
+        <property name="profileOrderLineItemConverter" ref="profileOrderLineItemConverter"/>
+    </bean>
+    <bean id="profileAddressPopulator" class="com.hybris.yprofile.populators.AddressPopulator"/>
+    <bean id="profileConsumerPopulator" class="com.hybris.yprofile.populators.ConsumerPopulator"/>
+    <bean id="profileIdentitiesPopulator" class="com.hybris.yprofile.populators.IdentitiesPopulator" init-method="init">
+        <property name="configurationService" ref="configurationService"/>
+    </bean>
+    <bean id="profileOrderLineItemPopulator" class="com.hybris.yprofile.populators.OrderLineItemPopulator"/>
+
+    <bean id="profileOrderEventConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.hybris.yprofile.dto.Order"/>
+        <property name="populators">
+            <list>
+                <ref bean="profileOrderEventPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="profileUserEventConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.hybris.yprofile.dto.User"/>
+        <property name="populators">
+            <list>
+                <ref bean="profileUserEventPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="profileConsignmentEventConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.hybris.yprofile.dto.Order"/>
+        <property name="populators">
+            <list>
+                <ref bean="profileConsignmentEventPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="profileReturnEventConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.hybris.yprofile.dto.Order"/>
+        <property name="populators">
+            <list>
+                <ref bean="profileReturnEventPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="profileAddressConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.hybris.yprofile.dto.Address"/>
+        <property name="populators">
+            <list>
+                <ref bean="profileAddressPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="profileConsumerConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.hybris.yprofile.dto.Consumer"/>
+        <property name="populators">
+            <list>
+                <ref bean="profileConsumerPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="profileIdentitiesConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="java.util.ArrayList"/>
+        <property name="populators">
+            <list>
+                <ref bean="profileIdentitiesPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="profileOrderLineItemConverter" parent="abstractPopulatingConverter">
+        <property name="targetClass" value="com.hybris.yprofile.dto.OrderLineItem"/>
+        <property name="populators">
+            <list>
+                <ref bean="profileOrderLineItemPopulator"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>

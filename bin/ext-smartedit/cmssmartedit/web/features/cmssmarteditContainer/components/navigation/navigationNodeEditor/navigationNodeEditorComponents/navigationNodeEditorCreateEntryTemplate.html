@@ -1,0 +1,44 @@
+<div class="ySENavigationNodeEditorAddEntry">
+    <div data-ng-if="!ctrl.displayEditor"
+        class="ySEAdd-node-button">
+        <button id="navigation-node-editor-add-entry"
+            class="y-add-btn"
+            data-ng-click="ctrl.addNewEntry()">
+            <span class="hyicon hyicon-add"></span>
+            <span data-translate="se.cms.navigationmanagement.navnode.node.entry.add.new.message"></span>
+        </button>
+    </div>
+    <div data-ng-if="ctrl.displayEditor"
+        class="ySEEntryData">
+        <generic-editor data-id="ctrl.tabId"
+            data-smartedit-component-type="ctrl.entryTypeCode"
+            data-smartedit-component-id="ctrl.entry.id"
+            data-structure="ctrl.tabStructure"
+            data-uri-context="ctrl.uriContext"
+            data-content="ctrl.entry"
+            data-is-dirty="ctrl.isDirty"
+            data-is-valid="ctrl.isValid"
+            data-submit="ctrl.submit"
+            data-reset="ctrl.reset">
+        </generic-editor>
+
+
+        <div class="row">
+            <div class="ySEEntryData--buttons">
+                <button id="navigation-node-editor-save-entry"
+                    class="btn btn-default btn-lg"
+                    data-ng-click="ctrl.saveEntry()"
+                    data-ng-disabled="ctrl.isDisabled()">
+                    <span data-ng-if="ctrl.isNewEntry()"
+                        data-translate="se.cms.navigationmanagement.navnode.node.entry.button.add"></span>
+                    <span data-ng-if="!ctrl.isNewEntry()"
+                        data-translate="se.cms.navigationmanagement.navnode.node.entry.button.update"></span>
+                </button>
+                <button id="navigation-node-editor-cancel"
+                    class="btn btn-subordinate btn-lg"
+                    data-ng-click="ctrl.cancelEntry()"
+                    data-translate="se.cms.navigationmanagement.navnode.node.entry.button.cancel"></button>
+            </div>
+        </div>
+    </div>
+</div>

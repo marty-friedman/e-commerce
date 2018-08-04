@@ -1,0 +1,11 @@
+#Ant properties
+#Mon Feb 05 05:58:37 UTC 2018
+builddate=20180205 0558
+description=atddengine
+group.id=de.hybris.platform
+module.name=platform-module
+name=atddengine
+releasedate=20180202 1942
+vendor=hybris
+version=6.6.0.0
+version.api=6.6.0

@@ -1,0 +1,11 @@
+#Ant properties
+#Fri Mar 09 10:05:50 UTC 2018
+builddate=20180309 1005
+description=pcmbackoffice
+group.id=de.hybris.platform
+module.name=platform-module
+name=pcmbackoffice
+releasedate=20180308 1939
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

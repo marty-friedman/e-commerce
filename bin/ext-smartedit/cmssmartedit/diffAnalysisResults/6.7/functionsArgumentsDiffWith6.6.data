@@ -1,0 +1,207 @@
+Following requests have different arguments between both versions
+
+------------------------------------------------------------
+
+FeatureServiceInterface, register
+{"kind":"D","path":[0,"i18nKey"],"lhs":"STRING"}
+{"kind":"D","path":[0,"regexpKeys"],"lhs":["STRING"]}
+{"kind":"D","path":[0,"displayClass"],"lhs":"STRING"}
+{"kind":"D","path":[0,"displayIconClass"],"lhs":"STRING"}
+{"kind":"D","path":[0,"displaySmallIconClass"],"lhs":"STRING"}
+{"kind":"D","path":[0,"permissions"],"lhs":["STRING"]}
+{"kind":"N","path":[0,"descriptionI18nKey"],"rhs":"STRING"}
+{"kind":"N","path":[0,"id"],"rhs":"STRING"}
+
+perspectiveService, register
+{"kind":"N","path":[0,"permissions"],"rhs":{}}
+
+featureService, register
+{"kind":"D","path":[0,"i18nKey"],"lhs":"STRING"}
+{"kind":"D","path":[0,"regexpKeys"],"lhs":["STRING"]}
+{"kind":"D","path":[0,"displayClass"],"lhs":"STRING"}
+{"kind":"D","path":[0,"displayIconClass"],"lhs":"STRING"}
+{"kind":"D","path":[0,"displaySmallIconClass"],"lhs":"STRING"}
+{"kind":"D","path":[0,"permissions"],"lhs":["STRING"]}
+{"kind":"N","path":[0,"descriptionI18nKey"],"rhs":"STRING"}
+{"kind":"N","path":[0,"id"],"rhs":"STRING"}
+
+httpAuthInterceptor, request
+{"kind":"D","path":[0,"data","catalogVersion"],"lhs":"STRING"}
+{"kind":"D","path":[0,"data","uuids"],"lhs":["null"]}
+{"kind":"N","path":[0,"data","itemtype"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","name"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","activeFrom"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","activeUntil"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","type"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","uid"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","uuid"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","description"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","identifier"],"rhs":"STRING"}
+
+experienceInterceptor, request
+{"kind":"D","path":[0,"data","catalogVersion"],"lhs":"STRING"}
+{"kind":"D","path":[0,"data","uuids"],"lhs":["null"]}
+{"kind":"N","path":[0,"data","itemtype"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","name"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","activeFrom"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","activeUntil"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","type"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","uid"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","uuid"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","description"],"rhs":"STRING"}
+{"kind":"N","path":[0,"data","identifier"],"rhs":"STRING"}
+
+configurationExtractorService, extractSEModules
+{"kind":"D","path":[0,"applications.LanguagesMocks"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.i18nMockModule"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.backendMocksUtilsModule"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.pagesContentSlotsComponentsMocks"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.pagesContentSlotsContainerMocks"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.pagesContentSlotsMocks"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.dragAndDropMocks"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.componentMocks"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.slotTypeRestrictionsMocks"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.mockDataOverridesModule","smartEditLocation"],"lhs":"STRING"}
+{"kind":"N","path":[0,"applications.mockDataOverridesModule","smartEditContainerLocation"],"rhs":"STRING"}
+{"kind":"N","path":[0,"whiteListedStorefronts"],"rhs":["STRING"]}
+{"kind":"N","path":[0,"applications.rerenderMocks"],"rhs":{"smartEditLocation":"STRING"}}
+
+bootstrapService, bootstrapSEApp
+{"kind":"D","path":[0,"applications.LanguagesMocks"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.i18nMockModule"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.backendMocksUtilsModule"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.pagesContentSlotsComponentsMocks"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.pagesContentSlotsContainerMocks"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.pagesContentSlotsMocks"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.dragAndDropMocks"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.componentMocks"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.slotTypeRestrictionsMocks"],"lhs":{"smartEditLocation":"STRING"}}
+{"kind":"D","path":[0,"applications.mockDataOverridesModule","smartEditLocation"],"lhs":"STRING"}
+{"kind":"N","path":[0,"applications.mockDataOverridesModule","smartEditContainerLocation"],"rhs":"STRING"}
+{"kind":"N","path":[0,"whiteListedStorefronts"],"rhs":["STRING"]}
+{"kind":"N","path":[0,"applications.rerenderMocks"],"rhs":{"smartEditLocation":"STRING"}}
+
+experienceService, updateExperiencePageContext
+{"kind":"A","index":0,"item":{"kind":"N","rhs":"STRING"}}
+{"kind":"A","index":1,"item":{"kind":"N","rhs":"STRING"}}
+
+crossFrameEventServiceGateway, publish
+{"kind":"D","path":[1,"removedComponents"],"lhs":["ELEMENT"]}
+{"kind":"N","path":[1,"itemId"],"rhs":"STRING"}
+{"kind":"N","path":[1,"itemType"],"rhs":"STRING"}
+{"kind":"N","path":[1,"name"],"rhs":"STRING"}
+{"kind":"N","path":[1,"catalogVersionUuid"],"rhs":"STRING"}
+{"kind":"N","path":[1,"status"],"rhs":"STRING"}
+{"kind":"N","path":[1,"dependentItemTypesOutOfSync"],"rhs":{}}
+{"kind":"N","path":[1,"selectedDependencies"],"rhs":[{"itemId":"STRING","itemType":"STRING","name":"STRING","lastSyncStatus":"NUMBER","status":"STRING","catalogVersionUuid":"STRING","selectedDependencies":[{"itemId":"STRING","itemType":"STRING","name":"STRING","lastSyncStatus":"NUMBER","status":"STRING","catalogVersionUuid":"STRING","dependentItemTypesOutOfSync":{}}],"dependentItemTypesOutOfSync":{},"unavailableDependencies":{}}]}
+{"kind":"N","path":[1,"sharedDependencies"],"rhs":[{"itemId":"STRING","itemType":"STRING","name":"STRING","lastSyncStatus":"NUMBER","status":"STRING","catalogVersionUuid":"STRING","selectedDependencies":[{"itemId":"STRING","itemType":"STRING","name":"STRING","lastSyncStatus":"NUMBER","status":"STRING","catalogVersionUuid":"STRING"}],"unavailableDependencies":{}}]}
+{"kind":"N","path":[1,"unavailableDependencies"],"rhs":{}}
+{"kind":"N","path":[1,"lastSyncStatus"],"rhs":"NUMBER"}
+
+crossFrameEventService, publish
+{"kind":"D","path":[1,"removedComponents"],"lhs":["ELEMENT"]}
+{"kind":"N","path":[1,"itemId"],"rhs":"STRING"}
+{"kind":"N","path":[1,"itemType"],"rhs":"STRING"}
+{"kind":"N","path":[1,"name"],"rhs":"STRING"}
+{"kind":"N","path":[1,"catalogVersionUuid"],"rhs":"STRING"}
+{"kind":"N","path":[1,"status"],"rhs":"STRING"}
+{"kind":"N","path":[1,"dependentItemTypesOutOfSync"],"rhs":{}}
+{"kind":"N","path":[1,"selectedDependencies"],"rhs":[{"itemId":"STRING","itemType":"STRING","name":"STRING","lastSyncStatus":"NUMBER","status":"STRING","catalogVersionUuid":"STRING","selectedDependencies":[{"itemId":"STRING","itemType":"STRING","name":"STRING","lastSyncStatus":"NUMBER","status":"STRING","catalogVersionUuid":"STRING","dependentItemTypesOutOfSync":{}}],"dependentItemTypesOutOfSync":{},"unavailableDependencies":{}}]}
+{"kind":"N","path":[1,"sharedDependencies"],"rhs":[{"itemId":"STRING","itemType":"STRING","name":"STRING","lastSyncStatus":"NUMBER","status":"STRING","catalogVersionUuid":"STRING","selectedDependencies":[{"itemId":"STRING","itemType":"STRING","name":"STRING","lastSyncStatus":"NUMBER","status":"STRING","catalogVersionUuid":"STRING"}],"unavailableDependencies":{}}]}
+{"kind":"N","path":[1,"unavailableDependencies"],"rhs":{}}
+{"kind":"N","path":[1,"lastSyncStatus"],"rhs":"NUMBER"}
+
+permissionService, isPermitted
+{"kind":"D","path":[0,0,"context","catalogId"],"lhs":"STRING"}
+{"kind":"D","path":[0,0,"context","catalogVersion"],"lhs":"STRING"}
+{"kind":"N","path":[0,0,"context","slotCatalogVersionUuid"],"rhs":"STRING"}
+
+yPopupEngineService, configure
+{"kind":"E","path":[0,"container"],"lhs":"ELEMENT","rhs":"STRING"}
+
+GenericEditor, reset
+{"kind":"A","index":0,"item":{"kind":"D","lhs":{"name":{}}}}
+
+GenericEditor, getComponent
+{"kind":"A","index":0,"item":{"kind":"D","lhs":{"name":{}}}}
+
+GenericEditor, submit
+{"kind":"A","index":0,"item":{"kind":"D","lhs":{"name":{}}}}
+
+httpErrorInterceptor, responseError
+{"kind":"D","path":[0,"config","cache"],"lhs":"BOOLEAN"}
+{"kind":"D","path":[0,"config","headers","x-requested-with"],"lhs":"STRING"}
+{"kind":"D","path":[0,"config","headers","Content-Type"],"lhs":"STRING"}
+{"kind":"D","path":[0,"config","data"],"lhs":{"uid":"STRING","uuid":"STRING","name":"STRING","typeCode":"STRING","itemtype":"STRING","description":"STRING","activeFrom":"STRING","activeUntil":"STRING","identifier":"STRING"}}
+{"kind":"E","path":[0,"data"],"lhs":{"errors":[{"message":"STRING","reason":"STRING","subject":"STRING","subjectType":"STRING","type":"STRING"}]},"rhs":"null"}
+{"kind":"N","path":[0,"xhrStatus"],"rhs":"STRING"}
+
+GenericEditor, isValid
+{"kind":"E","path":[0],"lhs":{"name":{},"uid":{},"title":{}},"rhs":"BOOLEAN"}
+
+previewErrorInterceptor, predicate
+{"kind":"D","path":[0,"config","cache"],"lhs":"BOOLEAN"}
+{"kind":"D","path":[0,"config","headers","x-requested-with"],"lhs":"STRING"}
+{"kind":"D","path":[0,"config","headers","Content-Type"],"lhs":"STRING"}
+{"kind":"D","path":[0,"config","data"],"lhs":{"uid":"STRING","uuid":"STRING","name":"STRING","typeCode":"STRING","itemtype":"STRING","description":"STRING","activeFrom":"STRING","activeUntil":"STRING","identifier":"STRING"}}
+{"kind":"E","path":[0,"data"],"lhs":{"errors":[{"message":"STRING","reason":"STRING","subject":"STRING","subjectType":"STRING","type":"STRING"}]},"rhs":"null"}
+{"kind":"N","path":[0,"xhrStatus"],"rhs":"STRING"}
+
+nonValidationErrorInterceptor, predicate
+{"kind":"D","path":[0,"config","cache"],"lhs":"BOOLEAN"}
+{"kind":"D","path":[0,"config","headers","x-requested-with"],"lhs":"STRING"}
+{"kind":"D","path":[0,"config","headers","Content-Type"],"lhs":"STRING"}
+{"kind":"D","path":[0,"config","data"],"lhs":{"uid":"STRING","uuid":"STRING","name":"STRING","typeCode":"STRING","itemtype":"STRING","description":"STRING","activeFrom":"STRING","activeUntil":"STRING","identifier":"STRING"}}
+{"kind":"E","path":[0,"data"],"lhs":{"errors":[{"message":"STRING","reason":"STRING","subject":"STRING","subjectType":"STRING","type":"STRING"}]},"rhs":"null"}
+{"kind":"N","path":[0,"xhrStatus"],"rhs":"STRING"}
+
+resourceNotFoundErrorInterceptor, predicate
+{"kind":"D","path":[0,"config","cache"],"lhs":"BOOLEAN"}
+{"kind":"D","path":[0,"config","headers","x-requested-with"],"lhs":"STRING"}
+{"kind":"D","path":[0,"config","headers","Content-Type"],"lhs":"STRING"}
+{"kind":"D","path":[0,"config","data"],"lhs":{"uid":"STRING","uuid":"STRING","name":"STRING","typeCode":"STRING","itemtype":"STRING","description":"STRING","activeFrom":"STRING","activeUntil":"STRING","identifier":"STRING"}}
+{"kind":"E","path":[0,"data"],"lhs":{"errors":[{"message":"STRING","reason":"STRING","subject":"STRING","subjectType":"STRING","type":"STRING"}]},"rhs":"null"}
+{"kind":"N","path":[0,"xhrStatus"],"rhs":"STRING"}
+
+unauthorizedErrorInterceptor, predicate
+{"kind":"D","path":[0,"config","cache"],"lhs":"BOOLEAN"}
+{"kind":"D","path":[0,"config","headers","x-requested-with"],"lhs":"STRING"}
+{"kind":"D","path":[0,"config","headers","Content-Type"],"lhs":"STRING"}
+{"kind":"D","path":[0,"config","data"],"lhs":{"uid":"STRING","uuid":"STRING","name":"STRING","typeCode":"STRING","itemtype":"STRING","description":"STRING","activeFrom":"STRING","activeUntil":"STRING","identifier":"STRING"}}
+{"kind":"E","path":[0,"data"],"lhs":{"errors":[{"message":"STRING","reason":"STRING","subject":"STRING","subjectType":"STRING","type":"STRING"}]},"rhs":"null"}
+{"kind":"N","path":[0,"xhrStatus"],"rhs":"STRING"}
+
+retryInterceptor, predicate
+{"kind":"D","path":[0,"config","cache"],"lhs":"BOOLEAN"}
+{"kind":"D","path":[0,"config","headers","x-requested-with"],"lhs":"STRING"}
+{"kind":"D","path":[0,"config","headers","Content-Type"],"lhs":"STRING"}
+{"kind":"D","path":[0,"config","data"],"lhs":{"uid":"STRING","uuid":"STRING","name":"STRING","typeCode":"STRING","itemtype":"STRING","description":"STRING","activeFrom":"STRING","activeUntil":"STRING","identifier":"STRING"}}
+{"kind":"E","path":[0,"data"],"lhs":{"errors":[{"message":"STRING","reason":"STRING","subject":"STRING","subjectType":"STRING","type":"STRING"}]},"rhs":"null"}
+{"kind":"N","path":[0,"xhrStatus"],"rhs":"STRING"}
+
+httpErrorInterceptorService, responseError
+{"kind":"D","path":[0,"config","cache"],"lhs":"BOOLEAN"}
+{"kind":"D","path":[0,"config","headers","x-requested-with"],"lhs":"STRING"}
+{"kind":"D","path":[0,"config","headers","Content-Type"],"lhs":"STRING"}
+{"kind":"D","path":[0,"config","data"],"lhs":{"uid":"STRING","uuid":"STRING","name":"STRING","typeCode":"STRING","itemtype":"STRING","description":"STRING","activeFrom":"STRING","activeUntil":"STRING","identifier":"STRING"}}
+{"kind":"E","path":[0,"data"],"lhs":{"errors":[{"message":"STRING","reason":"STRING","subject":"STRING","subjectType":"STRING","type":"STRING"}]},"rhs":"null"}
+{"kind":"N","path":[0,"xhrStatus"],"rhs":"STRING"}
+
+optionsDropdownPopulator, populate
+{"kind":"N","path":[0,"model","typeCode"],"rhs":"STRING"}
+{"kind":"N","path":[0,"model","uid"],"rhs":"STRING"}
+{"kind":"N","path":[0,"model","uuid"],"rhs":"STRING"}
+{"kind":"N","path":[0,"model","product"],"rhs":"STRING"}
+
+DropdownPopulatorInterface, populate
+{"kind":"N","path":[0,"model","typeCode"],"rhs":"STRING"}
+{"kind":"N","path":[0,"model","uid"],"rhs":"STRING"}
+{"kind":"N","path":[0,"model","uuid"],"rhs":"STRING"}
+{"kind":"N","path":[0,"model","product"],"rhs":"STRING"}
+
+alertFactory, createDanger
+{"kind":"D","path":[0,"timeout"],"lhs":"NUMBER"}
+
+alertService, showDanger
+{"kind":"D","path":[0,"timeout"],"lhs":"NUMBER"}
+

@@ -1,0 +1,11 @@
+#Ant properties
+#Thu Feb 22 21:48:34 UTC 2018
+builddate=20180222 2148
+description=dataservicesbackoffice
+group.id=de.hybris.platform
+module.name=platform-module
+name=dataservicesbackoffice
+releasedate=20180220 1258
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

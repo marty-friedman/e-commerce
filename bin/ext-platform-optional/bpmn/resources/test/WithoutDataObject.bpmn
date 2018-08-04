@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC">
+    <bpmn:process isExecutable="false" name="test" id="test">
+        <bpmn:endEvent name="SUCCEEDED[]" id="7e5284f7-f7da-485d-8ec5-049689ab5f77">
+            <bpmn:incoming>seqFlow_StartEvent_7e5284f7-f7da-485d-8ec5-049689ab5f77_null</bpmn:incoming>
+            <bpmn:messageEventDefinition/>
+        </bpmn:endEvent>
+        <bpmn:startEvent name="StartEvent" id="StartEvent">
+            <bpmn:outgoing>seqFlow_StartEvent_7e5284f7-f7da-485d-8ec5-049689ab5f77_null</bpmn:outgoing>
+            <bpmn:messageEventDefinition/>
+        </bpmn:startEvent>
+        <bpmn:sequenceFlow sourceRef="StartEvent" targetRef="7e5284f7-f7da-485d-8ec5-049689ab5f77" id="seqFlow_StartEvent_7e5284f7-f7da-485d-8ec5-049689ab5f77_null"/>
+    </bpmn:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+        <BPMNPlane bpmnElement="test" id="BPMNPlane_1">
+            <bpmndi:BPMNShape bpmnElement="StartEvent" id="bpmnShape_StartEvent">
+                <dc:Bounds x="315.0" y="114.0" width="36.0" height="36.0"/>
+                <BPMNLabel>
+                    <dc:Bounds x="297.0" y="150.0" width="100.0" height="20.0"/>
+                </BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="7e5284f7-f7da-485d-8ec5-049689ab5f77" id="bpmnShape_7e5284f7-f7da-485d-8ec5-049689ab5f77">
+                <dc:Bounds x="315.0" y="264.0" width="36.0" height="36.0"/>
+                <BPMNLabel>
+                    <dc:Bounds x="297.0" y="300.0" width="100.0" height="20.0"/>
+                </BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_StartEvent_7e5284f7-f7da-485d-8ec5-049689ab5f77_null" sourceElement="bpmnShape_StartEvent" targetElement="bpmnShape_7e5284f7-f7da-485d-8ec5-049689ab5f77" id="edge_For_seqFlow_StartEvent_7e5284f7-f7da-485d-8ec5-049689ab5f77_null">
+                <waypoint x="333.0" y="150.0"/>
+                <waypoint x="333.0" y="264.0"/>
+            </bpmndi:BPMNEdge>
+        </BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn:definitions>

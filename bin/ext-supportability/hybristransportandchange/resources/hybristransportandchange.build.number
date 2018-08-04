@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Feb 20 13:29:15 UTC 2018
+builddate=20180220 1329
+description=hybristransportandchange
+group.id=de.hybris.platform
+module.name=platform-module
+name=hybristransportandchange
+releasedate=20180123 1942
+vendor=hybris
+version=6.6.0.0
+version.api=6.6.0

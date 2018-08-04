@@ -1,0 +1,53 @@
+        .startEvent
+        {
+            stroke: #288000;
+            fill: #ECFDDC;
+        }
+        .startEventIcon
+        {
+            stroke: #288000;
+            fill: none;
+        }
+        .startEventIconFill
+        {
+            stroke: none;
+            fill: #288000;
+        }
+        .endEvent
+        {
+            stroke: #CC2424;
+            fill: #FFE6E5;
+        }
+        .endEventIcon
+        {
+            stroke: #D85252;
+            fill: #D85252;
+        }
+        .task
+        {
+            stroke: #428EB0;
+            fill: url(#taskGradient); /* Uses gradient defined in SVG */
+        }
+        .taskIcon
+        {
+            stroke: #0080C0;
+            fill: #0080C0;
+        }
+        .taskName
+        {
+            fill: #0080C0;
+        }
+        .gateway
+        {
+            stroke: #997C35;
+            fill: #FFFFD6;
+        }
+        .gatewayIcon
+        {
+            stroke: #997C35;
+            fill: #997C35;
+        }
+        .sequence
+        {
+            stroke: #0080C0;
+        }

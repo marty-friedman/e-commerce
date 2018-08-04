@@ -1,0 +1,96 @@
+Following requests from previous version were not found in new version
+
+------------------------------------------------------------
+
+PermissionServiceInterface, registerRule
+
+permissionService, getPermission
+
+PermissionServiceInterface, registerDefaultRule
+
+permissionService, registerRule
+
+permissionService, registerPermission
+
+permissionService, registerDefaultRule
+
+previewTicketInterceptor, request
+
+UrlServiceInterface, buildUriContext
+
+catalogVersionPermissionService, hasReadPermissionOnCurrent
+
+DecoratorServiceClass, addMappings
+
+smartEditContractChangeListener, onComponentsAdded
+
+smartEditContractChangeListener, onComponentsRemoved
+
+smartEditContractChangeListener, onComponentResized
+
+smartEditContractChangeListener, onComponentRepositioned
+
+smartEditContractChangeListener, onComponentChanged
+
+smartEditContractChangeListener, onPageChanged
+
+smartEditContractChangeListener, initListener
+
+featureService, addContextualMenuButton
+
+featureService, addDecorator
+
+positionRegistry, getRepositionedComponents
+
+languageServiceGateway, subscribe
+
+languageService, registerSwitchLanguage
+
+renderService, renderPage
+
+permissionService, isPermitted
+
+DecoratorServiceClass, enable
+
+positionRegistry, unregister
+
+positionRegistry, register
+
+resizeListener, register
+
+resizeListener, fix
+
+DecoratorServiceClass, getDecoratorsForComponent
+
+ContextualMenuServiceClass, getContextualMenuByType
+
+ContextualMenuServiceClass, getContextualMenuItems
+
+DecoratorServiceClass, disable
+
+permissionService, hasCachedResult
+
+catalogVersionPermissionService, hasWritePermissionOnCurrent
+
+ContextualMenuServiceClass, addItems
+
+ContextualMenuServiceClass, removeItemByKey
+
+yPopupOverlayUtilsClickOrderService, register
+
+yPopupOverlayUtilsClickOrderService, unregister
+
+resizeListener, unregister
+
+renderService, renderSlots
+
+UrlServiceInterface, buildPageUriContext
+
+SlotVisibilityService, reloadSlotsInfo
+
+cmsitemsRestService, getByIds
+
+SlotVisibilityService, getSlotsForComponent
+
+catalogVersionPermissionService, hasWritePermission
+

@@ -1,0 +1,188 @@
+/* *
+/* This file includes the styles used in Create New Customization modal
+*/
+
+@navtab-row__item__variation--padding-top: .1*@smartedit-gutter;
+@customization-form__variation-menu--width: 1.3*@smartedit-gutter;
+@customization-form__list-group__item--padding: .4*@smartedit-gutter 0 .4*@smartedit-gutter .4*@smartedit-gutter;
+@hyicon-msgwarning--dates--font-size: 11px;
+@customization-form__title--padding-bottom: .2*@smartedit-gutter;
+@customization-form__title-dates--font-size: 11px;
+@customization-form__title-header-name--font-size: 16px;
+@customization-form__navtab-forms--add-btn--padding: .4*@smartedit-gutter 0;
+.customization-form {
+    .form-group-dates {
+        margin-bottom: 5px;
+    }
+    .form-group {
+        margin-bottom: 30px;
+    }
+    .description-area {
+        resize: none;
+    }
+    .status-toggle {
+        padding-right: 0;
+        label {
+            //reset the initial height, fix the IE allignment issue; remove when fixed in techme
+            height: inherit;
+            padding-bottom: 30px; //for equal spacing for all form elements
+        }
+    }
+    .select2-choices {
+        margin-top: 15px;
+    }
+    .ui-select-match-item {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        display: inline-block;
+        &.select2-search-choice {
+            background: @background-color-light-grey2;
+            border-style: none;
+            line-height: 22px;
+            margin-bottom: 5px;
+            margin-top: 5px;
+            margin-right: 10px;
+        }
+    }
+    .select2-disabled {
+        opacity: @opacity_point-four;
+        background: none;
+        cursor: none;
+    }
+    .ui-select-match-close {
+        position: inherit;
+        vertical-align: top;
+        padding-left: 10px;
+    }
+    .targetgroup-list__title {
+        font-weight: @font-weight-semibold;
+    }
+    .perso-sliderpanel__expression-text {
+        font-weight: @font-weight-bold;
+    }
+    @media (max-width: 768px) {
+        .commerce-customization-ui-select-sm {
+            width: 250px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .navtab-info--dates {
+        padding-left: 1%;
+    }
+}
+
+.customization-form__title-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.customization-form__title-header-badge {
+    margin-right: 0;
+}
+
+.customization-form {
+    word-wrap: break-word;
+}
+
+.customization-form__title-header-name {
+    font-size: @customization-form__title-header-name--font-size;
+    font-weight: @font-weight-bold;
+    width: 85%;
+}
+
+.customization-form__title-subarea {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.customization-form__title-dates {
+    font-size: @customization-form__title-dates--font-size;
+}
+
+.customization-form__title {
+    padding-bottom: @customization-form__title--padding-bottom;
+    border-bottom: 1px solid @border-color-light-grey;
+}
+
+.hyicon-msgwarning--dates {
+    color: @warning;
+    font-size: @hyicon-msgwarning--dates--font-size;
+}
+
+.customization-form__navtab-forms--add-btn {
+    padding: @customization-form__navtab-forms--add-btn--padding;
+    border-bottom: 1px solid @border-color-light-grey;
+}
+
+.customization-form__list-group__item {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid @border-color-light-grey;
+    padding: @customization-form__list-group__item--padding;
+    &:hover {
+        background-color: @techne__row--background-color--hover;
+    }
+}
+
+.customization-form__navtab-forms__list-group {
+    list-style-type: none;
+    padding: 0;
+}
+
+.customization-form__variation-data,
+.customization-form__variation-menu {
+    display: inline-block;
+}
+
+.customization-form__variation-menu {
+    width: @customization-form__variation-menu--width;
+}
+
+.customization-form__variation-data {
+    width: calc(~"100% - 65px");
+}
+
+.customization-form__list-group {
+    list-style-type: none;
+    padding: 0;
+}
+
+.navtab-row__item__variation {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: @text-color-blue;
+    padding-right: @navtab-row__item__variation--padding-top;
+}
+
+.variation-layout--selected:extend(.variation-layout) {
+    color: @text-color-grey;
+    .status-active, .status-inactive, .status-ignore {
+        color: @text-color-grey;
+    }
+}
+
+.help-inline--tooltip .pe-help-block--inline {
+    right: -17px;
+    top: 20px;
+}
+
+//overwrite techné
+.help-inline--tooltip:hover .hyicon-msgwarning--dates:before {
+    content: "\e036";
+}
+
+.hyicon-msgwarning--dates.help-icon-inline:before {
+    font-size: 13px;
+    color: @warning;
+    margin: 0;
+}
+
+.help-inline .hyicon.hyicon-msgwarning--dates {
+    font-size: 13px;
+}
+
+//overwrite techné

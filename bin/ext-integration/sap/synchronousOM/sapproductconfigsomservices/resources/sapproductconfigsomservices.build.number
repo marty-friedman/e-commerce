@@ -1,0 +1,11 @@
+#Ant properties
+#Wed Mar 07 11:08:49 UTC 2018
+builddate=20180307 1108
+description=sapproductconfigsomservices
+group.id=de.hybris.platform
+module.name=platform-module
+name=sapproductconfigsomservices
+releasedate=20180306 1940
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<process name="Simple-Action-Process" start="e81660ee-7cfd-46ae-92e2-ce2fe3c9e4b0" processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel" xmlns="http://www.hybris.de/xsd/processdefinition">
+    <action bean="checkOrderAction" id="e81660ee-7cfd-46ae-92e2-ce2fe3c9e4b0">
+        <transition name="NOK" to="ef31423a-0a73-4efd-b97e-8326b3881488"/>
+        <transition name="OK" to="7013e85c-cb6a-49bb-9a57-3bf37a7a0dd7"/>
+    </action>
+    <end state="ERROR" id="ef31423a-0a73-4efd-b97e-8326b3881488">Process ended in ERROR</end>
+    <end state="SUCCEEDED" id="7013e85c-cb6a-49bb-9a57-3bf37a7a0dd7">Process was successful</end>
+</process>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="User" type="User"/>
+<xs:complexType name="simpleHybrisField">
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute type="xs:string" name="header"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+<xs:complexType name="localizedHybrisField">
+<xs:sequence>
+<xs:element name="value" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:simpleContent>
+<xs:extension base="xs:string">
+<xs:attribute type="xs:string" name="locale"/>
+</xs:extension>
+</xs:simpleContent>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+<xs:attribute type="xs:string" name="header"/>
+</xs:complexType>
+<xs:complexType name="User">
+<xs:sequence>
+<xs:element type="simpleHybrisField" name="name"/>
+<xs:element type="simpleHybrisField" name="uid">
+<xs:unique name="unique_user_uid">
+<xs:selector xpath="user"/>
+<xs:field xpath="uid"/>
+</xs:unique>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Address">
+<xs:sequence>
+<xs:element type="Item" name="owner"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Item">
+<xs:sequence/>
+</xs:complexType>
+</xs:schema>

@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Mar 06 12:46:21 UTC 2018
+builddate=20180306 1246
+description=ruleengineatddtests
+group.id=de.hybris.platform
+module.name=platform-module
+name=ruleengineatddtests
+releasedate=20180305 1940
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

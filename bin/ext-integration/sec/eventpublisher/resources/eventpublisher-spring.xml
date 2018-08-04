@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="defaultSECSaveListener"
+		class="com.sap.hybris.sec.eventpublisher.listener.DefaultSECSaveListener">
+		<property name="handlers" ref="sec.aftersaveevent.handlers" />
+	</bean>
+
+	<alias name="sec.aftersaveevent.handlers" alias="sec.aftersaveevent.handlers" />
+	<util:map id="sec.aftersaveevent.handlers" key-type="java.lang.Integer">
+		<entry
+			key="#{T(com.sap.hybris.sec.eventpublisher.constants.EventpublisherConstants).CUSTOMER_MODEL_TYPECODE}"
+			value-ref="afterCustomerSaveEventHandler"></entry>
+		<entry
+			key="#{T(com.sap.hybris.sec.eventpublisher.constants.EventpublisherConstants).ADDRESS_MODEL_TYPECODE}"
+			value-ref="afterAddressSaveEventHandler"></entry>
+		<entry
+			key="#{T(com.sap.hybris.sec.eventpublisher.constants.EventpublisherConstants).ORDER_MODEL_TYPECODE}"
+			value-ref="afterOrderSaveEventHandler"></entry>
+	</util:map>
+
+	<alias name="afterCustomerSaveEventHandler" alias="afterCustomerSaveEventHandler" />
+	<bean id="afterCustomerSaveEventHandler"
+		class="com.sap.hybris.sec.eventpublisher.handler.impl.AfterCustomerSaveEventHandler">
+		<property name="modelService" ref="modelService" />
+		<property name="customerPopulator" ref="secCustomerPopulator" />
+		<property name="hciPublisher" ref="hciPublisher" />
+	</bean>
+
+	<alias name="afterAddressSaveEventHandler" alias="afterAddressSaveEventHandler" />
+	<bean id="afterAddressSaveEventHandler"
+		class="com.sap.hybris.sec.eventpublisher.handler.impl.AfterAddressSaveEventHandler">
+		<property name="modelService" ref="modelService" />
+		<property name="addressPopulator" ref="secAddressPopulator" />
+		<property name="hciPublisher" ref="hciPublisher" />
+	</bean>
+
+	<alias name="afterOrderSaveEventHandler" alias="afterOrderSaveEventHandler" />
+	<bean id="afterOrderSaveEventHandler"
+		class="com.sap.hybris.sec.eventpublisher.handler.impl.AfterOrderSaveEventHandler" scope="singleton">
+		<property name="modelService" ref="modelService" />
+		<property name="orderPopulator" ref="secOrderPopulator" />
+		<property name="orderWSPopulator" ref="secOrderWSPopulator" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="publisher" ref="hciPublisher" />
+	</bean>
+
+
+	<alias name="hciPublisher" alias="hciPublisher" />
+	<bean id="hciPublisher"
+		class="com.sap.hybris.sec.eventpublisher.publisher.Impl.HCIPublisher">
+		<property name="configurationService" ref="configurationService" />
+		<property name="secHttpConnection" ref="secHttpConnection" />
+	</bean>
+
+
+	<alias name="defaultSECHttpConnection" alias="secHttpConnection" />
+	<bean id="defaultSECHttpConnection"
+		class="com.sap.hybris.sec.eventpublisher.httpconnection.Impl.DefaultSECHttpConnection">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+
+	<alias name="secCustomerPopulator" alias="secCustomerPopulator" />
+	<bean id="secCustomerPopulator"
+		class="com.sap.hybris.sec.eventpublisher.populator.SECCustomerPopulator">
+		<property name="configurationService" ref="configurationService" />
+		<property name="customerNameStrategy" ref="customerNameStrategy" />
+	</bean>
+
+
+	<alias name="secAddressPopulator" alias="secAddressPopulator" />
+	<bean id="secAddressPopulator"
+		class="com.sap.hybris.sec.eventpublisher.populator.SECAddressPopulator">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+
+	<alias name="secOrderPopulator" alias="secOrderPopulator" />
+	<bean id="secOrderPopulator"
+		class="com.sap.hybris.sec.eventpublisher.populator.SECOrderPopulator">
+		<property name="configurationService" ref="configurationService" />
+		<property name="customerNameStrategy" ref="customerNameStrategy" />
+	</bean>
+	
+	<alias name="secOrderWSPopulator" alias="secOrderWSPopulator" />
+	<bean id="secOrderWSPopulator"
+		class="com.sap.hybris.sec.eventpublisher.populator.SECOrderWSPopulator">
+		<property name="configurationService" ref="configurationService" />
+	</bean>
+	
+	<alias name="defaultSecCustomerRemoveInterceptor" alias="secCustomerRemoveInterceptor" />
+	<bean id="defaultSecCustomerRemoveInterceptor"
+		class="com.sap.hybris.sec.eventpublisher.interceptor.DefaultSECCustomerRemoveInterceptor">
+		<property name="eventService" ref="eventService" />
+	</bean>
+	
+	<bean id="secCustomerRemoveInterceptorMapping"  
+      class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="secCustomerRemoveInterceptor"/>
+		<property name="typeCode" value="Customer"/>
+		<property name="order" value="5000"/>
+	</bean>
+
+	<alias name="defaultSecCustomerDeleteEventListener" alias="secCustomerDeleteEventListener" />
+	<bean id="defaultSecCustomerDeleteEventListener" parent="abstractEventListener"
+		class="com.sap.hybris.sec.eventpublisher.listener.DefaultSecCustomerDeleteEventListener">
+		<property name="customerPopulator" ref="secCustomerPopulator" />
+		<property name="hciPublisher" ref="hciPublisher" />
+	</bean>
+
+	<alias name="defaultSecAddressRemoveInterceptor" alias="secAddressRemoveInterceptor" />
+	<bean id="defaultSecAddressRemoveInterceptor"
+		class="com.sap.hybris.sec.eventpublisher.interceptor.DefaultSECAddressRemoveInterceptor">
+		<property name="eventService" ref="eventService" />
+	</bean>
+	
+	<bean id="secAddressRemoveInterceptorMapping"  
+      class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="secAddressRemoveInterceptor"/>
+		<property name="typeCode" value="Address"/>
+		<property name="order" value="5000"/>
+	</bean>
+	
+	<alias name="defaultSecAddressDeleteEventListener" alias="secAddressDeleteEventListener" />
+	<bean id="defaultSecAddressDeleteEventListener" parent="abstractEventListener"
+		class="com.sap.hybris.sec.eventpublisher.listener.DefaultSecAddressDeleteEventListener">
+		<property name="configurationService" ref="configurationService" />
+		<property name="hciPublisher" ref="hciPublisher" />
+	</bean>
+	
+	
+
+</beans>

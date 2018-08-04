@@ -1,0 +1,52 @@
+.border {
+    background-color: #FAFAFF;
+    border: 1px solid darkgray;
+}
+
+#textarea-container {
+    position: relative;
+    border: 1px dashed #666 !important;
+}
+
+#output {
+    margin: 0;
+}
+
+.ui-tabs .ui-tabs-panel {
+    padding: 5px;
+}
+
+.scrollable {
+    overflow: auto;
+}
+
+#executeButton {
+    float: right;
+}
+
+.button_bar{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding-bottom: 2%;
+    width:100%;
+    height:auto;
+    vertical-align:top;
+}
+
+/* put a button on the far right of the above button bar */
+.button_bar_right_button
+{
+    align:right;
+	float:right;
+    margin-left:1%;
+    vertical-align:top;
+}
+/* put a button on the far left of the above button bar */
+.button_bar_left_button
+{
+    float:left;
+    margin-left:1%;
+    vertical-align:top;
+} 

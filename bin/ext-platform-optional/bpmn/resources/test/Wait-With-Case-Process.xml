@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<process name="Wait-With-Case-Process" start="4b279304-ba6d-46fe-bd50-4491f0fe193f" processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel" xmlns="http://www.hybris.de/xsd/processdefinition">
+    <action bean="checkOrderAction" id="4b279304-ba6d-46fe-bd50-4491f0fe193f">
+        <transition name="NOK" to="32aed93d-d66e-4503-8d1d-1a6ac431b898"/>
+        <transition name="OK" to="58f3a566-8c60-4d9d-a097-7350408cd7ab"/>
+    </action>
+    <end state="ERROR" id="32aed93d-d66e-4503-8d1d-1a6ac431b898"></end>
+    <wait then="7816c222-a67a-45db-8f3f-1bb91467e77a" id="58f3a566-8c60-4d9d-a097-7350408cd7ab">
+        <case event="OrderActionEvent">
+            <choice id="consignmentProcessEnded" then="0d99c096-d965-4b7e-9e50-b9a83434f55b"/>
+            <choice id="cancelOrder" then="686d523d-4a63-4dc1-b773-85fa84b59f76"/>
+        </case>
+    </wait>
+    <end state="FAILED" id="7816c222-a67a-45db-8f3f-1bb91467e77a"></end>
+    <action bean="notifyCustomerAboutFraudAction" id="0d99c096-d965-4b7e-9e50-b9a83434f55b">
+        <transition name="OK" to="5ee8a80d-4dbf-4d5e-8051-80a160a5170e"/>
+    </action>
+    <end state="SUCCEEDED" id="5ee8a80d-4dbf-4d5e-8051-80a160a5170e"></end>
+    <action bean="prepareOrderForManualCheckAction" id="686d523d-4a63-4dc1-b773-85fa84b59f76">
+        <transition name="OK" to="8ef7ddeb-c045-4c0d-b78d-8fad1762f5e6"/>
+    </action>
+    <end state="FAILED" id="8ef7ddeb-c045-4c0d-b78d-8fad1762f5e6"></end>
+</process>

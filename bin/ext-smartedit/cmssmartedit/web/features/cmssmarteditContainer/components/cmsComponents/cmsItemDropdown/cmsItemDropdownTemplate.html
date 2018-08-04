@@ -1,0 +1,16 @@
+<div class="cms-nested-component-template">
+    <label class="control-label"
+        data-translate="se.cms.nestedcomponenteditor.createorselect"></label>
+    <div data-recompile-dom="cmsItemDropdownCtrl._recompileDom"
+        class="cms-nested-component-select">
+        <se-dropdown data-field="cmsItemDropdownCtrl.field"
+            data-qualifier="cmsItemDropdownCtrl.qualifier"
+            data-model="cmsItemDropdownCtrl.model"
+            data-id="cmsItemDropdownCtrl.id"
+            data-item-template-url="cmsItemDropdownCtrl.itemTemplateUrl"
+            data-get-api="cmsItemDropdownCtrl.configureSeDropdown($api)"></se-dropdown>
+        <sub-type-selector data-ng-if="cmsItemDropdownCtrl.showSubTypesSelector"
+            data-sub-types="cmsItemDropdownCtrl.field.subTypes"
+            data-on-sub-type-selected="cmsItemDropdownCtrl.onSubTypeSelected"></sub-type-selector>
+    </div>
+</div>

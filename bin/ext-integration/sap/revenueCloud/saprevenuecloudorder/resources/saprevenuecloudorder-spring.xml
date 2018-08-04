@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+           
+    <!-- Process Actions -->
+    <import resource="/saprevenuecloudorder/process/sap-subscription-order-process-spring.xml"/>    
+    
+    <!-- SAP Subscription Process Definitions -->
+    <alias name="sapDefaultSubscriptionProcessDefinitionResource" alias="sapSubscriptionProcessDefinitionResource" />
+    <bean id="sapDefaultSubscriptionProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/saprevenuecloudorder/process/sap-subscription-order-process.xml"/>
+    </bean>   
+
+	<alias name="defaultSapSubscriptionConfigurationService" alias="sapSubscriptionConfigurationService"/>
+	<bean name="defaultSapSubscriptionConfigurationService" class="de.hybris.platform.sap.saprevenuecloudorder.service.impl.DefaultSapRevenueCloudSubscriptionConfigurationService">
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="yaasServiceFactory" ref="yaasServiceFactory"/>
+		<property name="yaasConfigurationService" ref="yaasConfigurationService" />
+	</bean>
+
+	<alias name="defaultSapSubscriptionService" alias="sapSubscriptionService"/>
+	<bean id="defaultSapSubscriptionService"  class="de.hybris.platform.sap.saprevenuecloudorder.service.impl.DefaultSapRevenueCloudSubscriptionService">
+		<property name="sapSubscriptionConfigurationService" ref="sapSubscriptionConfigurationService"/>
+	</bean>
+
+	<!-- SAP Subscription Facade -->
+	<alias name="sapDefaultSubscriptionFacade" alias="subscriptionFacade" />
+	<bean id="sapDefaultSubscriptionFacade"
+		class="de.hybris.platform.sap.saprevenuecloudorder.facade.impl.DefaultSapRevenueCloudSubscriptionFacade"
+		parent="defaultSubscriptionFacade">
+		<property name="sapSubscriptionService" ref="sapSubscriptionService" />
+		<property name="userService" ref="userService" />
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="sapRevenueCloudProductService" ref="sapRevenueCloudProductService"/>
+		<property name="pricePlanOneTimeChargePopulator" ref="subscriptionPricePlanOneTimeChargePopulator" />
+		<property name="pricePlanRecurringChargePopulator" ref="subscriptionPricePlanRecurringChargePopulator" />
+		<property name="productUrlPopulator" ref="productUrlPopulator" />
+		<property name="cmsSiteService" ref="cmsSiteService" />
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+	
+	<alias name="sapDefaultSubscriptionOrderPopulator" alias="sapSubscriptionOrderPopulator"/>
+	<bean name="sapDefaultSubscriptionOrderPopulator" class="de.hybris.platform.sap.saprevenuecloudorder.populators.DefaultSAPRevenueCloudSubscriptionOrderPopulator">
+	   <property name="commercePriceService" ref="subscriptionCommercePriceService"/>
+	   <property name="cmsSiteService" ref="cmsSiteService"/>
+	   <property name="sapRevenueCloudSubscriptionService" ref="sapSubscriptionService"/>
+	   <property name="sapCatalogToMarketMappingGenericDao" ref="sapCatalogToMarketMappingGenericDao"/>
+	   <property name="configurationService" ref="configurationService"/>
+	 </bean>  
+	 
+	 <bean name="sapCatalogToMarketMappingGenericDao"
+          class="de.hybris.platform.servicelayer.internal.dao.DefaultGenericDao">
+        <constructor-arg value="SAPMarketToCatalogMapping"/>        
+    </bean>
+    
+    
+	<alias name="sendDefaultOrderToSCPIHelper" alias="sendOrderToSCPIHelper"/>
+	<bean id="sendDefaultOrderToSCPIHelper"
+		class="de.hybris.platform.sap.saprevenuecloudorder.outbound.SendSubscriptionOrderToSCPIHelper">
+		<property name="defaultCloudPlatformIntegrationConnection"
+			ref="cloudPlatformIntegrationConnection" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="sapSubscriptionOrderPopulator" ref="sapSubscriptionOrderPopulator" />
+	</bean>
+
+	<!-- process action beans -->
+
+	<!-- SAP Subscription Order Process Action -->
+	<alias name="sapDefaultSubscriptionOrderSendAction" alias="sapSubscriptionOrderSendAction" />
+	<bean id="sapDefaultSubscriptionOrderSendAction"
+		class="de.hybris.platform.sap.saprevenuecloudorder.actions.SendSubscriptionOrderAction"
+		parent="abstractAction">
+		<property name="businessProcessService" ref="businessProcessService" />
+		<property name="sendOrderToSCPIHelper" ref="sendOrderToSCPIHelper" />
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<!-- SAP Subscription Confirmation Action -->
+	<alias name="sapDefaultSubscriptionOrderConfirmationAction"
+		alias="sapSubscriptionOrderConfirmationAction" />
+	<bean id="sapDefaultSubscriptionOrderConfirmationAction"
+		class="de.hybris.platform.sap.saprevenuecloudorder.actions.SapRevenueCloudOrderConfirmationAction"
+		parent="abstractAction">
+	</bean>
+    
+</beans>

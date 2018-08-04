@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<!-- Product Recommendation -->
+	<bean class="com.hybris.ymkt.recommendationwebservices.data.RecommendationComponentWsDTO" extends="de.hybris.platform.cmswebservices.data.AbstractCMSComponentData">
+        <property name="title" type="java.util.Map&lt;String,String&gt;" />
+        <property name="recotype" type="String" />
+        <property name="leadingitemtype" type="String" />
+        <property name="leadingitemdstype" type="String" />
+        <property name="cartitemdstype" type="String" />
+        <property name="includecart" type="boolean" />
+        <property name="includerecent" type="boolean" /> 
+	</bean>
+
+	<bean class="com.hybris.ymkt.recommendationwebservices.data.RecommendationComponentData" extends="de.hybris.platform.cmsfacades.data.AbstractCMSComponentData">
+		<property name="title" type="java.util.Map&lt;String,String&gt;" />
+		<property name="recotype" type="String" />
+		<property name="leadingitemtype" type="String" />
+		<property name="leadingitemdstype" type="String" />
+		<property name="cartitemdstype" type="String" />
+		<property name="includecart" type="boolean" />
+		<property name="includerecent" type="boolean" />
+	</bean>
+	
+	<!-- Offer Recommendation -->
+	<bean class="com.hybris.ymkt.recommendationwebservices.data.OfferRecommendationComponentWsDTO" extends="de.hybris.platform.cmswebservices.data.AbstractCMSComponentData">
+		<property name="recotype" type="String" />
+        <property name="leadingitemtype" type="String" />
+        <property name="leadingitemdstype" type="String" />
+        <property name="cartitemdstype" type="String" />
+		<property name="contentposition" type="String" />
+		<property name="includecart" type="boolean" />
+		<property name="includerecent" type="boolean" />
+	</bean>
+
+	<bean class="com.hybris.ymkt.recommendationwebservices.data.OfferRecommendationComponentData" extends="de.hybris.platform.cmsfacades.data.AbstractCMSComponentData">
+		<property name="recotype" type="String" />
+		<property name="leadingitemtype" type="String" />
+		<property name="leadingitemdstype" type="String" />
+		<property name="cartitemdstype" type="String" />
+		<property name="contentposition" type="String" />
+		<property name="includecart" type="boolean" />
+		<property name="includerecent" type="boolean" />
+	</bean>
+</beans>
+

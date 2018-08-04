@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+
+	<classpathentry exported="true" kind="src" path="/ondemandcommon" />
+	<classpathentry exported="true" kind="src" path="/entitlementfacades" />
+	<classpathentry exported="true" kind="lib" path="lib/entitlements-rest-client-6.7.0.0-RC1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/entitlements-service-6.7.0.0-RC1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/hybris-commons-configuration-6.0.0.0-RC1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/hybris-commons-context-6.0.0.0-RC1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/hybris-commons-rest-client-6.0.0.0-RC1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/hybris-commons-security-6.0.0.0-RC1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jackson-jaxrs-1.9.13.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jackson-jaxrs-base-2.8.9.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jackson-jaxrs-json-provider-2.8.9.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jackson-module-jaxb-annotations-2.8.9.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jackson-xc-1.9.13.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/javax.annotation-api-1.3.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/jettison-1.3.8.jar" />
+	<classpathentry exported="true" kind="lib" path="resources" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="src" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="gensrc" />
+	<classpathentry exported="false" kind="src" path="/platform" />
+				
+</classpath>
+				

@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Mar 06 15:43:27 UTC 2018
+builddate=20180306 1543
+description=assistedservicefacades
+group.id=de.hybris.platform
+module.name=platform-module
+name=assistedservicefacades
+releasedate=20180302 1302
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0

@@ -1,0 +1,201 @@
+.yw-com_sap_hybris_bpmnWidget {
+	height: 100%;
+}
+
+.yw-com_sap_hybris_bpmnWidget .startEvent {
+	stroke: #288000;
+	fill: #ECFDDC;
+}
+
+.yw-com_sap_hybris_bpmnWidget .startEventIcon {
+	stroke: #288000;
+	fill: none;
+}
+
+.yw-com_sap_hybris_bpmnWidget  .startEventIconFill {
+	stroke: none;
+	fill: #288000;
+}
+
+.yw-com_sap_hybris_bpmnWidget .endEvent {
+	stroke: #CC2424;
+	fill: #FFE6E5;
+}
+
+.yw-com_sap_hybris_bpmnWidget .endEventIcon {
+	stroke: #D85252;
+	fill: #D85252;
+}
+
+.yw-com_sap_hybris_bpmnWidget .task {
+	stroke: #428EB0;
+	fill: url(#taskGradient); /* Uses gradient defined in SVG */
+}
+
+.yw-com_sap_hybris_bpmnWidget .taskIcon {
+	stroke: #0080C0;
+	fill: #0080C0;
+}
+
+.yw-com_sap_hybris_bpmnWidget .taskName {
+	fill: #0080C0;
+}
+
+.yw-com_sap_hybris_bpmnWidget .gateway {
+	stroke: #997C35;
+	fill: #FFFFD6;
+}
+
+.yw-com_sap_hybris_bpmnWidget .gatewayIcon {
+	stroke: #997C35;
+	fill: #997C35;
+}
+
+.yw-com_sap_hybris_bpmnWidget .sequence {
+	stroke: #0080C0;
+}
+
+.yw-com_sap_hybris_bpmnWidget #mainbody {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: white;
+}
+
+.yw-com_sap_hybris_bpmnWidget #header {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	background: #E0E0E0;
+}
+
+.yw-com_sap_hybris_bpmnWidget #title {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	padding-top: 10px;
+	padding-left: 10px;
+	width: 160px;
+	font: normal normal bold 20px Unicode MS;
+	color: #666666;
+}
+
+.yw-com_sap_hybris_bpmnWidget #mainPage {
+	position: absolute;
+	overflow: hidden;
+	top: 40px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	float: left;
+}
+
+.yw-com_sap_hybris_bpmnWidget #tools {
+	position: absolute;
+	top: 2px;
+	width: 100%;
+	font: normal normal bold 18px Unicode MS;
+	color: White;
+	background-color: rgba(54, 62, 67, 0.96);
+	vertical-align: middle;
+}
+
+.yw-com_sap_hybris_bpmnWidget .tool {
+	font: normal normal bold 18px Unicode MS;
+	color: White;
+	padding-top: 6px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-bottom: 6px;
+	width: 20px;
+	height: 20px;
+}
+
+.yw-com_sap_hybris_bpmnWidget #editorArea {
+	position: absolute;
+	overflow: hidden;
+	top: 40px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	float: left;
+	width: 100%;
+}
+
+.yw-com_sap_hybris_bpmnWidget #editor {
+	position: absolute;
+	overflow: hidden;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	float: left;
+	width: 75%;
+}
+
+.yw-com_sap_hybris_bpmnWidget #properties {
+	position: absolute;
+	top: 0px;
+	left: 75.5%;
+	width: 24.5%;
+	bottom: 0px;
+	float: right;
+}
+
+.yw-com_sap_hybris_bpmnWidget .Label {
+	float: left;
+	margin-left: 5px;
+	margin-right: 5px;
+	clear: left;
+	width: 7em;
+	padding-bottom: .5em;
+}
+.yw-com_sap_hybris_bpmnWidget .yw-bpmneditor-properties{
+   padding-top:5px;
+   overflow: auto;
+}
+
+.yw-com_sap_hybris_bpmnWidget .yw-bpmneditor.z-textbox{
+	margin-left:10px;
+	margin-top:3px;
+	width:95%;
+}
+
+.yw-com_sap_hybris_bpmnWidget .yw-bpmneditor.z-label{
+	color:#787878;
+}
+
+.yw-com_sap_hybris_bpmnWidget .yw-bpmneditor.z-checkbox{
+	transform: scale(1.5,1.5);
+	margin:10px;
+}
+
+.yw-com_sap_hybris_bpmnWidget  .yw-bpmneditor-fieldset{
+	border-radius: 5px;
+	padding: 5px;
+	margin-right:10px;
+	padding-bottom:10px;
+}
+
+.yw-com_sap_hybris_bpmnWidget  .yw-bpmneditor-legend {
+	text-transform: uppercase;
+	color:#151c22;
+	font-size: 16px;
+	font-weight: bold;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<config xmlns="http://www.hybris.com/cockpit/config"
+		xmlns:y="http://www.hybris.com/cockpit/config/hybris"
+		xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+		xmlns:list-view="http://www.hybris.com/cockpitng/component/listView"
+		xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea"
+		xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree"
+		xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch"
+		xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch"
+		xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms"
+		xmlns:dsb="http://www.hybris.com/cockpitng/config/dashboard"
+		xmlns:na="http://www.hybris.com/cockpitng/config/notifications">
+
+	<context type="DynamicProcessDefinition" component="editorareaactions" merge-by="type">
+		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch" xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms" xmlns:dsb="http://www.hybris.com/cockpitng/config/dashboard" xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea" xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree" xmlns:list-view="http://www.hybris.com/cockpitng/component/listView" xmlns:na="http://www.hybris.com/cockpitng/config/notifications" xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch" xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config">
+			<y:group qualifier="common">
+				<y:label>actiongroup.common</y:label>
+				<y:action action-id="com.hybris.cockpitng.action.openBPMN" property="currentObject"/>
+			</y:group>
+		</y:actions>
+	</context>
+
+	<context type="DynamicProcessDefinition" component="listviewactions" merge-by="type">
+		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+			<y:group qualifier="common">
+				<y:label>actiongroup.common</y:label>
+				<y:action action-id="com.hybris.cockpitng.action.openBPMN" property="currentObject"/>
+				<y:action action-id="com.hybris.cockpitng.action.create" property="pageable.typeCode"/>
+				<y:action action-id="com.hybris.cockpitng.listview.action.export.csv" property="exportColumnsAndData" />
+			</y:group>
+		</y:actions>
+	</context>
+
+	<context type="BusinessProcess" component="editorareaactions" merge-by="type">
+		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris" xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch" xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms" xmlns:dsb="http://www.hybris.com/cockpitng/config/dashboard" xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea" xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree" xmlns:list-view="http://www.hybris.com/cockpitng/component/listView" xmlns:na="http://www.hybris.com/cockpitng/config/notifications" xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch" xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config">
+			<y:group qualifier="common">
+				<y:label>actiongroup.common</y:label>
+				<y:action action-id="com.hybris.cockpitng.action.openBPMN" property="currentObject"/>
+			</y:group>
+		</y:actions>
+	</context>
+
+	<context merge-by="type" parent="auto" type="DynamicProcessDefinition"
+			 component="editor-area">
+		<editorArea:editorArea name="">
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential">
+					<editorArea:panel colspan="1" name="panel0">
+						<editorArea:attribute qualifier="code" />
+					</editorArea:panel>
+
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab name="tab.bpmn">
+				<editorArea:section name="bpmn.section.info">
+					<editorArea:panel colspan="2" name="bpmn_contnent.panel">
+						<editorArea:attribute
+								editor="de.hybris.platform.bpmnbackoffice.codecontent"
+								qualifier="bpmn" readonly="true" />
+					</editorArea:panel>
+					<editorArea:customPanel colspan="2" spring-bean="uploadDownloadPanelRenderer" name="upload_download.panel">
+					</editorArea:customPanel>
+				</editorArea:section>
+			</editorArea:tab>
+
+			<editorArea:tab name="tab.process">
+				<editorArea:section name="process.section.info">
+
+					<editorArea:panel colspan="2" name="panel0">
+						<editorArea:attribute
+								editor="de.hybris.platform.bpmnbackoffice.codecontent"
+								qualifier="content" readonly="true" />
+					</editorArea:panel>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+</config>

@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC">
+    <bpmn:process isExecutable="false" name="sap-oms-order-process" id="sap-oms-order-process">
+        <bpmn:intermediateCatchEvent name="waitForOrderAction" id="waitForOrderAction">
+            <bpmn:incoming >seqFlow_waitForOrderAction_ExJn_1_waitForOrderAction_null</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_waitForOrderAction_waitForOrderAction_ExCh_1_null</bpmn:outgoing>
+            <bpmn:messageEventDefinition/>
+        </bpmn:intermediateCatchEvent>
+        <bpmn:exclusiveGateway default="seqFlow_waitForOrderAction_ExCh_1_failed_default" gatewayDirection="Diverging" id="waitForOrderAction_ExCh_1">
+            <bpmn:incoming >seqFlow_waitForOrderAction_waitForOrderAction_ExCh_1_null</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_waitForOrderAction_ExCh_1_failed_default</bpmn:outgoing>
+            <bpmn:outgoing >seqFlow_waitForOrderAction_ExCh_1_setCompletionStatus_consignmentProcessEnded</bpmn:outgoing>
+            <bpmn:outgoing >seqFlow_waitForOrderAction_ExCh_1_cancelOrderAction_ExJn_2_consignmentProcessCancelled</bpmn:outgoing>
+            <bpmn:outgoing >seqFlow_waitForOrderAction_ExCh_1_cancelOrderAction_ExJn_2_cancelOrder</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:sequenceFlow sourceRef="waitForOrderAction" targetRef="waitForOrderAction_ExCh_1" name="OrderActionEvent" id="seqFlow_waitForOrderAction_waitForOrderAction_ExCh_1_null"/>
+        <bpmn:exclusiveGateway gatewayDirection="Diverging" id="setCompletionStatus_ExCh_6">
+            <bpmn:incoming >seqFlow_setCompletionStatus_setCompletionStatus_ExCh_6_null</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_setCompletionStatus_ExCh_6_success_OK</bpmn:outgoing>
+            <bpmn:outgoing >seqFlow_setCompletionStatus_ExCh_6_waitForOrderAction_ExJn_1_WAIT</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:endEvent name="SUCCEEDED[Order placed. Consignment created.]" id="success">
+            <bpmn:incoming >seqFlow_setCompletionStatus_ExCh_6_success_OK</bpmn:incoming>
+            <bpmn:messageEventDefinition/>
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow sourceRef="setCompletionStatus_ExCh_6" targetRef="success" name="OK" id="seqFlow_setCompletionStatus_ExCh_6_success_OK"/>
+        <bpmn:exclusiveGateway gatewayDirection="Converging" id="waitForOrderAction_ExJn_1">
+            <bpmn:incoming >seqFlow_setCompletionStatus_ExCh_6_waitForOrderAction_ExJn_1_WAIT</bpmn:incoming>
+            <bpmn:incoming >seqFlow_setConfirmationStatus_ExCh_2_waitForOrderAction_ExJn_1_OK</bpmn:incoming>
+            <bpmn:incoming >seqFlow_cancelOrderAction_ExCh_5_waitForOrderAction_ExJn_1_WAIT</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_waitForOrderAction_ExJn_1_waitForOrderAction_null</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:sequenceFlow sourceRef="setCompletionStatus_ExCh_6" targetRef="waitForOrderAction_ExJn_1" name="WAIT" id="seqFlow_setCompletionStatus_ExCh_6_waitForOrderAction_ExJn_1_WAIT"/>
+        <bpmn:exclusiveGateway gatewayDirection="Diverging" id="checkSAPOrder_ExCh_4">
+            <bpmn:incoming >seqFlow_checkSAPOrder_checkSAPOrder_ExCh_4_null</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_checkSAPOrder_ExCh_4_error_NOK</bpmn:outgoing>
+            <bpmn:outgoing >seqFlow_checkSAPOrder_ExCh_4_checkSAPCustomerReplication_OK</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:endEvent name="ERROR[Order check failed.]" id="error">
+            <bpmn:incoming >seqFlow_checkSAPOrder_ExCh_4_error_NOK</bpmn:incoming>
+            <bpmn:messageEventDefinition/>
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow sourceRef="checkSAPOrder_ExCh_4" targetRef="error" name="NOK" id="seqFlow_checkSAPOrder_ExCh_4_error_NOK"/>
+        <bpmn:task name="sapOmsCheckCustomerReplicationAction" id="checkSAPCustomerReplication">
+            <bpmn:incoming >seqFlow_checkSAPOrder_ExCh_4_checkSAPCustomerReplication_OK</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_checkSAPCustomerReplication_checkSAPCustomerReplication_ExCh_7_null</bpmn:outgoing>
+        </bpmn:task>
+        <bpmn:sequenceFlow sourceRef="checkSAPOrder_ExCh_4" targetRef="checkSAPCustomerReplication" name="OK" id="seqFlow_checkSAPOrder_ExCh_4_checkSAPCustomerReplication_OK"/>
+        <bpmn:task name="sapOmsCancelOrderAction" id="cancelOrderAction">
+            <bpmn:incoming >seqFlow_cancelOrderAction_ExJn_2_cancelOrderAction_null</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_cancelOrderAction_cancelOrderAction_ExCh_5_null</bpmn:outgoing>
+        </bpmn:task>
+        <bpmn:exclusiveGateway gatewayDirection="Diverging" id="cancelOrderAction_ExCh_5">
+            <bpmn:incoming >seqFlow_cancelOrderAction_cancelOrderAction_ExCh_5_null</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_cancelOrderAction_ExCh_5_cancelled_OK</bpmn:outgoing>
+            <bpmn:outgoing >seqFlow_cancelOrderAction_ExCh_5_waitForOrderAction_ExJn_1_WAIT</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:sequenceFlow sourceRef="cancelOrderAction" targetRef="cancelOrderAction_ExCh_5" id="seqFlow_cancelOrderAction_cancelOrderAction_ExCh_5_null"/>
+        <bpmn:exclusiveGateway gatewayDirection="Converging" id="geocodeShippingAddress_ExJn_3">
+            <bpmn:incoming >seqFlow_waitForERPCustomerReplication_geocodeShippingAddress_ExJn_3_default</bpmn:incoming>
+            <bpmn:incoming >seqFlow_checkSAPCustomerReplication_ExCh_7_geocodeShippingAddress_ExJn_3_OK</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_geocodeShippingAddress_ExJn_3_geocodeShippingAddress_null</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:task name="geocodeShippingAddressAction" id="geocodeShippingAddress">
+            <bpmn:incoming >seqFlow_geocodeShippingAddress_ExJn_3_geocodeShippingAddress_null</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_geocodeShippingAddress_sourceOrder_OK</bpmn:outgoing>
+        </bpmn:task>
+        <bpmn:sequenceFlow sourceRef="geocodeShippingAddress_ExJn_3" targetRef="geocodeShippingAddress" id="seqFlow_geocodeShippingAddress_ExJn_3_geocodeShippingAddress_null"/>
+        <bpmn:exclusiveGateway gatewayDirection="Converging" id="waitForERPConfirmation_ExJn_4">
+            <bpmn:incoming >seqFlow_sendOrderToErp_ExCh_3_waitForERPConfirmation_ExJn_4_OK</bpmn:incoming>
+            <bpmn:incoming >seqFlow_setConfirmationStatus_ExCh_2_waitForERPConfirmation_ExJn_4_WAIT</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_waitForERPConfirmation_ExJn_4_waitForERPConfirmation_null</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:intermediateCatchEvent name="waitForERPConfirmation" id="waitForERPConfirmation">
+            <bpmn:incoming >seqFlow_waitForERPConfirmation_ExJn_4_waitForERPConfirmation_null</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_waitForERPConfirmation_setConfirmationStatus_default</bpmn:outgoing>
+            <bpmn:messageEventDefinition/>
+        </bpmn:intermediateCatchEvent>
+        <bpmn:sequenceFlow sourceRef="waitForERPConfirmation_ExJn_4" targetRef="waitForERPConfirmation" id="seqFlow_waitForERPConfirmation_ExJn_4_waitForERPConfirmation_null"/>
+        <bpmn:task name="sapOmsSourceOrderAction" id="sourceOrder">
+            <bpmn:incoming >seqFlow_geocodeShippingAddress_sourceOrder_OK</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_sourceOrder_sendOrderToErp_OK</bpmn:outgoing>
+        </bpmn:task>
+        <bpmn:sequenceFlow sourceRef="geocodeShippingAddress" targetRef="sourceOrder" name="OK" id="seqFlow_geocodeShippingAddress_sourceOrder_OK"/>
+        <bpmn:startEvent name="StartEvent" id="StartEvent">
+            <bpmn:outgoing >seqFlow_StartEvent_checkSAPOrder_null</bpmn:outgoing>
+            <bpmn:messageEventDefinition/>
+        </bpmn:startEvent>
+        <bpmn:task name="sapOmsCheckOrderAction" id="checkSAPOrder">
+            <bpmn:incoming >seqFlow_StartEvent_checkSAPOrder_null</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_checkSAPOrder_checkSAPOrder_ExCh_4_null</bpmn:outgoing>
+        </bpmn:task>
+        <bpmn:sequenceFlow sourceRef="StartEvent" targetRef="checkSAPOrder" id="seqFlow_StartEvent_checkSAPOrder_null"/>
+        <bpmn:endEvent name="FAILED[Order failed.]" id="failed">
+            <bpmn:incoming >seqFlow_waitForOrderAction_ExCh_1_failed_default</bpmn:incoming>
+            <bpmn:messageEventDefinition/>
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow sourceRef="waitForOrderAction_ExCh_1" targetRef="failed" id="seqFlow_waitForOrderAction_ExCh_1_failed_default"/>
+        <bpmn:task name="sapOmsCheckCompletionStatusAction" id="setCompletionStatus">
+            <bpmn:incoming >seqFlow_waitForOrderAction_ExCh_1_setCompletionStatus_consignmentProcessEnded</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_setCompletionStatus_setCompletionStatus_ExCh_6_null</bpmn:outgoing>
+        </bpmn:task>
+        <bpmn:sequenceFlow sourceRef="waitForOrderAction_ExCh_1" targetRef="setCompletionStatus" name="consignmentProcessEnded" id="seqFlow_waitForOrderAction_ExCh_1_setCompletionStatus_consignmentProcessEnded"/>
+        <bpmn:exclusiveGateway gatewayDirection="Converging" id="cancelOrderAction_ExJn_2">
+            <bpmn:incoming >seqFlow_waitForOrderAction_ExCh_1_cancelOrderAction_ExJn_2_consignmentProcessCancelled</bpmn:incoming>
+            <bpmn:incoming >seqFlow_waitForOrderAction_ExCh_1_cancelOrderAction_ExJn_2_cancelOrder</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_cancelOrderAction_ExJn_2_cancelOrderAction_null</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:sequenceFlow sourceRef="waitForOrderAction_ExCh_1" targetRef="cancelOrderAction_ExJn_2" name="consignmentProcessCancelled" id="seqFlow_waitForOrderAction_ExCh_1_cancelOrderAction_ExJn_2_consignmentProcessCancelled"/>
+        <bpmn:sequenceFlow sourceRef="waitForOrderAction_ExCh_1" targetRef="cancelOrderAction_ExJn_2" name="cancelOrder" id="seqFlow_waitForOrderAction_ExCh_1_cancelOrderAction_ExJn_2_cancelOrder"/>
+        <bpmn:intermediateCatchEvent name="waitForERPCustomerReplication" id="waitForERPCustomerReplication">
+            <bpmn:incoming >seqFlow_checkSAPCustomerReplication_ExCh_7_waitForERPCustomerReplication_NOK</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_waitForERPCustomerReplication_geocodeShippingAddress_ExJn_3_default</bpmn:outgoing>
+            <bpmn:messageEventDefinition/>
+        </bpmn:intermediateCatchEvent>
+        <bpmn:sequenceFlow sourceRef="waitForERPCustomerReplication" targetRef="geocodeShippingAddress_ExJn_3" name="ERPCustomerReplicationEvent_${process.order.user.customerID}_${process.order.code}" id="seqFlow_waitForERPCustomerReplication_geocodeShippingAddress_ExJn_3_default"/>
+        <bpmn:sequenceFlow sourceRef="setCompletionStatus" targetRef="setCompletionStatus_ExCh_6" id="seqFlow_setCompletionStatus_setCompletionStatus_ExCh_6_null"/>
+        <bpmn:endEvent name="ERROR[Sending to ERP went wrong.]" id="erpsendingerror">
+            <bpmn:incoming >seqFlow_sendOrderToErp_ExCh_3_erpsendingerror_NOK</bpmn:incoming>
+            <bpmn:messageEventDefinition/>
+        </bpmn:endEvent>
+        <bpmn:exclusiveGateway gatewayDirection="Diverging" id="sendOrderToErp_ExCh_3">
+            <bpmn:incoming >seqFlow_sendOrderToErp_sendOrderToErp_ExCh_3_null</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_sendOrderToErp_ExCh_3_erpsendingerror_NOK</bpmn:outgoing>
+            <bpmn:outgoing >seqFlow_sendOrderToErp_ExCh_3_waitForERPConfirmation_ExJn_4_OK</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:sequenceFlow sourceRef="sendOrderToErp_ExCh_3" targetRef="erpsendingerror" name="NOK" id="seqFlow_sendOrderToErp_ExCh_3_erpsendingerror_NOK"/>
+        <bpmn:sequenceFlow sourceRef="sendOrderToErp_ExCh_3" targetRef="waitForERPConfirmation_ExJn_4" name="OK" id="seqFlow_sendOrderToErp_ExCh_3_waitForERPConfirmation_ExJn_4_OK"/>
+        <bpmn:exclusiveGateway gatewayDirection="Diverging" id="checkSAPCustomerReplication_ExCh_7">
+            <bpmn:incoming >seqFlow_checkSAPCustomerReplication_checkSAPCustomerReplication_ExCh_7_null</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_checkSAPCustomerReplication_ExCh_7_waitForERPCustomerReplication_NOK</bpmn:outgoing>
+            <bpmn:outgoing >seqFlow_checkSAPCustomerReplication_ExCh_7_geocodeShippingAddress_ExJn_3_OK</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:sequenceFlow sourceRef="checkSAPCustomerReplication" targetRef="checkSAPCustomerReplication_ExCh_7" id="seqFlow_checkSAPCustomerReplication_checkSAPCustomerReplication_ExCh_7_null"/>
+        <bpmn:exclusiveGateway gatewayDirection="Diverging" id="setConfirmationStatus_ExCh_2">
+            <bpmn:incoming >seqFlow_setConfirmationStatus_setConfirmationStatus_ExCh_2_null</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_setConfirmationStatus_ExCh_2_waitForOrderAction_ExJn_1_OK</bpmn:outgoing>
+            <bpmn:outgoing >seqFlow_setConfirmationStatus_ExCh_2_waitForERPConfirmation_ExJn_4_WAIT</bpmn:outgoing>
+        </bpmn:exclusiveGateway>
+        <bpmn:sequenceFlow sourceRef="setConfirmationStatus_ExCh_2" targetRef="waitForOrderAction_ExJn_1" name="OK" id="seqFlow_setConfirmationStatus_ExCh_2_waitForOrderAction_ExJn_1_OK"/>
+        <bpmn:sequenceFlow sourceRef="setConfirmationStatus_ExCh_2" targetRef="waitForERPConfirmation_ExJn_4" name="WAIT" id="seqFlow_setConfirmationStatus_ExCh_2_waitForERPConfirmation_ExJn_4_WAIT"/>
+        <bpmn:task name="sapOmsSendOrderToDataHubAction" id="sendOrderToErp">
+            <bpmn:incoming >seqFlow_sourceOrder_sendOrderToErp_OK</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_sendOrderToErp_sendOrderToErp_ExCh_3_null</bpmn:outgoing>
+        </bpmn:task>
+        <bpmn:sequenceFlow sourceRef="sourceOrder" targetRef="sendOrderToErp" name="OK" id="seqFlow_sourceOrder_sendOrderToErp_OK"/>
+        <bpmn:task name="sapOmsSetConfirmationStatusAction" id="setConfirmationStatus">
+            <bpmn:incoming >seqFlow_waitForERPConfirmation_setConfirmationStatus_default</bpmn:incoming>
+            <bpmn:outgoing >seqFlow_setConfirmationStatus_setConfirmationStatus_ExCh_2_null</bpmn:outgoing>
+        </bpmn:task>
+        <bpmn:sequenceFlow sourceRef="setConfirmationStatus" targetRef="setConfirmationStatus_ExCh_2" id="seqFlow_setConfirmationStatus_setConfirmationStatus_ExCh_2_null"/>
+        <bpmn:sequenceFlow sourceRef="sendOrderToErp" targetRef="sendOrderToErp_ExCh_3" id="seqFlow_sendOrderToErp_sendOrderToErp_ExCh_3_null"/>
+        <bpmn:endEvent name="SUCCEEDED[Order cancelled.]" id="cancelled">
+            <bpmn:incoming >seqFlow_cancelOrderAction_ExCh_5_cancelled_OK</bpmn:incoming>
+            <bpmn:messageEventDefinition/>
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow sourceRef="cancelOrderAction_ExCh_5" targetRef="cancelled" name="OK" id="seqFlow_cancelOrderAction_ExCh_5_cancelled_OK"/>
+        <bpmn:sequenceFlow sourceRef="cancelOrderAction_ExCh_5" targetRef="waitForOrderAction_ExJn_1" name="WAIT" id="seqFlow_cancelOrderAction_ExCh_5_waitForOrderAction_ExJn_1_WAIT"/>
+        <bpmn:sequenceFlow sourceRef="checkSAPCustomerReplication_ExCh_7" targetRef="waitForERPCustomerReplication" name="NOK" id="seqFlow_checkSAPCustomerReplication_ExCh_7_waitForERPCustomerReplication_NOK"/>
+        <bpmn:sequenceFlow sourceRef="checkSAPCustomerReplication_ExCh_7" targetRef="geocodeShippingAddress_ExJn_3" name="OK" id="seqFlow_checkSAPCustomerReplication_ExCh_7_geocodeShippingAddress_ExJn_3_OK"/>
+        <bpmn:sequenceFlow sourceRef="checkSAPOrder" targetRef="checkSAPOrder_ExCh_4" id="seqFlow_checkSAPOrder_checkSAPOrder_ExCh_4_null"/>
+        <bpmn:sequenceFlow sourceRef="cancelOrderAction_ExJn_2" targetRef="cancelOrderAction" id="seqFlow_cancelOrderAction_ExJn_2_cancelOrderAction_null"/>
+        <bpmn:sequenceFlow sourceRef="waitForERPConfirmation" targetRef="setConfirmationStatus" name="ERPOrderConfirmationEvent_${process.order.code}" id="seqFlow_waitForERPConfirmation_setConfirmationStatus_default"/>
+        <bpmn:sequenceFlow sourceRef="waitForOrderAction_ExJn_1" targetRef="waitForOrderAction" id="seqFlow_waitForOrderAction_ExJn_1_waitForOrderAction_null"/>
+        <bpmn:dataObject name="de.hybris.platform.orderprocessing.model.OrderProcessModel as processClass" id="de.hybris.platform.orderprocessing.model.OrderProcessModel as processClass"/>
+    </bpmn:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+        <bpmndi:BPMNPlane bpmnElement="sap-oms-order-process" id="BPMNPlane_1" >
+            <bpmndi:BPMNShape bpmnElement="StartEvent" id="bpmnShape_StartEvent">
+                <dc:Bounds x="315.0" y="114.0" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="297.0" y="150.0" width="100.0" height="20.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="checkSAPOrder" id="bpmnShape_checkSAPOrder">
+                <dc:Bounds x="245.0" y="264.0" width="176.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="checkSAPOrder_ExCh_4" id="bpmnShape_checkSAPOrder_ExCh_4">
+                <dc:Bounds x="315.0" y="414.0" width="36.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="error" id="bpmnShape_error">
+                <dc:Bounds x="165.0" y="564.0" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="147.0" y="600.0" width="100.0" height="20.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_checkSAPOrder_ExCh_4_error_NOK" sourceElement="bpmnShape_checkSAPOrder_ExCh_4" targetElement="bpmnShape_error" id="edge_For_seqFlow_checkSAPOrder_ExCh_4_error_NOK">
+                <di:waypoint x="333.0" y="450.0"/>
+                <di:waypoint x="183.0" y="564.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="checkSAPCustomerReplication" id="bpmnShape_checkSAPCustomerReplication">
+                <dc:Bounds x="493.0" y="564.0" width="288.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="checkSAPCustomerReplication_ExCh_7" id="bpmnShape_checkSAPCustomerReplication_ExCh_7">
+                <dc:Bounds x="619.0" y="714.0" width="36.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="waitForERPCustomerReplication" id="bpmnShape_waitForERPCustomerReplication">
+                <dc:Bounds x="469.0" y="864.0" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="451.0" y="900.0" width="100.0" height="20.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="geocodeShippingAddress_ExJn_3" id="bpmnShape_geocodeShippingAddress_ExJn_3">
+                <dc:Bounds x="469.0" y="1014.0" width="36.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="geocodeShippingAddress" id="bpmnShape_geocodeShippingAddress">
+                <dc:Bounds x="375.0" y="1164.0" width="224.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="sourceOrder" id="bpmnShape_sourceOrder">
+                <dc:Bounds x="395.0" y="1314.0" width="184.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="sendOrderToErp" id="bpmnShape_sendOrderToErp">
+                <dc:Bounds x="367.0" y="1464.0" width="240.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="sendOrderToErp_ExCh_3" id="bpmnShape_sendOrderToErp_ExCh_3">
+                <dc:Bounds x="469.0" y="1614.0" width="36.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="erpsendingerror" id="bpmnShape_erpsendingerror">
+                <dc:Bounds x="319.0" y="1764.0" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="301.0" y="1800.0" width="100.0" height="20.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_sendOrderToErp_ExCh_3_erpsendingerror_NOK" sourceElement="bpmnShape_sendOrderToErp_ExCh_3" targetElement="bpmnShape_erpsendingerror" id="edge_For_seqFlow_sendOrderToErp_ExCh_3_erpsendingerror_NOK">
+                <di:waypoint x="487.0" y="1650.0"/>
+                <di:waypoint x="337.0" y="1764.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="waitForERPConfirmation_ExJn_4" id="bpmnShape_waitForERPConfirmation_ExJn_4">
+                <dc:Bounds x="647.0" y="1764.0" width="36.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="waitForERPConfirmation" id="bpmnShape_waitForERPConfirmation">
+                <dc:Bounds x="647.0" y="1914.0" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="629.0" y="1950.0" width="100.0" height="20.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="setConfirmationStatus" id="bpmnShape_setConfirmationStatus">
+                <dc:Bounds x="533.0" y="2064.0" width="264.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="setConfirmationStatus_ExCh_2" id="bpmnShape_setConfirmationStatus_ExCh_2">
+                <dc:Bounds x="647.0" y="2214.0" width="36.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="waitForOrderAction_ExJn_1" id="bpmnShape_waitForOrderAction_ExJn_1">
+                <dc:Bounds x="497.0" y="2364.0" width="36.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="waitForOrderAction" id="bpmnShape_waitForOrderAction">
+                <dc:Bounds x="497.0" y="2514.0" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="479.0" y="2550.0" width="100.0" height="20.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="waitForOrderAction_ExCh_1" id="bpmnShape_waitForOrderAction_ExCh_1">
+                <dc:Bounds x="497.0" y="2664.0" width="36.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="failed" id="bpmnShape_failed">
+                <dc:Bounds x="205.0" y="2814.0" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="329.0" y="2850.0" width="100.0" height="20.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_waitForOrderAction_ExCh_1_failed_default" sourceElement="bpmnShape_waitForOrderAction_ExCh_1" targetElement="bpmnShape_failed" id="edge_For_seqFlow_waitForOrderAction_ExCh_1_failed_default">
+                <di:waypoint x="515.0" y="2700.0"/>
+                <di:waypoint x="223.0" y="2814.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="setCompletionStatus" id="bpmnShape_setCompletionStatus">
+                <dc:Bounds x="233.0" y="2814.0" width="264.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="setCompletionStatus_ExCh_6" id="bpmnShape_setCompletionStatus_ExCh_6">
+                <dc:Bounds x="347.0" y="2964.0" width="36.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="success" id="bpmnShape_success">
+                <dc:Bounds x="197.0" y="3114.0" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="179.0" y="3150.0" width="100.0" height="20.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_setCompletionStatus_ExCh_6_success_OK" sourceElement="bpmnShape_setCompletionStatus_ExCh_6" targetElement="bpmnShape_success" id="edge_For_seqFlow_setCompletionStatus_ExCh_6_success_OK">
+                <di:waypoint x="365.0" y="3000.0"/>
+                <di:waypoint x="215.0" y="3114.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_setCompletionStatus_ExCh_6_waitForOrderAction_ExJn_1_WAIT" sourceElement="bpmnShape_setCompletionStatus_ExCh_6" targetElement="bpmnShape_waitForOrderAction_ExJn_1" id="edge_For_seqFlow_setCompletionStatus_ExCh_6_waitForOrderAction_ExJn_1_WAIT">
+                <di:waypoint x="365.0" y="3000.0"/>
+                <di:waypoint x="515.0" y="2364.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_setCompletionStatus_setCompletionStatus_ExCh_6_null" sourceElement="bpmnShape_setCompletionStatus" targetElement="bpmnShape_setCompletionStatus_ExCh_6" id="edge_For_seqFlow_setCompletionStatus_setCompletionStatus_ExCh_6_null">
+                <di:waypoint x="365.0" y="2850.0"/>
+                <di:waypoint x="365.0" y="2964.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_waitForOrderAction_ExCh_1_setCompletionStatus_consignmentProcessEnded" sourceElement="bpmnShape_waitForOrderAction_ExCh_1" targetElement="bpmnShape_setCompletionStatus" id="edge_For_seqFlow_waitForOrderAction_ExCh_1_setCompletionStatus_consignmentProcessEnded">
+                <di:waypoint x="515.0" y="2700.0"/>
+                <di:waypoint x="365.0" y="2814.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="cancelOrderAction_ExJn_2" id="bpmnShape_cancelOrderAction_ExJn_2">
+                <dc:Bounds x="675.0" y="2814.0" width="36.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="cancelOrderAction" id="bpmnShape_cancelOrderAction">
+                <dc:Bounds x="601.0" y="2964.0" width="184.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="cancelOrderAction_ExCh_5" id="bpmnShape_cancelOrderAction_ExCh_5">
+                <dc:Bounds x="675.0" y="3114.0" width="36.0" height="36.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="cancelled" id="bpmnShape_cancelled">
+                <dc:Bounds x="525.0" y="3264.0" width="36.0" height="36.0"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="507.0" y="3300.0" width="100.0" height="20.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_cancelOrderAction_ExCh_5_cancelled_OK" sourceElement="bpmnShape_cancelOrderAction_ExCh_5" targetElement="bpmnShape_cancelled" id="edge_For_seqFlow_cancelOrderAction_ExCh_5_cancelled_OK">
+                <di:waypoint x="693.0" y="3150.0"/>
+                <di:waypoint x="543.0" y="3264.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_cancelOrderAction_ExCh_5_waitForOrderAction_ExJn_1_WAIT" sourceElement="bpmnShape_cancelOrderAction_ExCh_5" targetElement="bpmnShape_waitForOrderAction_ExJn_1" id="edge_For_seqFlow_cancelOrderAction_ExCh_5_waitForOrderAction_ExJn_1_WAIT">
+                <di:waypoint x="693.0" y="3150.0"/>
+                <di:waypoint x="515.0" y="2364.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_cancelOrderAction_cancelOrderAction_ExCh_5_null" sourceElement="bpmnShape_cancelOrderAction" targetElement="bpmnShape_cancelOrderAction_ExCh_5" id="edge_For_seqFlow_cancelOrderAction_cancelOrderAction_ExCh_5_null">
+                <di:waypoint x="693.0" y="3000.0"/>
+                <di:waypoint x="693.0" y="3114.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_cancelOrderAction_ExJn_2_cancelOrderAction_null" sourceElement="bpmnShape_cancelOrderAction_ExJn_2" targetElement="bpmnShape_cancelOrderAction" id="edge_For_seqFlow_cancelOrderAction_ExJn_2_cancelOrderAction_null">
+                <di:waypoint x="693.0" y="2850.0"/>
+                <di:waypoint x="693.0" y="2964.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_waitForOrderAction_ExCh_1_cancelOrderAction_ExJn_2_consignmentProcessCancelled" sourceElement="bpmnShape_waitForOrderAction_ExCh_1" targetElement="bpmnShape_cancelOrderAction_ExJn_2" id="edge_For_seqFlow_waitForOrderAction_ExCh_1_cancelOrderAction_ExJn_2_consignmentProcessCancelled">
+                <di:waypoint x="515.0" y="2700.0"/>
+                <di:waypoint x="693.0" y="2814.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_waitForOrderAction_ExCh_1_cancelOrderAction_ExJn_2_cancelOrder" sourceElement="bpmnShape_waitForOrderAction_ExCh_1" targetElement="bpmnShape_cancelOrderAction_ExJn_2" id="edge_For_seqFlow_waitForOrderAction_ExCh_1_cancelOrderAction_ExJn_2_cancelOrder">
+                <di:waypoint x="515.0" y="2700.0"/>
+                <di:waypoint x="693.0" y="2814.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_waitForOrderAction_waitForOrderAction_ExCh_1_null" sourceElement="bpmnShape_waitForOrderAction" targetElement="bpmnShape_waitForOrderAction_ExCh_1" id="edge_For_seqFlow_waitForOrderAction_waitForOrderAction_ExCh_1_null">
+                <di:waypoint x="515.0" y="2550.0"/>
+                <di:waypoint x="515.0" y="2664.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_waitForOrderAction_ExJn_1_waitForOrderAction_null" sourceElement="bpmnShape_waitForOrderAction_ExJn_1" targetElement="bpmnShape_waitForOrderAction" id="edge_For_seqFlow_waitForOrderAction_ExJn_1_waitForOrderAction_null">
+                <di:waypoint x="515.0" y="2400.0"/>
+                <di:waypoint x="515.0" y="2514.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_setConfirmationStatus_ExCh_2_waitForOrderAction_ExJn_1_OK" sourceElement="bpmnShape_setConfirmationStatus_ExCh_2" targetElement="bpmnShape_waitForOrderAction_ExJn_1" id="edge_For_seqFlow_setConfirmationStatus_ExCh_2_waitForOrderAction_ExJn_1_OK">
+                <di:waypoint x="665.0" y="2250.0"/>
+                <di:waypoint x="515.0" y="2364.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_setConfirmationStatus_ExCh_2_waitForERPConfirmation_ExJn_4_WAIT" sourceElement="bpmnShape_setConfirmationStatus_ExCh_2" targetElement="bpmnShape_waitForERPConfirmation_ExJn_4" id="edge_For_seqFlow_setConfirmationStatus_ExCh_2_waitForERPConfirmation_ExJn_4_WAIT">
+                <di:waypoint x="665.0" y="2250.0"/>
+                <di:waypoint x="665.0" y="1764.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_setConfirmationStatus_setConfirmationStatus_ExCh_2_null" sourceElement="bpmnShape_setConfirmationStatus" targetElement="bpmnShape_setConfirmationStatus_ExCh_2" id="edge_For_seqFlow_setConfirmationStatus_setConfirmationStatus_ExCh_2_null">
+                <di:waypoint x="665.0" y="2100.0"/>
+                <di:waypoint x="665.0" y="2214.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_waitForERPConfirmation_setConfirmationStatus_default" sourceElement="bpmnShape_waitForERPConfirmation" targetElement="bpmnShape_setConfirmationStatus" id="edge_For_seqFlow_waitForERPConfirmation_setConfirmationStatus_default">
+                <di:waypoint x="665.0" y="1950.0"/>
+                <di:waypoint x="665.0" y="2064.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_waitForERPConfirmation_ExJn_4_waitForERPConfirmation_null" sourceElement="bpmnShape_waitForERPConfirmation_ExJn_4" targetElement="bpmnShape_waitForERPConfirmation" id="edge_For_seqFlow_waitForERPConfirmation_ExJn_4_waitForERPConfirmation_null">
+                <di:waypoint x="665.0" y="1800.0"/>
+                <di:waypoint x="665.0" y="1914.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_sendOrderToErp_ExCh_3_waitForERPConfirmation_ExJn_4_OK" sourceElement="bpmnShape_sendOrderToErp_ExCh_3" targetElement="bpmnShape_waitForERPConfirmation_ExJn_4" id="edge_For_seqFlow_sendOrderToErp_ExCh_3_waitForERPConfirmation_ExJn_4_OK">
+                <di:waypoint x="487.0" y="1650.0"/>
+                <di:waypoint x="665.0" y="1764.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_sendOrderToErp_sendOrderToErp_ExCh_3_null" sourceElement="bpmnShape_sendOrderToErp" targetElement="bpmnShape_sendOrderToErp_ExCh_3" id="edge_For_seqFlow_sendOrderToErp_sendOrderToErp_ExCh_3_null">
+                <di:waypoint x="487.0" y="1500.0"/>
+                <di:waypoint x="487.0" y="1614.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_sourceOrder_sendOrderToErp_OK" sourceElement="bpmnShape_sourceOrder" targetElement="bpmnShape_sendOrderToErp" id="edge_For_seqFlow_sourceOrder_sendOrderToErp_OK">
+                <di:waypoint x="487.0" y="1350.0"/>
+                <di:waypoint x="487.0" y="1464.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_geocodeShippingAddress_sourceOrder_OK" sourceElement="bpmnShape_geocodeShippingAddress" targetElement="bpmnShape_sourceOrder" id="edge_For_seqFlow_geocodeShippingAddress_sourceOrder_OK">
+                <di:waypoint x="487.0" y="1200.0"/>
+                <di:waypoint x="487.0" y="1314.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_geocodeShippingAddress_ExJn_3_geocodeShippingAddress_null" sourceElement="bpmnShape_geocodeShippingAddress_ExJn_3" targetElement="bpmnShape_geocodeShippingAddress" id="edge_For_seqFlow_geocodeShippingAddress_ExJn_3_geocodeShippingAddress_null">
+                <di:waypoint x="487.0" y="1050.0"/>
+                <di:waypoint x="487.0" y="1164.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_waitForERPCustomerReplication_geocodeShippingAddress_ExJn_3_default" sourceElement="bpmnShape_waitForERPCustomerReplication" targetElement="bpmnShape_geocodeShippingAddress_ExJn_3" id="edge_For_seqFlow_waitForERPCustomerReplication_geocodeShippingAddress_ExJn_3_default">
+                <di:waypoint x="487.0" y="900.0"/>
+                <di:waypoint x="487.0" y="1014.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_checkSAPCustomerReplication_ExCh_7_waitForERPCustomerReplication_NOK" sourceElement="bpmnShape_checkSAPCustomerReplication_ExCh_7" targetElement="bpmnShape_waitForERPCustomerReplication" id="edge_For_seqFlow_checkSAPCustomerReplication_ExCh_7_waitForERPCustomerReplication_NOK">
+                <di:waypoint x="637.0" y="750.0"/>
+                <di:waypoint x="487.0" y="864.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_checkSAPCustomerReplication_ExCh_7_geocodeShippingAddress_ExJn_3_OK" sourceElement="bpmnShape_checkSAPCustomerReplication_ExCh_7" targetElement="bpmnShape_geocodeShippingAddress_ExJn_3" id="edge_For_seqFlow_checkSAPCustomerReplication_ExCh_7_geocodeShippingAddress_ExJn_3_OK">
+                <di:waypoint x="637.0" y="750.0"/>
+                <di:waypoint x="487.0" y="1014.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_checkSAPCustomerReplication_checkSAPCustomerReplication_ExCh_7_null" sourceElement="bpmnShape_checkSAPCustomerReplication" targetElement="bpmnShape_checkSAPCustomerReplication_ExCh_7" id="edge_For_seqFlow_checkSAPCustomerReplication_checkSAPCustomerReplication_ExCh_7_null">
+                <di:waypoint x="637.0" y="600.0"/>
+                <di:waypoint x="637.0" y="714.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_checkSAPOrder_ExCh_4_checkSAPCustomerReplication_OK" sourceElement="bpmnShape_checkSAPOrder_ExCh_4" targetElement="bpmnShape_checkSAPCustomerReplication" id="edge_For_seqFlow_checkSAPOrder_ExCh_4_checkSAPCustomerReplication_OK">
+                <di:waypoint x="333.0" y="450.0"/>
+                <di:waypoint x="637.0" y="564.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_checkSAPOrder_checkSAPOrder_ExCh_4_null" sourceElement="bpmnShape_checkSAPOrder" targetElement="bpmnShape_checkSAPOrder_ExCh_4" id="edge_For_seqFlow_checkSAPOrder_checkSAPOrder_ExCh_4_null">
+                <di:waypoint x="333.0" y="300.0"/>
+                <di:waypoint x="333.0" y="414.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="seqFlow_StartEvent_checkSAPOrder_null" sourceElement="bpmnShape_StartEvent" targetElement="bpmnShape_checkSAPOrder" id="edge_For_seqFlow_StartEvent_checkSAPOrder_null">
+                <di:waypoint x="333.0" y="150.0"/>
+                <di:waypoint x="333.0" y="264.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="de.hybris.platform.orderprocessing.model.OrderProcessModel as processClass" id="bpmnShape_de.hybris.platform.orderprocessing.model.OrderProcessModel as processClass">
+                <dc:Bounds x="100.0" y="100.0" width="34.0" height="40.0"/>
+                <bpmndi:BPMNLabel>
+                    <dc:Bounds x="-179.0" y="140.0" width="592.0" height="20.0"/>
+                </bpmndi:BPMNLabel>
+            </bpmndi:BPMNShape>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn:definitions>
+

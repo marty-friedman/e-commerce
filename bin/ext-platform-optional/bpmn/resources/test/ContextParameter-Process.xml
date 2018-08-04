@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<process name="ContextParameter-Process" start="d22691c0-9e58-4ab7-b6cd-547cffcdd0e4" processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel" xmlns="http://www.hybris.de/xsd/processdefinition">
+    <contextParameter name="customer" use="required" type="java.lang.String"/>
+    <action bean="sendOrderPlacedNotificationAction" id="d22691c0-9e58-4ab7-b6cd-547cffcdd0e4">
+        <transition name="OK" to="34b38430-42d2-438c-996a-76a8a01f6861"/>
+    </action>
+    <end state="SUCCEEDED" id="34b38430-42d2-438c-996a-76a8a01f6861"></end>
+</process>

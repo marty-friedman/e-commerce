@@ -1,0 +1,7 @@
+# language-unspecific impex
+$lang=de
+
+RuleConditionDefinitionCategory;id[unique=true];name[lang=$lang];
+;setup-with-unknown-language-test;Setup mit unbekannter Sprache Test;
+
+THIS TEXT FORCES SYNTAX ERRRORS IN THE IMPEX TO ENSURE IT FAILS IF IT GETS IMPORTED

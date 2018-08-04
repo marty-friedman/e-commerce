@@ -1,0 +1,16 @@
+<div data-ng-show="ctrl.visible"
+    class="pe-toolbar-item-context">
+    <span class="btn btn-default pe-toolbar-item-context__btn">
+        <div class="pe-toolbar-item-context__btn--txt">
+            <div title="{{ctrl.title}}"
+                class="perso-wrap-ellipsis pe-toolbar-item-context__btn--title">{{ctrl.title}}</div>
+            <div title="{{ctrl.subtitle}}"
+                class="perso-wrap-ellipsis pe-toolbar-item-context__btn--subtitle">{{ctrl.subtitle}}</div>
+        </div>
+    </span>
+    <span class="btn btn-default pe-toolbar-item-context__btn--hyicon"
+        data-ng-click="ctrl.clear()">
+        <div class="pe-toolbar-item-context__btn--txt hyicon hyicon-remove">
+        </div>
+    </span>
+</div>

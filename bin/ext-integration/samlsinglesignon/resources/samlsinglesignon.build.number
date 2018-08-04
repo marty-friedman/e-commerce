@@ -1,0 +1,11 @@
+#Ant properties
+#Tue Mar 06 14:46:19 UTC 2018
+builddate=20180306 1446
+description=samlsinglesignon
+group.id=de.hybris.platform
+module.name=platform-module
+name=samlsinglesignon
+releasedate=20180305 1940
+vendor=hybris
+version=6.7.0.0
+version.api=6.7.0
