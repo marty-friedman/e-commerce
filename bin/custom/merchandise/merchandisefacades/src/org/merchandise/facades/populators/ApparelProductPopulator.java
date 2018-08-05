@@ -30,34 +30,27 @@ import org.springframework.beans.factory.annotation.Required;
 /**
  * Populates {@link ProductData} with genders
  */
-public class ApparelProductPopulator implements Populator<ProductModel, ProductData>
-{
+public class ApparelProductPopulator implements Populator<ProductModel, ProductData> {
 	private Converter<Gender, GenderData> genderConverter;
 
-	protected Converter<Gender, GenderData> getGenderConverter()
-	{
+	protected Converter<Gender, GenderData> getGenderConverter() {
 		return genderConverter;
 	}
 
 	@Required
-	public void setGenderConverter(final Converter<Gender, GenderData> genderConverter)
-	{
+	public void setGenderConverter(final Converter<Gender, GenderData> genderConverter) {
 		this.genderConverter = genderConverter;
 	}
 
 	@Override
-	public void populate(final ProductModel source, final ProductData target) throws ConversionException
-	{
+	public void populate(final ProductModel source, final ProductData target) throws ConversionException {
 		final ProductModel baseProduct = getBaseProduct(source);
 
-		if (baseProduct instanceof ApparelProductModel)
-		{
+		if (baseProduct instanceof ApparelProductModel) {
 			final ApparelProductModel apparelProductModel = (ApparelProductModel) baseProduct;
-			if (CollectionUtils.isNotEmpty(apparelProductModel.getGenders()))
-			{
+			if (CollectionUtils.isNotEmpty(apparelProductModel.getGenders())) {
 				final List<GenderData> genders = new ArrayList<GenderData>();
-				for (final Gender gender : apparelProductModel.getGenders())
-				{
+				for (final Gender gender : apparelProductModel.getGenders()) {
 					genders.add(getGenderConverter().convert(gender));
 				}
 				target.setGenders(genders);
@@ -65,11 +58,9 @@ public class ApparelProductPopulator implements Populator<ProductModel, ProductD
 		}
 	}
 
-	protected ProductModel getBaseProduct(final ProductModel productModel)
-	{
+	protected ProductModel getBaseProduct(final ProductModel productModel) {
 		ProductModel currentProduct = productModel;
-		while (currentProduct instanceof VariantProductModel)
-		{
+		while (currentProduct instanceof VariantProductModel) {
 			final VariantProductModel variant = (VariantProductModel) currentProduct;
 			currentProduct = variant.getBaseProduct();
 		}

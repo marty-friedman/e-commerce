@@ -189,4 +189,23 @@
 	</bean>
 
 	<bean id="genderData" class="org.merchandise.facades.product.data.GenderData" scope="prototype"/>
+
+	<bean id="productInternalOnlyPopulator" class="org.merchandise.facades.populators.ProductInternalOnlyPopulator"/>
+	<bean id="searchResultProductInternalOnlyPopulator" class="org.merchandise.facades.populators.SearchResultProductInternalOnlyPopulator"/>
+	<bean id="customerInternalPopulator" class="org.merchandise.facades.populators.CustomerInternalPopulator"/>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productConverter"/>
+		<property name="add"  ref="productInternalOnlyPopulator"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSearchResultProductConverter"/>
+		<property name="add"  ref="searchResultProductInternalOnlyPopulator"/>
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="customerConverter"/>
+		<property name="add" ref="customerInternalPopulator"/>
+	</bean>
 </beans>

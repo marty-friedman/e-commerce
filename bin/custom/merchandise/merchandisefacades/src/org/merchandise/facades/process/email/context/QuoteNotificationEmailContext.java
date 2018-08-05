@@ -28,72 +28,61 @@ import java.util.Optional;
 /**
  * Velocity context for a quote notification email.
  */
-public class QuoteNotificationEmailContext extends AbstractEmailContext<QuoteProcessModel>
-{
-    private QuoteService quoteService;
+public class QuoteNotificationEmailContext extends AbstractEmailContext<QuoteProcessModel> {
+	private QuoteService quoteService;
 
-    private Converter<QuoteModel, QuoteData> quoteConverter;
+	private Converter<QuoteModel, QuoteData> quoteConverter;
 
-    private QuoteData quoteData;
+	private QuoteData quoteData;
 
-    @Override
-    public void init(final QuoteProcessModel quoteProcessModel, final EmailPageModel emailPageModel)
-    {
-        super.init(quoteProcessModel, emailPageModel);
+	@Override
+	public void init(final QuoteProcessModel quoteProcessModel, final EmailPageModel emailPageModel) {
+		super.init(quoteProcessModel, emailPageModel);
 
-        quoteData = getQuoteConverter().convert(getQuote(quoteProcessModel));
-    }
+		quoteData = getQuoteConverter().convert(getQuote(quoteProcessModel));
+	}
 
-    public QuoteData getQuote()
-    {
-        return quoteData;
-    }
+	public QuoteData getQuote() {
+		return quoteData;
+	}
 
-    @Override
-    protected BaseSiteModel getSite(final QuoteProcessModel quoteProcessModel)
-    {
-        return getQuote(quoteProcessModel).getSite();
-    }
+	@Override
+	protected BaseSiteModel getSite(final QuoteProcessModel quoteProcessModel) {
+		return getQuote(quoteProcessModel).getSite();
+	}
 
-    @Override
-    protected CustomerModel getCustomer(final QuoteProcessModel quoteProcessModel)
-    {
-        return (CustomerModel) getQuote(quoteProcessModel).getUser();
-    }
+	@Override
+	protected CustomerModel getCustomer(final QuoteProcessModel quoteProcessModel) {
+		return (CustomerModel) getQuote(quoteProcessModel).getUser();
+	}
 
-    @Override
-    protected LanguageModel getEmailLanguage(final QuoteProcessModel quoteProcessModel)
-    {
-        return getCustomer(quoteProcessModel).getSessionLanguage();
-    }
+	@Override
+	protected LanguageModel getEmailLanguage(final QuoteProcessModel quoteProcessModel) {
+		return getCustomer(quoteProcessModel).getSessionLanguage();
+	}
 
-    protected QuoteModel getQuote(final QuoteProcessModel quoteProcessModel)
-    {
-        return Optional.of(quoteProcessModel)
-                .map(QuoteProcessModel::getQuoteCode)
-                .map(getQuoteService()::getCurrentQuoteForCode)
-                .get();
-    }
+	protected QuoteModel getQuote(final QuoteProcessModel quoteProcessModel) {
+		return Optional.of(quoteProcessModel)
+				.map(QuoteProcessModel::getQuoteCode)
+				.map(getQuoteService()::getCurrentQuoteForCode)
+				.get();
+	}
 
-    @Required
-    public void setQuoteService(QuoteService quoteService)
-    {
-        this.quoteService = quoteService;
-    }
+	@Required
+	public void setQuoteService(QuoteService quoteService) {
+		this.quoteService = quoteService;
+	}
 
-    protected QuoteService getQuoteService()
-    {
-        return quoteService;
-    }
+	protected QuoteService getQuoteService() {
+		return quoteService;
+	}
 
-    @Required
-    public void setQuoteConverter(Converter<QuoteModel, QuoteData> quoteConverter)
-    {
-        this.quoteConverter = quoteConverter;
-    }
+	@Required
+	public void setQuoteConverter(Converter<QuoteModel, QuoteData> quoteConverter) {
+		this.quoteConverter = quoteConverter;
+	}
 
-    protected Converter<QuoteModel, QuoteData> getQuoteConverter()
-    {
-        return quoteConverter;
-    }
+	protected Converter<QuoteModel, QuoteData> getQuoteConverter() {
+		return quoteConverter;
+	}
 }

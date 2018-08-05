@@ -21,7 +21,7 @@
             <input type="hidden" name="productPostPrice" value="${product.price.value}"/>
 
             <c:choose>
-                <c:when test="${product.stock.stockLevelStatus.code eq 'outOfStock' }">
+                <c:when test="${product.stock.stockLevelStatus.code eq 'outOfStock' or (product.internalOnly and not user.internal)}">
                     <button type="submit" class="btn btn-primary btn-block glyphicon glyphicon-shopping-cart"
                             aria-disabled="true" disabled="disabled">
                     </button>
@@ -38,7 +38,7 @@
     <form:form id="configureForm${fn:escapeXml(product.code)}" action="${configureProductUrl}" method="get" class="configure_form">
         <c:if test="${product.configurable}">
             <c:choose>
-                <c:when test="${product.stock.stockLevelStatus.code eq 'outOfStock' }">
+                <c:when test="${product.stock.stockLevelStatus.code eq 'outOfStock'  or (product.internalOnly and not user.internal)}">
                     <button id="configureProduct" type="button" class="btn btn-primary btn-block"
                             disabled="disabled">
                         <spring:theme code="basket.configure.product"/>

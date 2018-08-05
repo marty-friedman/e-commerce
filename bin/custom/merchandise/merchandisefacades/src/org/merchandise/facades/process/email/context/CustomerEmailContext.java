@@ -26,49 +26,41 @@ import org.springframework.beans.factory.annotation.Required;
 /**
  * Velocity context for a customer email.
  */
-public class CustomerEmailContext extends AbstractEmailContext<StoreFrontCustomerProcessModel>
-{
+public class CustomerEmailContext extends AbstractEmailContext<StoreFrontCustomerProcessModel> {
 	private Converter<UserModel, CustomerData> customerConverter;
 	private CustomerData customerData;
 
 	@Override
-	public void init(final StoreFrontCustomerProcessModel storeFrontCustomerProcessModel, final EmailPageModel emailPageModel)
-	{
+	public void init(final StoreFrontCustomerProcessModel storeFrontCustomerProcessModel, final EmailPageModel emailPageModel) {
 		super.init(storeFrontCustomerProcessModel, emailPageModel);
 		customerData = getCustomerConverter().convert(getCustomer(storeFrontCustomerProcessModel));
 	}
 
 	@Override
-	protected BaseSiteModel getSite(final StoreFrontCustomerProcessModel storeFrontCustomerProcessModel)
-	{
+	protected BaseSiteModel getSite(final StoreFrontCustomerProcessModel storeFrontCustomerProcessModel) {
 		return storeFrontCustomerProcessModel.getSite();
 	}
 
 	@Override
-	protected CustomerModel getCustomer(final StoreFrontCustomerProcessModel storeFrontCustomerProcessModel)
-	{
+	protected CustomerModel getCustomer(final StoreFrontCustomerProcessModel storeFrontCustomerProcessModel) {
 		return storeFrontCustomerProcessModel.getCustomer();
 	}
 
-	protected Converter<UserModel, CustomerData> getCustomerConverter()
-	{
+	protected Converter<UserModel, CustomerData> getCustomerConverter() {
 		return customerConverter;
 	}
 
 	@Required
-	public void setCustomerConverter(final Converter<UserModel, CustomerData> customerConverter)
-	{
+	public void setCustomerConverter(final Converter<UserModel, CustomerData> customerConverter) {
 		this.customerConverter = customerConverter;
 	}
 
-	public CustomerData getCustomer()
-	{
+	public CustomerData getCustomer() {
 		return customerData;
 	}
 
 	@Override
-	protected LanguageModel getEmailLanguage(final StoreFrontCustomerProcessModel businessProcessModel)
-	{
+	protected LanguageModel getEmailLanguage(final StoreFrontCustomerProcessModel businessProcessModel) {
 		return businessProcessModel.getLanguage();
 	}
 }

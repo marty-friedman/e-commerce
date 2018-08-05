@@ -38,8 +38,7 @@ import org.springframework.beans.factory.annotation.Required;
 /**
  * Default implementation of {@link SimpleSuggestionFacade}.
  */
-public class DefaultSimpleSuggestionFacade implements SimpleSuggestionFacade
-{
+public class DefaultSimpleSuggestionFacade implements SimpleSuggestionFacade {
 	private UserService userService;
 	private CategoryService categoryService;
 	private ProductService productService;
@@ -49,8 +48,7 @@ public class DefaultSimpleSuggestionFacade implements SimpleSuggestionFacade
 
 	@Override
 	public List<ProductData> getReferencesForPurchasedInCategory(final String categoryCode,
-			final List<ProductReferenceTypeEnum> referenceTypes, final boolean excludePurchased, final Integer limit)
-	{
+																 final List<ProductReferenceTypeEnum> referenceTypes, final boolean excludePurchased, final Integer limit) {
 		final UserModel user = getUserService().getCurrentUser();
 		final CategoryModel category = getCategoryService().getCategoryForCode(categoryCode);
 
@@ -62,13 +60,11 @@ public class DefaultSimpleSuggestionFacade implements SimpleSuggestionFacade
 
 	@Override
 	public List<ProductData> getReferencesForProducts(final Set<String> productCodes,
-			final List<ProductReferenceTypeEnum> referenceTypes, final boolean excludePurchased, final Integer limit)
-	{
+													  final List<ProductReferenceTypeEnum> referenceTypes, final boolean excludePurchased, final Integer limit) {
 		final UserModel user = getUserService().getCurrentUser();
 
 		final Set<ProductModel> products = new HashSet<ProductModel>();
-		for (final String productCode : productCodes)
-		{
+		for (final String productCode : productCodes) {
 			final ProductModel product = getProductService().getProductForCode(productCode);
 			products.addAll(getAllBaseProducts(product));
 		}
@@ -81,13 +77,10 @@ public class DefaultSimpleSuggestionFacade implements SimpleSuggestionFacade
 
 	@Override
 	public List<ProductData> getSuggestionsForProductsInCart(final List<ProductReferenceTypeEnum> referenceTypes,
-			final boolean excludePurchased, final Integer limit)
-	{
-		if (getCartService().hasSessionCart())
-		{
+															 final boolean excludePurchased, final Integer limit) {
+		if (getCartService().hasSessionCart()) {
 			final Set<ProductModel> products = new HashSet<ProductModel>();
-			for (final AbstractOrderEntryModel entry : getCartService().getSessionCart().getEntries())
-			{
+			for (final AbstractOrderEntryModel entry : getCartService().getSessionCart().getEntries()) {
 				products.addAll(getAllBaseProducts(entry.getProduct()));
 			}
 			return Converters.convertAll(
@@ -97,19 +90,16 @@ public class DefaultSimpleSuggestionFacade implements SimpleSuggestionFacade
 		return Collections.emptyList();
 	}
 
-	protected Set<ProductModel> getAllBaseProducts(final ProductModel productModel)
-	{
+	protected Set<ProductModel> getAllBaseProducts(final ProductModel productModel) {
 		final Set<ProductModel> allBaseProducts = new HashSet<ProductModel>();
 
 		ProductModel currentProduct = productModel;
 		allBaseProducts.add(currentProduct);
 
-		while (currentProduct instanceof VariantProductModel)
-		{
+		while (currentProduct instanceof VariantProductModel) {
 			currentProduct = ((VariantProductModel) currentProduct).getBaseProduct();
 
-			if (currentProduct != null)
-			{
+			if (currentProduct != null) {
 				allBaseProducts.add(currentProduct);
 			}
 		}
@@ -122,8 +112,7 @@ public class DefaultSimpleSuggestionFacade implements SimpleSuggestionFacade
 	@Deprecated
 	@Override
 	public List<ProductData> getReferencesForPurchasedInCategory(final String categoryCode,
-			final ProductReferenceTypeEnum referenceType, final boolean excludePurchased, final Integer limit)
-	{
+																 final ProductReferenceTypeEnum referenceType, final boolean excludePurchased, final Integer limit) {
 		final UserModel user = getUserService().getCurrentUser();
 		final CategoryModel category = getCategoryService().getCategoryForCode(categoryCode);
 
@@ -133,69 +122,57 @@ public class DefaultSimpleSuggestionFacade implements SimpleSuggestionFacade
 		return Converters.convertAll(suggestions, getProductConverter());
 	}
 
-	protected UserService getUserService()
-	{
+	protected UserService getUserService() {
 		return userService;
 	}
 
 	@Required
-	public void setUserService(final UserService userService)
-	{
+	public void setUserService(final UserService userService) {
 		this.userService = userService;
 	}
 
-	protected CategoryService getCategoryService()
-	{
+	protected CategoryService getCategoryService() {
 		return categoryService;
 	}
 
 	@Required
-	public void setCategoryService(final CategoryService categoryService)
-	{
+	public void setCategoryService(final CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
 
-	protected ProductService getProductService()
-	{
+	protected ProductService getProductService() {
 		return productService;
 	}
 
 	@Required
-	public void setProductService(final ProductService productService)
-	{
+	public void setProductService(final ProductService productService) {
 		this.productService = productService;
 	}
 
-	protected Converter<ProductModel, ProductData> getProductConverter()
-	{
+	protected Converter<ProductModel, ProductData> getProductConverter() {
 		return productConverter;
 	}
 
 	@Required
-	public void setProductConverter(final Converter<ProductModel, ProductData> productConverter)
-	{
+	public void setProductConverter(final Converter<ProductModel, ProductData> productConverter) {
 		this.productConverter = productConverter;
 	}
 
-	protected SimpleSuggestionService getSimpleSuggestionService()
-	{
+	protected SimpleSuggestionService getSimpleSuggestionService() {
 		return simpleSuggestionService;
 	}
 
 	@Required
-	public void setSimpleSuggestionService(final SimpleSuggestionService simpleSuggestionService)
-	{
+	public void setSimpleSuggestionService(final SimpleSuggestionService simpleSuggestionService) {
 		this.simpleSuggestionService = simpleSuggestionService;
 	}
 
-	protected CartService getCartService()
-	{
+	protected CartService getCartService() {
 		return cartService;
 	}
 
 	@Required
-	public void setCartService(final CartService cartService)
-	{
+	public void setCartService(final CartService cartService) {
 		this.cartService = cartService;
 	}
 }

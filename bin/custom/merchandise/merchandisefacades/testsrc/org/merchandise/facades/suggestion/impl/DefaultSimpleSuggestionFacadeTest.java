@@ -47,8 +47,7 @@ import org.mockito.MockitoAnnotations;
  * Unit test for {@link DefaultSimpleSuggestionFacade}.
  */
 @UnitTest
-public class DefaultSimpleSuggestionFacadeTest
-{
+public class DefaultSimpleSuggestionFacadeTest {
 	@Mock
 	private UserService userService;
 	@Mock
@@ -73,8 +72,7 @@ public class DefaultSimpleSuggestionFacadeTest
 	private DefaultSimpleSuggestionFacade defaultSimpleSuggestionFacade;
 
 	@Before
-	public void setUp()
-	{
+	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 		defaultSimpleSuggestionFacade = new DefaultSimpleSuggestionFacade();
 		defaultSimpleSuggestionFacade.setUserService(userService);
@@ -96,8 +94,7 @@ public class DefaultSimpleSuggestionFacadeTest
 	}
 
 	@Test
-	public void testGetReferencedProductsForBoughtCategory()
-	{
+	public void testGetReferencedProductsForBoughtCategory() {
 		final UserModel user = mock(UserModel.class);
 		final CategoryModel category = mock(CategoryModel.class);
 

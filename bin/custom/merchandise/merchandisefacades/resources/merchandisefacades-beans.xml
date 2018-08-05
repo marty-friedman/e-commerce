@@ -13,10 +13,15 @@
 
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="genders" type="java.util.List&lt;org.merchandise.facades.product.data.GenderData>"/>
+		<property name="internalOnly" type="Boolean"/>
 	</bean>
 
 	<bean class="org.merchandise.facades.product.data.GenderData">
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
+		<property name="internal" type="Boolean"/>
 	</bean>
 </beans>

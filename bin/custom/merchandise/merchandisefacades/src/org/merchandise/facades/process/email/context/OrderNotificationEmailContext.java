@@ -31,15 +31,13 @@ import org.springframework.beans.factory.annotation.Required;
 /**
  * Velocity context for a order notification email.
  */
-public class OrderNotificationEmailContext extends AbstractEmailContext<OrderProcessModel>
-{
+public class OrderNotificationEmailContext extends AbstractEmailContext<OrderProcessModel> {
 	private Converter<OrderModel, OrderData> orderConverter;
 	private OrderData orderData;
 	private List<CouponData> giftCoupons;
 
 	@Override
-	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel)
-	{
+	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
 		super.init(orderProcessModel, emailPageModel);
 		orderData = getOrderConverter().convert(orderProcessModel.getOrder());
 
@@ -47,42 +45,36 @@ public class OrderNotificationEmailContext extends AbstractEmailContext<OrderPro
 				.filter(x -> CollectionUtils.isNotEmpty(x.getGiveAwayCouponCodes())).flatMap(p -> p.getGiveAwayCouponCodes().stream())
 				.collect(Collectors.toList());
 	}
+
 	@Override
-	protected BaseSiteModel getSite(final OrderProcessModel orderProcessModel)
-	{
+	protected BaseSiteModel getSite(final OrderProcessModel orderProcessModel) {
 		return orderProcessModel.getOrder().getSite();
 	}
 
 	@Override
-	protected CustomerModel getCustomer(final OrderProcessModel orderProcessModel)
-	{
+	protected CustomerModel getCustomer(final OrderProcessModel orderProcessModel) {
 		return (CustomerModel) orderProcessModel.getOrder().getUser();
 	}
 
-	protected Converter<OrderModel, OrderData> getOrderConverter()
-	{
+	protected Converter<OrderModel, OrderData> getOrderConverter() {
 		return orderConverter;
 	}
 
 	@Required
-	public void setOrderConverter(final Converter<OrderModel, OrderData> orderConverter)
-	{
+	public void setOrderConverter(final Converter<OrderModel, OrderData> orderConverter) {
 		this.orderConverter = orderConverter;
 	}
 
-	public OrderData getOrder()
-	{
+	public OrderData getOrder() {
 		return orderData;
 	}
 
 	@Override
-	protected LanguageModel getEmailLanguage(final OrderProcessModel orderProcessModel)
-	{
+	protected LanguageModel getEmailLanguage(final OrderProcessModel orderProcessModel) {
 		return orderProcessModel.getOrder().getLanguage();
 	}
 
-	public List<CouponData> getCoupons()
-	{
+	public List<CouponData> getCoupons() {
 		return giftCoupons;
 	}
 }

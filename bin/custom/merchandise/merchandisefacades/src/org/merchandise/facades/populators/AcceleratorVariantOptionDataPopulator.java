@@ -31,8 +31,7 @@ import org.springframework.beans.factory.annotation.Required;
 /**
  * Accelerator specific variant option data converter implementation.
  */
-public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopulator
-{
+public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopulator {
 	private TypeService typeService;
 	private MediaService mediaService;
 	private MediaContainerService mediaContainerService;
@@ -40,35 +39,27 @@ public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopu
 	private Map<String, String> variantAttributeMapping;
 
 	@Override
-	public void populate(final VariantProductModel source, final VariantOptionData target)
-	{
+	public void populate(final VariantProductModel source, final VariantOptionData target) {
 		super.populate(source, target);
 
 		final MediaContainerModel mediaContainer = getPrimaryImageMediaContainer(source);
-		if (mediaContainer != null)
-		{
+		if (mediaContainer != null) {
 			final ComposedTypeModel productType = getTypeService().getComposedTypeForClass(source.getClass());
-			for (final VariantOptionQualifierData variantOptionQualifier : target.getVariantOptionQualifiers())
-			{
+			for (final VariantOptionQualifierData variantOptionQualifier : target.getVariantOptionQualifiers()) {
 				final MediaModel media = getMediaWithImageFormat(mediaContainer, lookupImageFormat(productType, variantOptionQualifier.getQualifier()));
-				if (media != null)
-				{
+				if (media != null) {
 					variantOptionQualifier.setImage(getImageConverter().convert(media));
 				}
 			}
 		}
 	}
 
-	protected MediaModel getMediaWithImageFormat(final MediaContainerModel mediaContainer, final String imageFormat)
-	{
-		if (mediaContainer != null && imageFormat != null)
-		{
+	protected MediaModel getMediaWithImageFormat(final MediaContainerModel mediaContainer, final String imageFormat) {
+		if (mediaContainer != null && imageFormat != null) {
 			final String mediaFormatQualifier = getImageFormatMapping().getMediaFormatQualifierForImageFormat(imageFormat);
-			if (mediaFormatQualifier != null)
-			{
+			if (mediaFormatQualifier != null) {
 				final MediaFormatModel mediaFormat = getMediaService().getFormat(mediaFormatQualifier);
-				if (mediaFormat != null)
-				{
+				if (mediaFormat != null) {
 					return getMediaContainerService().getMediaForFormat(mediaContainer, mediaFormat);
 				}
 			}
@@ -76,10 +67,8 @@ public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopu
 		return null;
 	}
 
-	protected String lookupImageFormat(final ComposedTypeModel productType, final String attributeQualifier)
-	{
-		if (productType == null)
-		{
+	protected String lookupImageFormat(final ComposedTypeModel productType, final String attributeQualifier) {
+		if (productType == null) {
 			return null;
 		}
 
@@ -91,69 +80,57 @@ public class AcceleratorVariantOptionDataPopulator extends VariantOptionDataPopu
 		return imageFormat != null ? imageFormat : lookupImageFormat(productType.getSuperType(), attributeQualifier);
 	}
 
-	protected MediaContainerModel getPrimaryImageMediaContainer(final VariantProductModel variantProductModel)
-	{
+	protected MediaContainerModel getPrimaryImageMediaContainer(final VariantProductModel variantProductModel) {
 		final MediaModel picture = variantProductModel.getPicture();
-		if (picture != null)
-		{
+		if (picture != null) {
 			return picture.getMediaContainer();
 		}
 		return null;
 	}
 
 
-	protected TypeService getTypeService()
-	{
+	protected TypeService getTypeService() {
 		return typeService;
 	}
 
 	@Required
-	public void setTypeService(final TypeService typeService)
-	{
+	public void setTypeService(final TypeService typeService) {
 		this.typeService = typeService;
 	}
 
-	protected MediaService getMediaService()
-	{
+	protected MediaService getMediaService() {
 		return mediaService;
 	}
 
 	@Required
-	public void setMediaService(final MediaService mediaService)
-	{
+	public void setMediaService(final MediaService mediaService) {
 		this.mediaService = mediaService;
 	}
 
-	protected MediaContainerService getMediaContainerService()
-	{
+	protected MediaContainerService getMediaContainerService() {
 		return mediaContainerService;
 	}
 
 	@Required
-	public void setMediaContainerService(final MediaContainerService mediaContainerService)
-	{
+	public void setMediaContainerService(final MediaContainerService mediaContainerService) {
 		this.mediaContainerService = mediaContainerService;
 	}
 
-	protected ImageFormatMapping getImageFormatMapping()
-	{
+	protected ImageFormatMapping getImageFormatMapping() {
 		return imageFormatMapping;
 	}
 
 	@Required
-	public void setImageFormatMapping(final ImageFormatMapping imageFormatMapping)
-	{
+	public void setImageFormatMapping(final ImageFormatMapping imageFormatMapping) {
 		this.imageFormatMapping = imageFormatMapping;
 	}
 
-	protected Map<String, String> getVariantAttributeMapping()
-	{
+	protected Map<String, String> getVariantAttributeMapping() {
 		return variantAttributeMapping;
 	}
 
 	@Required
-	public void setVariantAttributeMapping(final Map<String, String> variantAttributeMapping)
-	{
+	public void setVariantAttributeMapping(final Map<String, String> variantAttributeMapping) {
 		this.variantAttributeMapping = variantAttributeMapping;
 	}
 }

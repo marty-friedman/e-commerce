@@ -36,8 +36,7 @@ import org.junit.Test;
  * Integration test suite for {@link DefaultSimpleSuggestionFacade}.
  */
 @IntegrationTest
-public class DefaultSimpleSuggestionFacadeIntegrationTest extends ServicelayerTransactionalTest
-{
+public class DefaultSimpleSuggestionFacadeIntegrationTest extends ServicelayerTransactionalTest {
 
 	@Resource
 	private SimpleSuggestionFacade simpleSuggestionFacade;
@@ -47,16 +46,14 @@ public class DefaultSimpleSuggestionFacadeIntegrationTest extends ServicelayerTr
 	private UserService userService;
 
 	@Before
-	public void setUp() throws Exception
-	{
+	public void setUp() throws Exception {
 		userService.setCurrentUser(userService.getAnonymousUser());
 		importCsv("/merchandisefacades/test/testSimpleSuggestionFacade.csv", "utf-8");
 		baseSiteService.setCurrentBaseSite(baseSiteService.getBaseSiteForUID("testSite"), false);
 	}
 
 	@Test
-	public void testReferencesForPurchasedInCategory()
-	{
+	public void testReferencesForPurchasedInCategory() {
 		final UserModel user = userService.getUserForUID("dejol");
 		userService.setCurrentUser(user);
 		List<ProductData> result = simpleSuggestionFacade.getReferencesForPurchasedInCategory("cameras", Collections.EMPTY_LIST,

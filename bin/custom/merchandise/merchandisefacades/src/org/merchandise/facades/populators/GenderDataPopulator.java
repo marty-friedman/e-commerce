@@ -20,24 +20,20 @@ import org.springframework.beans.factory.annotation.Required;
 /**
  * Populates {@link GenderData} with name and code.
  */
-public class GenderDataPopulator implements Populator<Gender, GenderData>
-{
+public class GenderDataPopulator implements Populator<Gender, GenderData> {
 	private TypeService typeService;
 
-	protected TypeService getTypeService()
-	{
+	protected TypeService getTypeService() {
 		return typeService;
 	}
 
 	@Required
-	public void setTypeService(final TypeService typeService)
-	{
+	public void setTypeService(final TypeService typeService) {
 		this.typeService = typeService;
 	}
 
 	@Override
-	public void populate(final Gender source, final GenderData target)
-	{
+	public void populate(final Gender source, final GenderData target) {
 		target.setCode(source.getCode());
 		target.setName(getTypeService().getEnumerationValue(source).getName());
 	}

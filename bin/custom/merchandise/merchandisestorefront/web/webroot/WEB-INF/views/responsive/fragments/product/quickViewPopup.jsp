@@ -88,10 +88,15 @@
 					${productStockLevel}
 				</div>
 
-
-			<c:set var="buttonType">button</c:set>
-			<c:if test="${product.purchasable and product.stock.stockLevelStatus.code ne 'outOfStock' }">
-				<c:set var="buttonType">submit</c:set>
+			<c:set var="buttonType">submit</c:set>
+			<spring:theme var="addToCartButtonText" code="basket.add.to.basket"/>
+			<c:if test="${!product.purchasable or product.stock.stockLevelStatus.code eq 'outOfStock' }">
+				<c:set var="buttonType">button</c:set>
+				<spring:theme var="addToCartButtonText" code="product.variants.out.of.stock"/>
+			</c:if>
+			<c:if test="${product.internalOnly and !user.internal}">
+				<c:set var="buttonType">button</c:set>
+				<spring:theme var="addToCartButtonText" code="text.addToCart.unavailable"/>
 			</c:if>
 			<c:choose>
 				<c:when test="${fn:contains(buttonType, 'button')}">

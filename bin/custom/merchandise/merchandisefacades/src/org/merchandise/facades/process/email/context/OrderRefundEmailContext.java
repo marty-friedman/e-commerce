@@ -28,8 +28,7 @@ import org.springframework.beans.factory.annotation.Required;
 /**
  * Velocity context for a order refund email.
  */
-public class OrderRefundEmailContext extends AbstractEmailContext<OrderProcessModel>
-{
+public class OrderRefundEmailContext extends AbstractEmailContext<OrderProcessModel> {
 	private Converter<OrderModel, OrderData> orderConverter;
 	private OrderData orderData;
 	private String orderCode;
@@ -39,8 +38,7 @@ public class OrderRefundEmailContext extends AbstractEmailContext<OrderProcessMo
 	private PriceData refundAmount;
 
 	@Override
-	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel)
-	{
+	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
 		super.init(orderProcessModel, emailPageModel);
 		orderData = getOrderConverter().convert(orderProcessModel.getOrder());
 		orderCode = orderProcessModel.getOrder().getCode();
@@ -52,91 +50,74 @@ public class OrderRefundEmailContext extends AbstractEmailContext<OrderProcessMo
 	}
 
 	@Override
-	protected BaseSiteModel getSite(final OrderProcessModel orderProcessModel)
-	{
+	protected BaseSiteModel getSite(final OrderProcessModel orderProcessModel) {
 		return orderProcessModel.getOrder().getSite();
 	}
 
 	@Override
-	protected CustomerModel getCustomer(final OrderProcessModel orderProcessModel)
-	{
+	protected CustomerModel getCustomer(final OrderProcessModel orderProcessModel) {
 		return (CustomerModel) orderProcessModel.getOrder().getUser();
 	}
 
-	protected Converter<OrderModel, OrderData> getOrderConverter()
-	{
+	protected Converter<OrderModel, OrderData> getOrderConverter() {
 		return orderConverter;
 	}
 
 	@Required
-	public void setOrderConverter(final Converter<OrderModel, OrderData> orderConverter)
-	{
+	public void setOrderConverter(final Converter<OrderModel, OrderData> orderConverter) {
 		this.orderConverter = orderConverter;
 	}
 
-	public OrderData getOrder()
-	{
+	public OrderData getOrder() {
 		return orderData;
 	}
 
 	@Override
-	protected LanguageModel getEmailLanguage(final OrderProcessModel orderProcessModel)
-	{
+	protected LanguageModel getEmailLanguage(final OrderProcessModel orderProcessModel) {
 		return orderProcessModel.getOrder().getLanguage();
 	}
 
-	public OrderData getOrderData()
-	{
+	public OrderData getOrderData() {
 		return orderData;
 	}
 
-	public void setOrderData(final OrderData orderData)
-	{
+	public void setOrderData(final OrderData orderData) {
 		this.orderData = orderData;
 	}
 
-	public String getOrderCode()
-	{
+	public String getOrderCode() {
 		return orderCode;
 	}
 
-	public void setOrderCode(final String orderCode)
-	{
+	public void setOrderCode(final String orderCode) {
 		this.orderCode = orderCode;
 	}
 
-	public String getOrderGuid()
-	{
+	public String getOrderGuid() {
 		return orderGuid;
 	}
 
-	public void setOrderGuid(final String orderGuid)
-	{
+	public void setOrderGuid(final String orderGuid) {
 		this.orderGuid = orderGuid;
 	}
 
-	public boolean isGuest()
-	{
+	public boolean isGuest() {
 		return guest;
 	}
 
-	public void setGuest(final boolean guest)
-	{
+	public void setGuest(final boolean guest) {
 		this.guest = guest;
 	}
 
-	public String getStoreName()
-	{
+	public String getStoreName() {
 		return storeName;
 	}
 
-	public void setStoreName(final String storeName)
-	{
+	public void setStoreName(final String storeName) {
 		this.storeName = storeName;
 	}
 
-	public PriceData getRefundAmount()
-	{
+	public PriceData getRefundAmount() {
 		return refundAmount;
 	}
 }

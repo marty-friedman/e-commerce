@@ -13,12 +13,10 @@ package org.merchandise.facades.constants;
 /**
  * Global class for all MerchandiseFacades constants.
  */
-public class MerchandiseFacadesConstants extends GeneratedMerchandiseFacadesConstants
-{
+public class MerchandiseFacadesConstants extends GeneratedMerchandiseFacadesConstants {
 	public static final String EXTENSIONNAME = "merchandisefacades";
 
-	private MerchandiseFacadesConstants()
-	{
+	private MerchandiseFacadesConstants() {
 		//empty
 	}
 }

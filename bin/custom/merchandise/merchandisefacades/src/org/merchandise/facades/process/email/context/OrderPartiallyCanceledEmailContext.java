@@ -15,15 +15,12 @@ import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import java.util.List;
 
 
-
 /**
  * Velocity context for email about partially order cancellation.
  */
-public class OrderPartiallyCanceledEmailContext extends OrderPartiallyModifiedEmailContext
-{
+public class OrderPartiallyCanceledEmailContext extends OrderPartiallyModifiedEmailContext {
 
-	public List<OrderEntryData> getCanceledEntries()
-	{
+	public List<OrderEntryData> getCanceledEntries() {
 		return super.getModifiedEntries();
 	}
 }

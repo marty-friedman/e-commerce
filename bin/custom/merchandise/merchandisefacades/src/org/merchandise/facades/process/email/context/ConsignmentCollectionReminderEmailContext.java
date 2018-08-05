@@ -35,8 +35,7 @@ import org.springframework.beans.factory.annotation.Required;
 /**
  * Velocity context for a Consignment Collection reminder email.
  */
-public class ConsignmentCollectionReminderEmailContext extends AbstractEmailContext<ConsignmentProcessModel>
-{
+public class ConsignmentCollectionReminderEmailContext extends AbstractEmailContext<ConsignmentProcessModel> {
 	private static final Logger LOG = Logger.getLogger(ConsignmentCollectionReminderEmailContext.class);
 
 	private Converter<ConsignmentModel, ConsignmentData> consignmentConverter;
@@ -51,8 +50,7 @@ public class ConsignmentCollectionReminderEmailContext extends AbstractEmailCont
 	private OrderData orderData;
 
 	@Override
-	public void init(final ConsignmentProcessModel consignmentProcessModel, final EmailPageModel emailPageModel)
-	{
+	public void init(final ConsignmentProcessModel consignmentProcessModel, final EmailPageModel emailPageModel) {
 		super.init(consignmentProcessModel, emailPageModel);
 		orderCode = consignmentProcessModel.getConsignment().getOrder().getCode();
 		orderGuid = consignmentProcessModel.getConsignment().getOrder().getGuid();
@@ -62,29 +60,24 @@ public class ConsignmentCollectionReminderEmailContext extends AbstractEmailCont
 		pickUpDate = dateFormat.format(DateUtils.addHours(consignmentProcessModel.getConsignment().getShippingDate(),
 				getCustomerServiceUncollectedConsignmentStrategy().getTimeThreshold().intValue()));
 		orderData = getOrderConverter().convert((OrderModel) consignmentProcessModel.getConsignment().getOrder());
-		if (LOG.isDebugEnabled())
-		{
+		if (LOG.isDebugEnabled()) {
 			LOG.debug("Initialized with order code " + orderCode);
 		}
 	}
 
 	@Override
-	protected BaseSiteModel getSite(final ConsignmentProcessModel consignmentProcessModel)
-	{
+	protected BaseSiteModel getSite(final ConsignmentProcessModel consignmentProcessModel) {
 		return consignmentProcessModel.getConsignment().getOrder().getSite();
 	}
 
 	@Override
-	protected CustomerModel getCustomer(final ConsignmentProcessModel consignmentProcessModel)
-	{
+	protected CustomerModel getCustomer(final ConsignmentProcessModel consignmentProcessModel) {
 		return (CustomerModel) consignmentProcessModel.getConsignment().getOrder().getUser();
 	}
 
 	@Override
-	protected LanguageModel getEmailLanguage(final ConsignmentProcessModel consignmentProcessModel)
-	{
-		if (consignmentProcessModel.getConsignment().getOrder() instanceof OrderModel)
-		{
+	protected LanguageModel getEmailLanguage(final ConsignmentProcessModel consignmentProcessModel) {
+		if (consignmentProcessModel.getConsignment().getOrder() instanceof OrderModel) {
 			return ((OrderModel) consignmentProcessModel.getConsignment().getOrder()).getLanguage();
 		}
 
@@ -92,79 +85,65 @@ public class ConsignmentCollectionReminderEmailContext extends AbstractEmailCont
 	}
 
 
-	public ConsignmentData getConsignment()
-	{
+	public ConsignmentData getConsignment() {
 		return consignmentData;
 	}
 
-	public String getOrderCode()
-	{
+	public String getOrderCode() {
 		return orderCode;
 	}
 
-	public String getOrderGuid()
-	{
+	public String getOrderGuid() {
 		return orderGuid;
 	}
 
-	public boolean isGuest()
-	{
+	public boolean isGuest() {
 		return guest;
 	}
 
-	public String getPickUpDate()
-	{
+	public String getPickUpDate() {
 		return pickUpDate;
 	}
 
 
-	protected Converter<ConsignmentModel, ConsignmentData> getConsignmentConverter()
-	{
+	protected Converter<ConsignmentModel, ConsignmentData> getConsignmentConverter() {
 		return consignmentConverter;
 	}
 
 	@Required
-	public void setConsignmentConverter(final Converter<ConsignmentModel, ConsignmentData> consignmentConverter)
-	{
+	public void setConsignmentConverter(final Converter<ConsignmentModel, ConsignmentData> consignmentConverter) {
 		this.consignmentConverter = consignmentConverter;
 	}
 
-	protected CustomerServiceUncollectedConsignmentStrategy getCustomerServiceUncollectedConsignmentStrategy()
-	{
+	protected CustomerServiceUncollectedConsignmentStrategy getCustomerServiceUncollectedConsignmentStrategy() {
 		return customerServiceUncollectedConsignmentStrategy;
 	}
 
 	@Required
 	public void setCustomerServiceUncollectedConsignmentStrategy(
-			final CustomerServiceUncollectedConsignmentStrategy customerServiceUncollectedConsignmentStrategy)
-	{
+			final CustomerServiceUncollectedConsignmentStrategy customerServiceUncollectedConsignmentStrategy) {
 		this.customerServiceUncollectedConsignmentStrategy = customerServiceUncollectedConsignmentStrategy;
 	}
 
-	protected FormatFactory getFormatFactory()
-	{
+	protected FormatFactory getFormatFactory() {
 		return formatFactory;
 	}
 
 	@Required
-	public void setFormatFactory(final FormatFactory formatFactory)
-	{
+	public void setFormatFactory(final FormatFactory formatFactory) {
 		this.formatFactory = formatFactory;
 	}
 
-	protected Converter<OrderModel, OrderData> getOrderConverter()
-	{
+	protected Converter<OrderModel, OrderData> getOrderConverter() {
 		return orderConverter;
 	}
 
 	@Required
-	public void setOrderConverter(final Converter<OrderModel, OrderData> orderConverter)
-	{
+	public void setOrderConverter(final Converter<OrderModel, OrderData> orderConverter) {
 		this.orderConverter = orderConverter;
 	}
 
-	public OrderData getOrder()
-	{
+	public OrderData getOrder() {
 		return orderData;
 	}
 }

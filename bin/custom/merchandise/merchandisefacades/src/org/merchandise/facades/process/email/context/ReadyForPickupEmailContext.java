@@ -28,8 +28,7 @@ import org.springframework.beans.factory.annotation.Required;
 /**
  * Velocity context for a Ready For Pickup notification email.
  */
-public class ReadyForPickupEmailContext extends AbstractEmailContext<ConsignmentProcessModel>
-{
+public class ReadyForPickupEmailContext extends AbstractEmailContext<ConsignmentProcessModel> {
 	private Converter<ConsignmentModel, ConsignmentData> consignmentConverter;
 	private ConsignmentData consignmentData;
 	private String orderCode;
@@ -37,8 +36,7 @@ public class ReadyForPickupEmailContext extends AbstractEmailContext<Consignment
 	private boolean guest;
 
 	@Override
-	public void init(final ConsignmentProcessModel consignmentProcessModel, final EmailPageModel emailPageModel)
-	{
+	public void init(final ConsignmentProcessModel consignmentProcessModel, final EmailPageModel emailPageModel) {
 		super.init(consignmentProcessModel, emailPageModel);
 		orderCode = consignmentProcessModel.getConsignment().getOrder().getCode();
 		orderGuid = consignmentProcessModel.getConsignment().getOrder().getGuid();
@@ -47,53 +45,43 @@ public class ReadyForPickupEmailContext extends AbstractEmailContext<Consignment
 	}
 
 	@Override
-	protected BaseSiteModel getSite(final ConsignmentProcessModel consignmentProcessModel)
-	{
+	protected BaseSiteModel getSite(final ConsignmentProcessModel consignmentProcessModel) {
 		return consignmentProcessModel.getConsignment().getOrder().getSite();
 	}
 
 	@Override
-	protected CustomerModel getCustomer(final ConsignmentProcessModel consignmentProcessModel)
-	{
+	protected CustomerModel getCustomer(final ConsignmentProcessModel consignmentProcessModel) {
 		return (CustomerModel) consignmentProcessModel.getConsignment().getOrder().getUser();
 	}
 
-	protected Converter<ConsignmentModel, ConsignmentData> getConsignmentConverter()
-	{
+	protected Converter<ConsignmentModel, ConsignmentData> getConsignmentConverter() {
 		return consignmentConverter;
 	}
 
 	@Required
-	public void setConsignmentConverter(final Converter<ConsignmentModel, ConsignmentData> consignmentConverter)
-	{
+	public void setConsignmentConverter(final Converter<ConsignmentModel, ConsignmentData> consignmentConverter) {
 		this.consignmentConverter = consignmentConverter;
 	}
 
-	public ConsignmentData getConsignment()
-	{
+	public ConsignmentData getConsignment() {
 		return consignmentData;
 	}
 
-	public String getOrderCode()
-	{
+	public String getOrderCode() {
 		return orderCode;
 	}
 
-	public String getOrderGuid()
-	{
+	public String getOrderGuid() {
 		return orderGuid;
 	}
 
-	public boolean isGuest()
-	{
+	public boolean isGuest() {
 		return guest;
 	}
 
 	@Override
-	protected LanguageModel getEmailLanguage(final ConsignmentProcessModel consignmentProcessModel)
-	{
-		if (consignmentProcessModel.getConsignment().getOrder() instanceof OrderModel)
-		{
+	protected LanguageModel getEmailLanguage(final ConsignmentProcessModel consignmentProcessModel) {
+		if (consignmentProcessModel.getConsignment().getOrder() instanceof OrderModel) {
 			return ((OrderModel) consignmentProcessModel.getConsignment().getOrder()).getLanguage();
 		}
 

@@ -33,8 +33,7 @@ import org.springframework.beans.factory.annotation.Required;
 /**
  * Velocity context for email notification about order consignment.
  */
-public class NotPickedUpConsignmentCanceledEmailContext extends AbstractEmailContext<ConsignmentProcessModel>
-{
+public class NotPickedUpConsignmentCanceledEmailContext extends AbstractEmailContext<ConsignmentProcessModel> {
 	private Converter<ConsignmentModel, ConsignmentData> consignmentConverter;
 	private PriceDataFactory priceDataFactory;
 	private ConsignmentData consignmentData;
@@ -44,8 +43,7 @@ public class NotPickedUpConsignmentCanceledEmailContext extends AbstractEmailCon
 	private PriceData refundAmount;
 
 	@Override
-	public void init(final ConsignmentProcessModel consignmentProcessModel, final EmailPageModel emailPageModel)
-	{
+	public void init(final ConsignmentProcessModel consignmentProcessModel, final EmailPageModel emailPageModel) {
 		super.init(consignmentProcessModel, emailPageModel);
 		orderCode = consignmentProcessModel.getConsignment().getOrder().getCode();
 		orderGuid = consignmentProcessModel.getConsignment().getOrder().getGuid();
@@ -55,86 +53,70 @@ public class NotPickedUpConsignmentCanceledEmailContext extends AbstractEmailCon
 	}
 
 
-	protected void calculateRefundAmount()
-	{
+	protected void calculateRefundAmount() {
 		BigDecimal refundAmountValue = BigDecimal.ZERO;
 		PriceData totalPrice = null;
-		for (final ConsignmentEntryData consignmentEntry : getConsignment().getEntries())
-		{
+		for (final ConsignmentEntryData consignmentEntry : getConsignment().getEntries()) {
 			totalPrice = consignmentEntry.getOrderEntry().getTotalPrice();
 			refundAmountValue = refundAmountValue.add(totalPrice.getValue());
 		}
 
-		if (totalPrice != null)
-		{
+		if (totalPrice != null) {
 			refundAmount = getPriceDataFactory().create(totalPrice.getPriceType(), refundAmountValue, totalPrice.getCurrencyIso());
 		}
 	}
 
 	@Override
-	protected BaseSiteModel getSite(final ConsignmentProcessModel consignmentProcessModel)
-	{
+	protected BaseSiteModel getSite(final ConsignmentProcessModel consignmentProcessModel) {
 		return consignmentProcessModel.getConsignment().getOrder().getSite();
 	}
 
 	@Override
-	protected CustomerModel getCustomer(final ConsignmentProcessModel consignmentProcessModel)
-	{
+	protected CustomerModel getCustomer(final ConsignmentProcessModel consignmentProcessModel) {
 		return (CustomerModel) consignmentProcessModel.getConsignment().getOrder().getUser();
 	}
 
-	protected Converter<ConsignmentModel, ConsignmentData> getConsignmentConverter()
-	{
+	protected Converter<ConsignmentModel, ConsignmentData> getConsignmentConverter() {
 		return consignmentConverter;
 	}
 
 	@Required
-	public void setConsignmentConverter(final Converter<ConsignmentModel, ConsignmentData> consignmentConverter)
-	{
+	public void setConsignmentConverter(final Converter<ConsignmentModel, ConsignmentData> consignmentConverter) {
 		this.consignmentConverter = consignmentConverter;
 	}
 
-	public ConsignmentData getConsignment()
-	{
+	public ConsignmentData getConsignment() {
 		return consignmentData;
 	}
 
-	protected PriceDataFactory getPriceDataFactory()
-	{
+	protected PriceDataFactory getPriceDataFactory() {
 		return priceDataFactory;
 	}
 
 	@Required
-	public void setPriceDataFactory(final PriceDataFactory priceDataFactory)
-	{
+	public void setPriceDataFactory(final PriceDataFactory priceDataFactory) {
 		this.priceDataFactory = priceDataFactory;
 	}
 
-	public String getOrderCode()
-	{
+	public String getOrderCode() {
 		return orderCode;
 	}
 
-	public String getOrderGuid()
-	{
+	public String getOrderGuid() {
 		return orderGuid;
 	}
 
-	public boolean isGuest()
-	{
+	public boolean isGuest() {
 		return guest;
 	}
 
-	public PriceData getRefundAmount()
-	{
+	public PriceData getRefundAmount() {
 		return refundAmount;
 	}
 
 	@Override
-	protected LanguageModel getEmailLanguage(final ConsignmentProcessModel consignmentProcessModel)
-	{
-		if (consignmentProcessModel.getConsignment().getOrder() instanceof OrderModel)
-		{
+	protected LanguageModel getEmailLanguage(final ConsignmentProcessModel consignmentProcessModel) {
+		if (consignmentProcessModel.getConsignment().getOrder() instanceof OrderModel) {
 			return ((OrderModel) consignmentProcessModel.getConsignment().getOrder()).getLanguage();
 		}
 
