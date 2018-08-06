@@ -13,6 +13,7 @@
     <extension name='merchandiseinitialdata' />
     <extension name='merchandisefulfilmentprocess' />
     <extension name='merchandisestorefront' />
+	<extension name='merchandisecommerceservices'/>
     <extension name='ycommercewebservices' />
     <extension name='ycommercewebservicestest' />
     <extension name='electronicsstore' />

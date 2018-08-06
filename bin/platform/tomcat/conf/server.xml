@@ -506,7 +506,7 @@
 			</Context>
 
 			<!-- 'merchandisestorefront' extension's context for tenant 'master' -->
-			<Context path="/merchandisestorefront" docBase="/opt/hybris_6.7.0.3/hybris/bin/custom/merchandise/merchandisestorefront/web/webroot" useHttpOnly="true">
+			<Context path="/merchandisestorefront" docBase="/opt/hybris_6.7.0.3/hybris/bin/custom/merchandisestorefront/web/webroot" useHttpOnly="true">
 				<Manager pathname="" />
 				<Loader platformHome="/opt/hybris_6.7.0.3/hybris/bin/platform" className="de.hybris.tomcat.HybrisWebappLoader" deployName="default" />
 				<JarScanner >

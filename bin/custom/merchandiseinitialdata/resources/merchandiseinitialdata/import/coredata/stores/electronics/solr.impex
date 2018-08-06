@@ -1,0 +1,88 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2018 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+#
+# Import the Solr configuration for the store
+#
+$productCatalog=electronicsProductCatalog
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=
+$indexConfigName=
+$searchConfigName=
+$facetSearchConfigName=
+$facetSearchConfigDescription=
+$searchIndexNamePrefix=electronics
+$solrIndexedType=electronicsProductType
+$indexBaseSite=
+$indexLanguages=ja,en,de,zh
+$indexCurrencies=JPY,USD
+
+
+#
+# Setup the Solr server, indexer, and search configs
+#
+
+# Create the solr server configuration
+INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code)
+
+# Create the solr indexer configuration
+INSERT_UPDATE SolrIndexConfig;name[unique=true];batchSize;numberOfThreads;indexMode(code);
+
+# Create the faceted search configuration
+INSERT_UPDATE SolrSearchConfig;description[unique=true];pageSize
+
+#
+# Setup the indexed types, their properties, and the update queries
+#
+
+# Declare the indexed type Product
+INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&sortRefID)
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];description;indexNamePrefix;languages(isocode);currencies(isocode);solrServerConfig(name);solrSearchConfig(description);solrIndexConfig(name);solrIndexedTypes(identifier);enabledLanguageFallbackMechanism;$catalogVersions
+
+UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
+
+# Define price range set
+INSERT_UPDATE SolrValueRangeSet;name[unique=true]       ;qualifier  ;type   ;solrValueRanges(&rangeValueRefID)
+                               ;merchandiseAvgRating    ;           ;double ;avgRatingRef1,avgRatingRef2,avgRatingRef3,avgRatingRef4,avgRatingRef5
+
+# Define price ranges
+INSERT_UPDATE SolrValueRange;&rangeValueRefID   ;solrValueRangeSet(name)[unique=true]   ;name[unique=true]  ;from   ;to
+                            ;avgRatingRef1      ;merchandiseAvgRating                   ;1                  ;0.5    ;1.49
+                            ;avgRatingRef2      ;merchandiseAvgRating                   ;2                  ;1.5    ;2.49
+                            ;avgRatingRef3      ;merchandiseAvgRating                   ;3                  ;2.5    ;3.49
+                            ;avgRatingRef4      ;merchandiseAvgRating                   ;4                  ;3.5    ;4.49
+                            ;avgRatingRef5      ;merchandiseAvgRating                   ;5                  ;4.5    ;5
+
+# Non-facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true]  ;name[unique=true]         ;type(code)    ;sortableType(code)     ;currency[default=false]      ;localized[default=false]  ;multiValue[default=false] ;useForSpellchecking[default=false]    ;useForAutocomplete[default=false]    ;fieldValueProvider ;valueProviderParameter
+                                 ;$solrIndexedType                          ;internalOnly              ;boolean       ;                       ;                             ;                          ;                          ;                                      ;                                     ;                   ;
+
+# Category fields
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=false];multiValue[default=true];categoryField[default=true];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider
+
+# Category facets
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);multiValue[default=true];facet[default=true];facetType(code);facetSort(code);priority;visible;categoryField[default=true];fieldValueProvider;facetDisplayNameProvider;topValuesProvider
+
+# Other facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true]  ;name[unique=true]      ;type(code) ;sortableType(code) ;currency[default=false]    ;localized[default=false]   ;multiValue[default=false]  ;facet[default=true]    ;facetType(code)    ;facetSort(code)    ;priority   ;visible    ;useForSpellchecking[default=false] ;useForAutocomplete[default=false]  ;fieldValueProvider                 ;facetDisplayNameProvider   ;customFacetSortProvider    ;topValuesProvider  ;rangeSets(name)
+                                 ;$solrIndexedType                          ;reviewAvgRatingRange   ;double     ;                   ;                           ;                           ;true                       ;                       ;MultiSelectOr      ;Alpha              ;2000       ;true       ;                                   ;                                   ;rangedAvgCustomerRatingProvider    ;                           ;                           ;                   ;merchandiseAvgRating
+
+# Create the queries that will be used to extract data for Solr
+INSERT_UPDATE SolrIndexerQuery;solrIndexedType(identifier)[unique=true] ;identifier[unique=true]            ;type(code) ;injectCurrentDate[default=true]    ;injectCurrentTime[default=true]    ;injectLastIndexTime[default=true]  ;query;user(uid)
+
+# Define the available sorts
+INSERT_UPDATE SolrSort;&sortRefID;indexedType(identifier)[unique=true];code[unique=true];useBoost
+
+# Define the sort fields
+INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
+
+INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(identifier))[unique=true]   ;facet[default=true]    ;facetType(code)    ;priority   ;facetDisplayNameProvider   ;facetSortProvider  ;facetTopValuesProvider     ;includeInResponse[default=true]    ;searchQueryTemplate(name, indexedType(identifier))[unique=true][default=DEFAULT:$solrIndexedType]
+                                     ;reviewAvgRatingRange:$solrIndexedType								;					    ;MultiSelectOr	    ;2000	    ;						   	;				 	;defaultTopValuesProvider	;                                   ;
