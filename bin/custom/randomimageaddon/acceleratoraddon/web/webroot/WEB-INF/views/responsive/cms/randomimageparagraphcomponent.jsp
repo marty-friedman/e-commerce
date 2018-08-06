@@ -1,0 +1,1 @@
+<img src="https://loremflickr.com/${width}/${height}/${topic}" />

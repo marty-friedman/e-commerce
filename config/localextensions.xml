@@ -60,5 +60,6 @@
     <extension name='promotionengineatddtests' />
     <extension name='textfieldconfiguratortemplateatddtests' />
     <extension name='pcmbackofficesamplesaddon' />
+	<extension name='randomimageaddon'/>
   </extensions>
 </hybrisconfig>
