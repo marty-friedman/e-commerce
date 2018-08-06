@@ -11,11 +11,11 @@
 # ImpEx for Importing CMS Content
 # Macros / Replacement Parameter definitions
 $contentCatalog=electronicsContentCatalog
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
 
 INSERT_UPDATE RandomImageParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;topic(code);width;height
-                                           ;;RandomImage1;Random Image;RandomImage1;fashion;800;500
-                                           ;;RandomImage2;Random Image;RandomImage2;people;800;500
+                                           ;;RandomImage1;Random Image;RandomImage1;technics;481;713
+                                           ;;RandomImage2;Random Image;RandomImage2;people;481;713
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
                          ;;Section2ASlot-Homepage;Section2A Slot for Homepage;true;RandomImage1
