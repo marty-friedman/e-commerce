@@ -22,8 +22,8 @@
         "baseUrl": "../../jsTarget/",
         "typeRoots": [
             "../../node_modules/@types",
-            "/srv/jenkins/workspace/commerce-suite-unpacked/build/source/cmssmartedit/smartedit-build/@types",
-            "!/srv/jenkins/workspace/commerce-suite-unpacked/build/source/cmssmartedit/smartedit-build/@types/smarteditcontainer"
+            "/opt/hybris_6.7.0.3/hybris/bin/ext-smartedit/cmssmartedit/smartedit-build/@types",
+            "!/opt/hybris_6.7.0.3/hybris/bin/ext-smartedit/cmssmartedit/smartedit-build/@types/smarteditcontainer"
         ],
         "traceResolution": true,
         "listEmittedFiles": true,
@@ -33,10 +33,10 @@
         "experimentalDecorators": true,
         "paths": {
             "smarteditcommons": [
-                "/srv/jenkins/workspace/commerce-suite-unpacked/build/source/cmssmartedit/smartedit-build/@types/smarteditcommons"
+                "/opt/hybris_6.7.0.3/hybris/bin/ext-smartedit/cmssmartedit/smartedit-build/@types/smarteditcommons"
             ],
             "smartedit": [
-                "/srv/jenkins/workspace/commerce-suite-unpacked/build/source/cmssmartedit/smartedit-build/@types/smartedit"
+                "/opt/hybris_6.7.0.3/hybris/bin/ext-smartedit/cmssmartedit/smartedit-build/@types/smartedit"
             ],
             "cmscommons": [
                 "web/features/cmscommons"

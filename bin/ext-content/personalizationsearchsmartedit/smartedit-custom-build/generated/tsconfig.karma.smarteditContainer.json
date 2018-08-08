@@ -22,9 +22,9 @@
         "baseUrl": "../../jsTarget/",
         "typeRoots": [
             "../../node_modules/@types",
-            "/rp/tmp/pipelines/20180308174101_personalizationsearch_artifact_develop_4b928b2/prepare/build/source/personalizationsearchsmartedit/smartedit-build/@types",
-            "!/rp/tmp/pipelines/20180308174101_personalizationsearch_artifact_develop_4b928b2/prepare/build/source/personalizationsearchsmartedit/smartedit-build/@types/smartedit",
-            "/rp/tmp/pipelines/20180308174101_personalizationsearch_artifact_develop_4b928b2/prepare/build/source/personalizationsearchsmartedit/smartedit-build/test/@types"
+            "/opt/hybris_6.7.0.3/hybris/bin/ext-content/personalizationsearchsmartedit/smartedit-build/@types",
+            "!/opt/hybris_6.7.0.3/hybris/bin/ext-content/personalizationsearchsmartedit/smartedit-build/@types/smartedit",
+            "/opt/hybris_6.7.0.3/hybris/bin/ext-content/personalizationsearchsmartedit/smartedit-build/test/@types"
         ],
         "traceResolution": true,
         "listEmittedFiles": true,
@@ -34,10 +34,10 @@
         "experimentalDecorators": true,
         "paths": {
             "smarteditcommons": [
-                "/rp/tmp/pipelines/20180308174101_personalizationsearch_artifact_develop_4b928b2/prepare/build/source/personalizationsearchsmartedit/smartedit-build/@types/smarteditcommons"
+                "/opt/hybris_6.7.0.3/hybris/bin/ext-content/personalizationsearchsmartedit/smartedit-build/@types/smarteditcommons"
             ],
             "smarteditcontainer": [
-                "/rp/tmp/pipelines/20180308174101_personalizationsearch_artifact_develop_4b928b2/prepare/build/source/personalizationsearchsmartedit/smartedit-build/@types/smarteditcontainer"
+                "/opt/hybris_6.7.0.3/hybris/bin/ext-content/personalizationsearchsmartedit/smartedit-build/@types/smarteditcontainer"
             ],
             "testhelpers": [
                 ".././smartedit-build/test/unit"

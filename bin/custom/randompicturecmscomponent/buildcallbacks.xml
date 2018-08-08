@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+--><project name="randompicturecmscomponent_buildcallbacks">
+
+    <patternset id="extension.randompicturecmscomponent.binary.filter">
+        <patternset refid="extension.binary.filter"/>
+        <exclude name="build/"/>
+        <exclude name="smartedit-build/"/>
+        <exclude name="node_modules/"/>
+        <exclude name="jsTarget/"/>
+        <exclude name="package.json"/>
+    </patternset>
+
+    <patternset id="extension.randompicturecmscomponent.source.filter">
+        <patternset refid="extension.source.filter"/>
+        <exclude name="build/"/>
+        <exclude name="smartedit-build/"/>
+        <exclude name="node_modules/"/>
+        <exclude name="jsTarget/"/>
+        <exclude name="package.json"/>
+    </patternset>
+
+    <patternset id="extension.randompicturecmscomponent.production.filter">
+        <patternset refid="extension.production.filter"/>
+        <exclude name="build/"/>
+        <exclude name="smartedit-build/"/>
+        <exclude name="node_modules/"/>
+        <exclude name="jsTarget/"/>
+        <exclude name="package.json"/>
+    </patternset>
+
+    <macrodef name="randompicturecmscomponent_before_clean">
+        <sequential>
+            <if>
+				<available file="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}node_modules" type="dir"/>
+                <then>
+                    <delete dir="${ext.randompicturecmscomponent.path}${file.separator}temp"/>
+                    <delete dir="${ext.randompicturecmscomponent.path}${file.separator}jsTarget"/>
+                    <delete dir="${ext.randompicturecmscomponent.path}${file.separator}web${file.separator}webroot${file.separator}randompicturecmscomponent${file.separator}js"/>
+                    <unLinkSmarteditBundle target="${ext.randompicturecmscomponent.path}"/>
+                    <removeNodeModulesSymlink path="${ext.randompicturecmscomponent.path}"/>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="randompicturecmscomponent_before_build">
+        <sequential>
+        	<copy failonerror="false" file="${ext.randompicturecmscomponent.path}${file.separator}gitignore" overwrite="true" tofile="${ext.randompicturecmscomponent.path}${file.separator}.gitignore"/>
+            <if>
+				<available file="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}node_modules" type="dir"/>
+                <then>
+                    <linkSmarteditBundle target="${ext.randompicturecmscomponent.path}"/>
+                    <gruntBuild path="${ext.randompicturecmscomponent.path}" phase="packageSkipTests"/>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="randompicturecmscomponent_before_yunit">
+        <sequential>
+            <if>
+				<available file="${ext.npmancillary.path}${file.separator}resources${file.separator}npm${file.separator}node_modules" type="dir"/>
+                <then>
+                    <gruntBuild path="${ext.randompicturecmscomponent.path}" phase="test_only"/>
+                </then>
+            </if>
+        </sequential>
+    </macrodef>
+
+    
+
+</project>

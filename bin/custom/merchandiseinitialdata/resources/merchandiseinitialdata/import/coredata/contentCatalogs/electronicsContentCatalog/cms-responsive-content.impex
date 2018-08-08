@@ -18,7 +18,6 @@ $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCata
 UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
 $jarResourceCms=$config-jarResourceCmsValue
 
-INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
-                             ;Section2A;;RandomImageParagraphComponent;narrow
-                             ;Section2B;;RandomImageParagraphComponent;narrow
+INSERT_UPDATE ContentSlotName;name[unique=true] ;template(uid,$contentCV)[unique=true][default='LandingPage2Template']  ;validComponentTypes(code)  ;compTypeGroup(code)
+                             ;Section2C         ;                                                                       ;RandomPictureComponent     ;wide
 

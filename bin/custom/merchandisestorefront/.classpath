@@ -15,8 +15,8 @@
 	<classpathentry exported="false" kind="src" output="eclipsebin/web/classes" path="web/testsrc"/>
 	<classpathentry exported="false" kind="src" path="/platform"/>
 <classpathentry combineaccessrules="false" kind="src" path="/commerceorgsamplesaddon"/>
-<classpathentry combineaccessrules="false" kind="src" path="/promotionenginesamplesaddon"/>
-<classpathentry combineaccessrules="false" kind="src" path="/smarteditaddon"/>
+
+
 <classpathentry combineaccessrules="false" kind="src" path="/textfieldconfiguratortemplateaddon"/>
 
 <classpathentry combineaccessrules="false" kind="src" path="/assistedservicepromotionaddon"/>
@@ -27,7 +27,10 @@
 <classpathentry combineaccessrules="false" kind="src" path="/pcmbackofficesamplesaddon"/>
 <classpathentry combineaccessrules="false" kind="src" path="/personalizationsearchsamplesaddon"/>
 <classpathentry combineaccessrules="false" kind="src" path="/assistedservicestorefront"/>
-<classpathentry combineaccessrules="false" kind="src" path="/personalizationsampledataaddon"/>
-<classpathentry combineaccessrules="false" kind="src" path="/randomimageaddon"/>
+
+<classpathentry combineaccessrules="false" kind="src" path="/smarteditaddon"/>
+<classpathentry combineaccessrules="false" kind="src" path="/promotionenginesamplesaddon"/>
+
+
 				
 </classpath>

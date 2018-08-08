@@ -11,22 +11,22 @@ module.exports = {
         "smarteditcommons": "smarteditcommons"
     },
     "output": {
-        "path": "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180313145425_personalization_artifact_develop_b09b137\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationpromotionssmartedit\u002FjsTarget",
+        "path": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationpromotionssmartedit\u002FjsTarget",
         "filename": "[name].js",
         "sourceMapFilename": "[file].map"
     },
     "resolve": {
         "modules": [
-            "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180313145425_personalization_artifact_develop_b09b137\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationpromotionssmartedit\u002FjsTarget\u002Fweb\u002Fapp",
-            "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180313145425_personalization_artifact_develop_b09b137\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationpromotionssmartedit\u002FjsTarget\u002Fweb\u002Ffeatures"
+            "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationpromotionssmartedit\u002FjsTarget\u002Fweb\u002Fapp",
+            "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationpromotionssmartedit\u002FjsTarget\u002Fweb\u002Ffeatures"
         ],
         "extensions": [
             ".ts",
             ".js"
         ],
         "alias": {
-            "personalizationpromotionssmarteditcommons": "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180313145425_personalization_artifact_develop_b09b137\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationpromotionssmartedit\u002FjsTarget\u002Fweb\u002Ffeatures\u002Fpersonalizationpromotionssmarteditcommons",
-            "personalizationpromotionssmartedit": "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180313145425_personalization_artifact_develop_b09b137\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationpromotionssmartedit\u002FjsTarget\u002Fweb\u002Ffeatures\u002Fpersonalizationpromotionssmartedit"
+            "personalizationpromotionssmarteditcommons": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationpromotionssmartedit\u002FjsTarget\u002Fweb\u002Ffeatures\u002Fpersonalizationpromotionssmarteditcommons",
+            "personalizationpromotionssmartedit": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationpromotionssmartedit\u002FjsTarget\u002Fweb\u002Ffeatures\u002Fpersonalizationpromotionssmartedit"
         }
     },
     "module": {
@@ -34,7 +34,7 @@ module.exports = {
             "test": /\.ts$/,
             "loader": "awesome-typescript-loader",
             "options": {
-                "configFileName": "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180313145425_personalization_artifact_develop_b09b137\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationpromotionssmartedit\u002Fsmartedit-custom-build\u002Fgenerated\u002Ftsconfig.dev.smartedit.json"
+                "configFileName": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationpromotionssmartedit\u002Fsmartedit-custom-build\u002Fgenerated\u002Ftsconfig.dev.smartedit.json"
             }
         }]
     },

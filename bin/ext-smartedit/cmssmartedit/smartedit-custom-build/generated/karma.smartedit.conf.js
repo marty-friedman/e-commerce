@@ -19,8 +19,8 @@ module.exports = function(config) {
             "outputFile": "testReport.xml"
         },
         "files": [
-            "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fcmssmartedit\u002Fsmartedit-build\u002Fwebroot\u002Fstatic-resources\u002Fdist\u002Fsmartedit\u002Fjs\u002Fprelibraries.js",
-            "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fcmssmartedit\u002Fsmartedit-build\u002Ftest\u002Funit\u002F**\u002F*.+(js|ts)",
+            "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-smartedit\u002Fcmssmartedit\u002Fsmartedit-build\u002Fwebroot\u002Fstatic-resources\u002Fdist\u002Fsmartedit\u002Fjs\u002Fprelibraries.js",
+            "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-smartedit\u002Fcmssmartedit\u002Fsmartedit-build\u002Ftest\u002Funit\u002F**\u002F*.+(js|ts)",
             "jsTests\u002FmockData\u002F**\u002F*.js",
             "jsTests\u002FmockDao\u002F**\u002F*.js",
             "jsTests\u002FmockServices\u002F**\u002F*.js",
@@ -63,24 +63,24 @@ module.exports = function(config) {
                 "smarteditcommons": "smarteditcommons"
             },
             "output": {
-                "path": "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fcmssmartedit\u002FjsTarget",
+                "path": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-smartedit\u002Fcmssmartedit\u002FjsTarget",
                 "filename": "[name].js",
                 "sourceMapFilename": "[file].map"
             },
             "resolve": {
                 "modules": [
-                    "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fcmssmartedit\u002FjsTarget\u002Fweb\u002Fapp",
-                    "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fcmssmartedit\u002FjsTarget\u002Fweb\u002Ffeatures",
-                    "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fcmssmartedit\u002Fsmartedit-build\u002Ftest\u002Funit"
+                    "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-smartedit\u002Fcmssmartedit\u002FjsTarget\u002Fweb\u002Fapp",
+                    "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-smartedit\u002Fcmssmartedit\u002FjsTarget\u002Fweb\u002Ffeatures",
+                    "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-smartedit\u002Fcmssmartedit\u002Fsmartedit-build\u002Ftest\u002Funit"
                 ],
                 "extensions": [
                     ".ts",
                     ".js"
                 ],
                 "alias": {
-                    "testhelpers": "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fcmssmartedit\u002Fsmartedit-build\u002Ftest\u002Funit",
-                    "cmscommons": "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fcmssmartedit\u002FjsTarget\u002Fweb\u002Ffeatures\u002Fcmscommons",
-                    "cmssmartedit": "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fcmssmartedit\u002FjsTarget\u002Fweb\u002Ffeatures\u002Fcmssmartedit"
+                    "testhelpers": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-smartedit\u002Fcmssmartedit\u002Fsmartedit-build\u002Ftest\u002Funit",
+                    "cmscommons": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-smartedit\u002Fcmssmartedit\u002FjsTarget\u002Fweb\u002Ffeatures\u002Fcmscommons",
+                    "cmssmartedit": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-smartedit\u002Fcmssmartedit\u002FjsTarget\u002Fweb\u002Ffeatures\u002Fcmssmartedit"
                 }
             },
             "module": {
@@ -88,7 +88,7 @@ module.exports = function(config) {
                     "test": /\.ts$/,
                     "loader": "awesome-typescript-loader",
                     "options": {
-                        "configFileName": "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fcmssmartedit\u002Fsmartedit-custom-build\u002Fgenerated\u002Ftsconfig.karma.smartedit.json"
+                        "configFileName": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-smartedit\u002Fcmssmartedit\u002Fsmartedit-custom-build\u002Fgenerated\u002Ftsconfig.karma.smartedit.json"
                     }
                 }]
             },
@@ -109,7 +109,7 @@ module.exports = function(config) {
             }],
             "bail": true
         },
-        "basePath": "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fcmssmartedit",
+        "basePath": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-smartedit\u002Fcmssmartedit",
         "frameworks": [
             "jasmine"
         ],

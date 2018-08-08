@@ -44,7 +44,7 @@ module.exports = function(config) {
         "node_modules\u002Fpopper.js\u002Fdist\u002Fumd\u002Fpopper.js",
         "node_modules\u002Fng-infinite-scroll\u002Fbuild\u002Fng-infinite-scroll.js",
         "node_modules\u002Fcrypto-js\u002Fcrypto-js.js",
-        "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fsmartedit\u002Fsmartedit-build\u002Ftest\u002Funit\u002F**\u002F*.+(js|ts)",
+        "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fsmartedit\u002Fsmartedit-build\u002Ftest\u002Funit\u002F**\u002F*.+(js|ts)",
         "jsTarget\u002Ftemplates.js",
         "jsTarget\u002Fweb\u002Fapp\u002Fcommon\u002F**\u002F*.+(js|ts)",
         "jsTarget\u002Fweb\u002Fapp\u002Fsmarteditcontainer\u002F**\u002F*.+(js|ts)",
@@ -72,24 +72,24 @@ module.exports = function(config) {
             "crypto-js": "CryptoJS"
         },
         "output": {
-            "path": "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fsmartedit\u002FjsTarget",
+            "path": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fsmartedit\u002FjsTarget",
             "filename": "[name].js",
             "sourceMapFilename": "[file].map"
         },
         "resolve": {
             "modules": [
-                "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fsmartedit\u002FjsTarget\u002Fweb\u002Fapp",
-                "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fsmartedit\u002FjsTarget\u002Fweb\u002Ffeatures",
-                "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fsmartedit\u002Fsmartedit-build\u002Ftest\u002Funit"
+                "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fsmartedit\u002FjsTarget\u002Fweb\u002Fapp",
+                "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fsmartedit\u002FjsTarget\u002Fweb\u002Ffeatures",
+                "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fsmartedit\u002Fsmartedit-build\u002Ftest\u002Funit"
             ],
             "extensions": [
                 ".ts",
                 ".js"
             ],
             "alias": {
-                "testhelpers": "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fsmartedit\u002Fsmartedit-build\u002Ftest\u002Funit",
-                "smarteditcommons": "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fsmartedit\u002FjsTarget\u002Fweb\u002Fapp\u002Fcommon",
-                "smarteditcontainer": "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fsmartedit\u002FjsTarget\u002Fweb\u002Fapp\u002Fsmarteditcontainer"
+                "testhelpers": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fsmartedit\u002Fsmartedit-build\u002Ftest\u002Funit",
+                "smarteditcommons": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fsmartedit\u002FjsTarget\u002Fweb\u002Fapp\u002Fcommon",
+                "smarteditcontainer": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fsmartedit\u002FjsTarget\u002Fweb\u002Fapp\u002Fsmarteditcontainer"
             }
         },
         "module": {
@@ -98,7 +98,7 @@ module.exports = function(config) {
                     "test": /\.ts$/,
                     "loader": "awesome-typescript-loader",
                     "options": {
-                        "configFileName": "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fsmartedit\u002Fsmartedit-custom-build\u002Fgenerated\u002Ftsconfig.karma.smarteditContainer.json"
+                        "configFileName": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fsmartedit\u002Fsmartedit-custom-build\u002Fgenerated\u002Ftsconfig.karma.smarteditContainer.json"
                     }
                 }
             ]
@@ -122,7 +122,7 @@ module.exports = function(config) {
         ],
         "bail": true
     },
-    "basePath": "\u002Fsrv\u002Fjenkins\u002Fworkspace\u002Fcommerce-suite-unpacked\u002Fbuild\u002Fsource\u002Fsmartedit",
+    "basePath": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fsmartedit",
     "frameworks": [
         "jasmine"
     ],

@@ -1,0 +1,17 @@
+#########################
+# ySmartEditModule
+#########################
+
+.tscache
+jsTarget
+node_modules
+#**/static-resources/randompicturecmscomponent
+**/generated/**
+
+# BUNDLE
+smartedit-build
+build
+web/webroot/randompicturecmscomponent
+**/protractor-conf.js
+**/.jshintrc
+

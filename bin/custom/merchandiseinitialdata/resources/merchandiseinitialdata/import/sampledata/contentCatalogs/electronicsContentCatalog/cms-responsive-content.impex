@@ -10,13 +10,12 @@
 # -----------------------------------------------------------------------
 # ImpEx for Importing CMS Content
 # Macros / Replacement Parameter definitions
+
 $contentCatalog=electronicsContentCatalog
-$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Online])[default=$contentCatalog:Online]
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 
-INSERT_UPDATE RandomImageParagraphComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;topic(code);width;height
-                                           ;;RandomImage1;Random Image;RandomImage1;technics;481;713
-                                           ;;RandomImage2;Random Image;RandomImage2;people;481;713
+INSERT_UPDATE RandomPictureComponent;$contentCV[unique=true]    ;uid[unique=true]       ;name                   ;&componentRef          ;topic(code)    ;width  ;height
+                                    ;                           ;RandomImageHomepage    ;Random Image Homepage  ;RandomImageHomepage    ;cats           ;800    ;500
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
-                         ;;Section2ASlot-Homepage;Section2A Slot for Homepage;true;RandomImage1
-                         ;;Section2BSlot-Homepage;Section2B Slot for Homepage;true;RandomImage2
+INSERT_UPDATE ContentSlot;$contentCV[unique=true]   ;uid[unique=true]       ;name                           ;active ;cmsComponents(&componentRef)
+                         ;                          ;Section2CSlot-Homepage ;Section2C Slot for Homepage    ;true   ;RandomImageHomepage

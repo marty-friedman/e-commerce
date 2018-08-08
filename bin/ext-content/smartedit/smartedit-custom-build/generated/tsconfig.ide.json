@@ -22,7 +22,7 @@
         "baseUrl": "../../jsTarget/",
         "typeRoots": [
             "../../node_modules/@types",
-            "/srv/jenkins/workspace/commerce-suite-unpacked/build/source/smartedit/smartedit-build/test/@types"
+            "/opt/hybris_6.7.0.3/hybris/bin/ext-content/smartedit/smartedit-build/test/@types"
         ],
         "traceResolution": true,
         "listEmittedFiles": true,

@@ -19,8 +19,8 @@ module.exports = function(config) {
             "outputFile": "testReport.xml"
         },
         "files": [
-            "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180308174101_personalizationsearch_artifact_develop_4b928b2\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationsearchsmartedit\u002Fsmartedit-build\u002Fwebroot\u002Fstatic-resources\u002Fdist\u002Fsmartedit\u002Fjs\u002Fprelibraries.js",
-            "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180308174101_personalizationsearch_artifact_develop_4b928b2\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationsearchsmartedit\u002Fsmartedit-build\u002Ftest\u002Funit\u002F**\u002F*.+(js|ts)",
+            "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationsearchsmartedit\u002Fsmartedit-build\u002Fwebroot\u002Fstatic-resources\u002Fdist\u002Fsmartedit\u002Fjs\u002Fprelibraries.js",
+            "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationsearchsmartedit\u002Fsmartedit-build\u002Ftest\u002Funit\u002F**\u002F*.+(js|ts)",
             "web\u002Ffeatures\u002Fpersonalizationsearchsmarteditcommons\u002F**\u002F*.+(js|ts)",
             "web\u002Ffeatures\u002Fpersonalizationsearchsmartedit\u002F**\u002F*.+(js|ts)",
             "jsTarget\u002Fweb\u002Ffeatures\u002Fpersonalizationsearchsmartedit\u002Ftemplates.js",
@@ -44,24 +44,24 @@ module.exports = function(config) {
                 "smarteditcommons": "smarteditcommons"
             },
             "output": {
-                "path": "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180308174101_personalizationsearch_artifact_develop_4b928b2\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationsearchsmartedit\u002FjsTarget",
+                "path": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationsearchsmartedit\u002FjsTarget",
                 "filename": "[name].js",
                 "sourceMapFilename": "[file].map"
             },
             "resolve": {
                 "modules": [
-                    "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180308174101_personalizationsearch_artifact_develop_4b928b2\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationsearchsmartedit\u002FjsTarget\u002Fweb\u002Fapp",
-                    "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180308174101_personalizationsearch_artifact_develop_4b928b2\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationsearchsmartedit\u002FjsTarget\u002Fweb\u002Ffeatures",
-                    "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180308174101_personalizationsearch_artifact_develop_4b928b2\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationsearchsmartedit\u002Fsmartedit-build\u002Ftest\u002Funit"
+                    "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationsearchsmartedit\u002FjsTarget\u002Fweb\u002Fapp",
+                    "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationsearchsmartedit\u002FjsTarget\u002Fweb\u002Ffeatures",
+                    "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationsearchsmartedit\u002Fsmartedit-build\u002Ftest\u002Funit"
                 ],
                 "extensions": [
                     ".ts",
                     ".js"
                 ],
                 "alias": {
-                    "testhelpers": "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180308174101_personalizationsearch_artifact_develop_4b928b2\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationsearchsmartedit\u002Fsmartedit-build\u002Ftest\u002Funit",
-                    "personalizationsearchsmarteditcommons": "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180308174101_personalizationsearch_artifact_develop_4b928b2\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationsearchsmartedit\u002FjsTarget\u002Fweb\u002Ffeatures\u002Fpersonalizationsearchsmarteditcommons",
-                    "personalizationsearchsmartedit": "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180308174101_personalizationsearch_artifact_develop_4b928b2\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationsearchsmartedit\u002FjsTarget\u002Fweb\u002Ffeatures\u002Fpersonalizationsearchsmartedit"
+                    "testhelpers": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationsearchsmartedit\u002Fsmartedit-build\u002Ftest\u002Funit",
+                    "personalizationsearchsmarteditcommons": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationsearchsmartedit\u002FjsTarget\u002Fweb\u002Ffeatures\u002Fpersonalizationsearchsmarteditcommons",
+                    "personalizationsearchsmartedit": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationsearchsmartedit\u002FjsTarget\u002Fweb\u002Ffeatures\u002Fpersonalizationsearchsmartedit"
                 }
             },
             "module": {
@@ -69,7 +69,7 @@ module.exports = function(config) {
                     "test": /\.ts$/,
                     "loader": "awesome-typescript-loader",
                     "options": {
-                        "configFileName": "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180308174101_personalizationsearch_artifact_develop_4b928b2\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationsearchsmartedit\u002Fsmartedit-custom-build\u002Fgenerated\u002Ftsconfig.karma.smartedit.json"
+                        "configFileName": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationsearchsmartedit\u002Fsmartedit-custom-build\u002Fgenerated\u002Ftsconfig.karma.smartedit.json"
                     }
                 }]
             },
@@ -90,7 +90,7 @@ module.exports = function(config) {
             }],
             "bail": true
         },
-        "basePath": "\u002Frp\u002Ftmp\u002Fpipelines\u002F20180308174101_personalizationsearch_artifact_develop_4b928b2\u002Fprepare\u002Fbuild\u002Fsource\u002Fpersonalizationsearchsmartedit",
+        "basePath": "\u002Fopt\u002Fhybris_6.7.0.3\u002Fhybris\u002Fbin\u002Fext-content\u002Fpersonalizationsearchsmartedit",
         "frameworks": [
             "jasmine"
         ],

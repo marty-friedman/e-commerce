@@ -41,7 +41,7 @@
     <extension name='personalizationcmsweb' />
     <extension name='personalizationsmartedit' />
     <extension name='personalizationpromotionssmartedit' />
-    <extension name='personalizationsampledataaddon' />
+    <!--<extension name='personalizationsampledataaddon' />-->
     <extension name='personalizationpromotions' />
     <extension name='personalizationpromotionsweb' />
     <extension name='personalizationservicesbackoffice' />
@@ -60,6 +60,7 @@
     <extension name='promotionengineatddtests' />
     <extension name='textfieldconfiguratortemplateatddtests' />
     <extension name='pcmbackofficesamplesaddon' />
-	<extension name='randomimageaddon'/>
+    <extension name='npmtestancillary'/>
+    <extension name='randompicturecmscomponent'/>
   </extensions>
 </hybrisconfig>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<!-- ATTENTION: This is just an example file. You have to edit it according 
+	to your needs. -->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
+	<enumtypes>
+		<enumtype code="RandomPictureTopic">
+			<value code="fashion"/>
+			<value code="sports"/>
+			<value code="abstract"/>
+			<value code="animals"/>
+			<value code="city"/>
+			<value code="food"/>
+			<value code="nightlife"/>
+			<value code="people"/>
+			<value code="nature"/>
+			<value code="technics"/>
+			<value code="transport"/>
+			<value code="electronics"/>
+			<value code="cats"/>
+		</enumtype>
+	</enumtypes>
+	<itemtypes>
+		<itemtype code="RandomPictureComponent" extends="SimpleCMSComponent"
+				  jaloclass="org.merchandise.cms.randompicturecmscomponent.jalo.TrainingComponent">
+			<attributes>
+				<attribute qualifier="topic" type="RandomPictureTopic">
+					<defaultvalue>em().getEnumerationValue("RandomPictureTopic", "electronics")</defaultvalue>
+					<persistence type="property"/>
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute qualifier="width" type="java.lang.Integer">
+					<defaultvalue>256</defaultvalue>
+					<persistence type="property" />
+					<modifiers optional="false"/>
+				</attribute>
+				<attribute qualifier="height" type="java.lang.Integer">
+					<defaultvalue>256</defaultvalue>
+					<persistence type="property" />
+					<modifiers optional="false"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>

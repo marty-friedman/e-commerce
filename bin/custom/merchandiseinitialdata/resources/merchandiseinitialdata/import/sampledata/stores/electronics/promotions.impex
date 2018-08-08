@@ -16,7 +16,7 @@ $defaultPromoGrp=electronicsPromoGrp
 
 $favCustomers=favoriteCustomers
 $bigSpenders=bigSpenders
-$catalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=Online])[default=$productCatalog:Online]
+$catalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=Staged])[default=$productCatalog:Staged]
 
 INSERT PromotionPriceRow;&tresholdId;Currency(isocode);price
 
