@@ -1,0 +1,23 @@
+# ImpEx for Importing Prices groups into Electronics Store
+
+$merchandisepricegroup=merchandisePriceGroup
+$merchandiseusergroup=merchandisegroup
+$productCatalog=electronicsProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$ug=ug(code[default=$merchandisepricegroup])[unique=true]
+$minqtd=minqtd[default=1]
+$product=product(code,$catalogVersion)[unique=true]
+$currency=currency(isocode)[unique=true]
+$unitFactor=unitFactor[default=1]
+$unit=unit(code[default=pieces])
+
+INSERT_UPDATE UserPriceGroup;code[unique=true]
+                            ;$merchandisepricegroup
+
+UPDATE Usergroup;uid[unique=true]       ;userPriceGroup(code)
+                ;$merchandiseusergroup  ;$merchandisepricegroup
+
+INSERT_UPDATE PriceRow;$product ;price  ;$currency  ;$ug    ;$minqtd    ;$unitFactor    ;$catalogVersion    ;$unit;
+                      ;3557133  ;900    ;USD        ;
+                      ;4812254  ;900    ;USD        ;
+                      ;1776948  ;100    ;USD        ;

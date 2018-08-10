@@ -18,5 +18,14 @@
            http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <bean id="rangedAvgCustomerRatingProvider" class="org.merchandise.search.providers.MerchandiseProductReviewAverageRatingValueProvider" parent="productReviewAverageRatingValueProvider" />
-			
+
+	<bean id="merchandiseCustomersPrepareInterceptor" class="org.merchandise.servicelayer.interceptor.MerchandiseCustomersPrepareInterceptor">
+		<property name="userGroupDao" ref="userGroupDao"/>
+	</bean>
+
+	<bean id="hybridCustomersPrepareInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="merchandiseCustomersPrepareInterceptor"/>
+		<property name="typeCode" value="Customer"/>
+	</bean>
+
 </beans>
